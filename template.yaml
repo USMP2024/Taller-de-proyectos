@@ -85,21 +85,6 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
-  GetUsersGmailFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUsersGmail/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /users-gmail/
-            Method: get
-
 
 Outputs:
   ApiGatewayUrl:
