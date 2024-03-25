@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:  # Install dependencies
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install  # Install Node.js dependencies (if applicable)
+      - pip install --upgrade aws-sam-cli  # Upgrade the AWS SAM CLI
+
+  pre_build:  # Optional: Validate template or application (if applicable)
+    commands:
+      - sam validate --template-file template.yaml
+      # - npm test                   # Run unit tests (optional)
+
+  build:  # Build your application
+    commands:
+      - cd frontend/mfe-contenedor && npm install && npm run build
+      - cd ../mfe-lista-usuarios && npm install && npm run build
+      - cd ../mfe-crear-usuario && npm install && npm run build
+      - cd ../mfe-sidebar && npm install && npm run build
+      - cd ../mfe-footer && npm install && npm run build
+      - cd ../../
+      - sam build --use-container
+
+  post_build:  # Package and deploy your application
+    commands:
+      - sam package template.yaml --output-template-file packaged.yaml --s3-bucket s3-prueba-aws
+      - aws cloudformation deploy --template-file packaged.yaml --stack-name stack-prueba --capabilities CAPABILITY_NAMED_IAM --region us-east-1
+      # Despliega cada microfrontend a su respectivo bucket
+      - aws s3 sync ./frontend/mfe-contenedor/dist s3://bucket-mfe-contenedor --delete
+      - aws s3 sync ./frontend/mfe-lista-usuarios/dist s3://bucket-mfe-lista-usuarios --delete
+      - aws s3 sync ./frontend/mfe-crear-usuario/dist s3://bucket-mfe-crear-usuario --delete
+      - aws s3 sync ./frontend/mfe-sidebar/dist s3://bucket-mfe-sidebar --delete
+      - aws s3 sync ./frontend/mfe-footer/dist s3://bucket-mfe-footer --delete
+
+artifacts:
+  files:
+    - packaged.yaml  # Include the packaged template file

@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'sam-app
+
+  Sample SAM Template for sam-app
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  CreateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://s3-prueba-aws/c024d583001a5b4d189eb65850ad3978
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      Events:
+        CreateUser:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: post
+    Metadata:
+      SamResourceId: CreateUserFunction
+  GetUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://s3-prueba-aws/a0535e6d76c6ba09f03ee0ca992c618b
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: get
+    Metadata:
+      SamResourceId: GetUserFunction
+  GetUsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://s3-prueba-aws/30f2bfae1a1e3718acaad5680db03250
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /users/
+            Method: get
+    Metadata:
+      SamResourceId: GetUsersFunction
+  UpdateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://s3-prueba-aws/2d10cdeba4f805f2be4fe053ec5bea32
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      Events:
+        UpdateUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: put
+    Metadata:
+      SamResourceId: UpdateUserFunction
+  DeleteUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://s3-prueba-aws/84c3d7ab0ded90c61ad44f2d22ae0539
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      Events:
+        DeleteUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: delete
+    Metadata:
+      SamResourceId: DeleteUserFunction
+  GetUsersGmailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://s3-prueba-aws/df56b068391f5f760a4b54649d71f2a1
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /users-gmail/
+            Method: get
+    Metadata:
+      SamResourceId: GetUsersGmailFunction
+Outputs:
+  ApiGatewayUrl:
+    Description: API Gateway endpoint URL for Prod stage
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/

@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-app
+
+  Sample SAM Template for sam-app
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  CreateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/createUser/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        CreateUser:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: post
+
+  GetUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/getUser/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: get
+
+  GetUsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/getUsers/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /users/
+            Method: get
+
+  UpdateUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/updateUser/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        UpdateUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: put
+
+  DeleteUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/deleteUser/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        DeleteUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: delete
+
+  GetUsersGmailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/getUsersGmail/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /users-gmail/
+            Method: get
+
+
+Outputs:
+  ApiGatewayUrl:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
