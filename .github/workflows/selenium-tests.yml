@@ -1,0 +1,41 @@
+name: Selenium Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install selenium
+          pip install pytest
+
+      - name: Download ChromeDriver
+        run: |
+          curl -Lo chromedriver_linux64.zip https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip
+
+      - name: Extract ChromeDriver
+        run: unzip -o chromedriver_linux64.zip -d ${{ github.workspace }}
+
+      - name: Move ChromeDriver to PATH
+        run: |
+          sudo mv ${{ github.workspace }}/chromedriver-linux64/chromedriver /usr/bin/chromedriver
+          sudo chmod +x /usr/bin/chromedriver
+
+      - name: Run Selenium Tests
+        run: python test_selenium.py
