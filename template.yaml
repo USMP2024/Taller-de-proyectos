@@ -85,6 +85,20 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
+lambda-listar-clientes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-clientes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        lambda-listar-clientes:
+          Type: Api
+          Properties:
+            Path: /user/ListarClientes
+            Method: GET   
 
 Outputs:
   ApiGatewayUrl:
