@@ -98,7 +98,7 @@ lambda-listar-clientes:
           Type: Api
           Properties:
             Path: /user/ListarClientes
-            Method: GET   
+            Method: get   
 
 Outputs:
   ApiGatewayUrl:
