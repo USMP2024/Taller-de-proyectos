@@ -94,7 +94,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        lambda-listar-clientes:
+        LambdaListarClientes:
           Type: Api
           Properties:
             Path: /user/ListarClientes
