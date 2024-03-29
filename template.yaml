@@ -85,7 +85,7 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
-lambda-listar-clientes:
+  lambda-listar-clientes:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-listar-clientes/
@@ -98,7 +98,7 @@ lambda-listar-clientes:
           Type: Api
           Properties:
             Path: /user/ListarClientes
-            Method: GET   
+            Method: get   
 
 Outputs:
   ApiGatewayUrl:
