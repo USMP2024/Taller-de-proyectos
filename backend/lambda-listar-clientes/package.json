@@ -2,7 +2,7 @@
   "name": "lambda-listar-clientes",
   "version": "1.0.0",
   "dependencies": {
-    "mysql2": "^3.9.2"
+    "mysql2": "^2.0.0"
   },
   "description": "",
   "main": "app.js",
@@ -12,3 +12,5 @@
   "author": "",
   "license": "ISC"
 }
+}
+
