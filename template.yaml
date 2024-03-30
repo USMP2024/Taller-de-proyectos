@@ -85,7 +85,7 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
-  lambda-listar-clientes:
+  LambdaListarClientes:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-listar-clientes/
