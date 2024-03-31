@@ -1,0 +1,48 @@
+name: Revisión de Comentarios para #listo
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  buscar_listo_en_comentarios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Buscar #listo en todos los comentarios de issues
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+            const context = github.context;
+            const { owner, repo } = context.repo;
+            
+            // Obtener la lista de issues del repositorio
+            const issues = await octokit.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'all',
+            });
+
+            let issuesConListo = [];
+
+            // Revisar cada issue para buscar comentarios con #listo
+            for (const issue of issues.data) {
+              const comments = await octokit.rest.issues.listComments({
+                owner,
+                repo,
+                issue_number: issue.number,
+              });
+
+              // Buscar #listo en cada comentario
+              for (const comment of comments.data) {
+                if (comment.body.includes('#listo')) {
+                  issuesConListo.push(issue.number);
+                  break; // Si encontramos #listo, no necesitamos buscar más en esta issue
+                }
+              }
+            }
+
+            // Imprimir los números de issues que contienen comentarios con #listo
+            console.log('Issues con #listo:', issuesConListo.join(', '));
