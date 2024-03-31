@@ -32,9 +32,12 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
+            console.log("Comprobando PAT:");
+            console.log(process.env.MI_PAT); // Log PAT value (masked)
+
             const projectId = "PVTV_lADOCatWXc4AePLTzgDCvdw"; // ID de tu proyecto V2
             const itemId = "I_kwDOLcr7k86Dzazt"; // ID del item a actualizar
-            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgT62AI"; // ID del campo a actualizar
+            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgDCvdw"; // ID del campo a actualizar
             const fieldValue = "98236657"; // ID de la opción de selección única
 
             const mutation = `mutation($input: UpdateProjectV2ItemFieldValueInput!) {
@@ -56,5 +59,3 @@ jobs:
             });
 
             console.log("Resultado de la actualización:", result);
-        env:
-          MI_PAT: ${{ secrets.PAT }} # Cambia 'MI_PAT' por el nombre que prefieras, y asegúrate de que 'PAT' es el nombre correcto de tu secreto.
