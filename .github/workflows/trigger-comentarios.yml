@@ -9,45 +9,58 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        name: Checkout del código
 
       - name: Instalar Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # O la versión que necesites
+          node-version: '14'
 
-      # Si es necesario instalar Jest
+      # Condición para verificar si se debe ejecutar Jest basado en el comentario de la issue
       - name: Instalar Jest Globalmente (opcional)
         if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         run: npm install -g jest
 
-      # Ejecutar pruebas unitarias si el issue es el #44 y contiene #listo en el comentario
+      # Ejecutar pruebas unitarias específicamente si el comentario contiene '#listo' y es en la issue número 44
       - name: Ejecutar pruebas unitarias
         if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         run: |
           cd backend/lambda-listar-clientes
           npm install
           npm test
-      
-      # Mover la issue a la columna con ID 98236657 si los tests son exitosos
+        # Este paso fallará si `npm test` devuelve un código de salida diferente de cero, lo que indica que alguno de los tests falló.
+
+      # Este paso asume que deseas mover la issue solo si los tests anteriores fueron exitosos.
+      # Dado que GitHub Actions detendrá el flujo de trabajo si algún paso falla (a menos que se especifique lo contrario),
+      # este paso solo se ejecutará si todos los tests pasan exitosamente.
       - name: Mover issue a la columna deseada después de tests exitosos
         if: success() && contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         uses: actions/github-script@v5
         with:
           script: |
-            const projectId = '3'; // Reemplaza esto con el ID real de tu proyecto
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            
-            // Lista las columnas del proyecto
-            const response = await github.rest.projects.listColumns({
-              project_id: projectId,
-              mediaType: {
-                previews: [
-                  'inertia' // Necesario para acceder a proyectos beta, quitar si es un proyecto clásico
-                ]
+            const projectId = "PVTV_lADOCatWXc4AePLTzgDCvdw"; // Reemplaza esto con el ID de tu proyecto V2
+            const itemId = "I_kwDOLcr7k86Dzazt"; // Reemplaza esto con el ID del item que deseas actualizar
+            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgT62AI"; // Reemplaza esto con el ID del campo que deseas actualizar
+            const fieldValue = "98236657"; // Nuevo valor para el campo
+
+            const mutation = `mutation($input: UpdateProjectV2ItemFieldValueInput!) {
+              updateProjectV2ItemFieldValue(input: $input) {
+                clientMutationId
               }
+            }`;
+
+            const result = await github.graphql(mutation, {
+              input: {
+                projectId: projectId,
+                itemId: itemId,
+                fieldId: fieldId,
+                value: JSON.stringify({ singleSelectOptionId: fieldValue }) // Ajusta esto según el tipo de campo
+              },
+              headers: {
+                authorization: `token ${process.env.GITHUB_TOKEN}`,
+              },
             });
-            
-            // Imprime las columnas encontradas
-            console.log(response.data);
-            
+
+            console.log("Resultado de la actualización:", result);
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
