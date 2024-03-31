@@ -48,7 +48,7 @@ jobs:
                 projectId: projectId,
                 itemId: itemId,
                 fieldId: fieldId,
-                value: JSON.stringify({ singleSelectOptionId: fieldValue })
+                value: { singleSelectOptionId: fieldValue }
               },
               headers: {
                 authorization: `token ${process.env.MI_PAT}`,
