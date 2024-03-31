@@ -40,6 +40,9 @@ jobs:
       - name: Run Selenium Tests
         run: python test_selenium.py  # Assuming test_selenium.py is in the root directory
 
+      - name: Install Jest Globally (optional)
+        run: npm install -g jest
+      
       - name: Run Unit Tests
         run: |
           # Change working directory to the test location
