@@ -1,47 +1,31 @@
-name: Revisión de Comentarios para #listo
+name: Ejecutar acciones basadas en el número de issue y comentario
 
 on:
   issue_comment:
     types: [created]
 
 jobs:
-  buscar_listo_en_comentarios:
+  acciones_condicionales:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Buscar #listo en todos los comentarios de issues
-        uses: actions/github-script@v7
+      - name: Instalar Node.js
+        uses: actions/setup-node@v2
         with:
-          script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            
-            // Obtener la lista de issues del repositorio
-            const issues = await github.rest.issues.listForRepo({
-              owner,
-              repo,
-              state: 'all',
-            });
+          node-version: '14' # O la versión que necesites
 
-            let issuesConListo = [];
+      # Opcionalmente instala Jest globalmente si es necesario para tu proyecto
+      - name: Instalar Jest Globalmente (opcional)
+        if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
+        run: npm install -g jest
 
-            // Revisar cada issue para buscar comentarios con #listo
-            for (const issue of issues.data) {
-              const comments = await github.rest.issues.listComments({
-                owner,
-                repo,
-                issue_number: issue.number,
-              });
+      # Ejecutar pruebas unitarias si el issue es el #44 y contiene #listo en el comentario
+      - name: Ejecutar pruebas unitarias
+        if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
+        run: |
+          cd backend/lambda-listar-clientes
+          npm install
+          npm test
 
-              // Buscar #listo en cada comentario
-              for (const comment of comments.data) {
-                if (comment.body.includes('#listo')) {
-                  issuesConListo.push(issue.number);
-                  break;
-                }
-              }
-            }
-
-            // Imprimir los números de issues que contienen comentarios con #listo
-            console.log('Issues con #listo:', issuesConListo.join(', '));
+      # Puedes agregar más pasos con diferentes condiciones para otros números de issue aquí
