@@ -34,35 +34,20 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const column_id = 98236657; // El ID de la columna a la que se moverá la issue
-            const issue_number = context.issue.number; // El número de la issue actual
-            const repository = context.repo.repo; // El repositorio donde se está ejecutando el workflow
-            const owner = context.repo.owner; // El propietario del repositorio
+            const projectId = '3'; // Reemplaza esto con el ID real de tu proyecto
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
             
-            // Obtener la lista de tarjetas de proyecto en la columna "Hecho"
-            const cards = await github.rest.projects.listCards({
-              column_id: column_id
+            // Lista las columnas del proyecto
+            const response = await github.rest.projects.listColumns({
+              project_id: projectId,
+              mediaType: {
+                previews: [
+                  'inertia' // Necesario para acceder a proyectos beta, quitar si es un proyecto clásico
+                ]
+              }
             });
             
-            // Encontrar la tarjeta que corresponde a la issue
-            const card = cards.data.find(card => card.content_url.includes(`/issues/${issue_number}`));
+            // Imprime las columnas encontradas
+            console.log(response.data);
             
-            if (card) {
-              // Si la tarjeta ya existe en la columna, nada que hacer
-              console.log(`La issue #${issue_number} ya está en la columna deseada.`);
-            } else {
-              // Si no, obtener el ID de la issue
-              const issue = await github.rest.issues.get({
-                owner: owner,
-                repo: repository,
-                issue_number: issue_number,
-              });
-              
-              // Crear una nueva tarjeta en la columna
-              await github.rest.projects.createCard({
-                column_id: column_id,
-                content_id: issue.data.id,
-                content_type: 'Issue',
-              });
-              console.log(`La issue #${issue_number} ha sido movida a la columna deseada.`);
-            }
