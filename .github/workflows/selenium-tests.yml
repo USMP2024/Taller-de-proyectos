@@ -1,4 +1,4 @@
-name: Selenium Tests
+name: Selenium Tests and Unit Tests
 
 on:
   push:
@@ -38,4 +38,17 @@ jobs:
           sudo chmod +x /usr/bin/chromedriver
 
       - name: Run Selenium Tests
-        run: python test_selenium.py
+        run: python test_selenium.py  # Assuming test_selenium.py is in the root directory
+
+      - name: Install Jest Globally (optional)
+        run: npm install -g jest
+      
+      - name: Run Unit Tests
+        run: |
+          # Change working directory to the test location
+          cd backend/lambda-listar-clientes
+          # Install project dependencies
+          npm install
+          # Run the unit tests
+          npm test
+
