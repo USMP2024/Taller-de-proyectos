@@ -41,7 +41,7 @@ jobs:
 
             const projectId = "PVTV_lADOCatWXc4AePLTzgDCvdw"; // ID de tu proyecto V2
             const itemId = "I_kwDOLcr7k86Dzazt"; // ID del item a actualizar
-            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgDCvdw"; // ID del campo a actualizar
+            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgT62AI"; // ID del campo a actualizar
             const fieldValue = "98236657"; // ID de la opción de selección única
 
             const mutation = `mutation($input: UpdateProjectV2ItemFieldValueInput!) {
