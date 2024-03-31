@@ -59,3 +59,5 @@ jobs:
             });
 
             console.log("Resultado de la actualización:", result);
+      env:
+        MI_PAT: ${{ secrets.PAT }}  # Replace 'PAT' with the actual secret name
