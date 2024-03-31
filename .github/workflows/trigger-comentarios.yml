@@ -11,6 +11,7 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
+      org: write
     steps:
       - name: Checkout del código
         uses: actions/checkout@v2
