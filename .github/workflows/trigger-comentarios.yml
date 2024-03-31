@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Instalar dependencias
+        run: npm install @octokit/rest
+
       - name: Buscar #listo en todos los comentarios de issues
         uses: actions/github-script@v7
         with:
