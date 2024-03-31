@@ -7,6 +7,10 @@ on:
 jobs:
   acciones_condicionales:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - name: Checkout del código
         uses: actions/checkout@v2
