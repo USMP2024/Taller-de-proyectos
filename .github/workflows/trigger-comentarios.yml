@@ -15,14 +15,14 @@ jobs:
         with:
           script: |
             const token = '${{ secrets.PAT }}'; // Reemplaza 'PAT' con el nombre del secreto
-            const github = new Octokit({
+            const octokitInstance = new Octokit({
               auth: `token ${token}`,
             });
 
-            const { owner, repo } = github.context.repo;
+            const { owner, repo } = octokitInstance.context.repo;
 
             // Obtener la lista de issues del repositorio
-            const issues = await github.issues.listForRepo({
+            const issues = await octokitInstance.issues.listForRepo({
               owner,
               repo,
               state: 'all',
@@ -32,7 +32,7 @@ jobs:
 
             // Revisar cada issue para buscar comentarios con #listo
             for (const issue of issues.data) {
-              const comments = await github.issues.listComments({
+              const comments = await octokitInstance.issues.listComments({
                 owner,
                 repo,
                 issue_number: issue.number,
