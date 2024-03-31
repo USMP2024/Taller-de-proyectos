@@ -8,8 +8,8 @@ jobs:
   acciones_condicionales:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout del código
+      - name: Checkout del código
+        uses: actions/checkout@v2
 
       - name: Instalar Node.js
         uses: actions/setup-node@v2
