@@ -2,27 +2,7 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "mysql2": "^3.9.2"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "name": "taller-de-proyectos",
-  "description": "This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.",
-  "version": "1.0.0",
-  "main": "app.test.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/USMP2024/Taller-de-proyectos.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/USMP2024/Taller-de-proyectos/issues"
-  },
-  "homepage": "https://github.com/USMP2024/Taller-de-proyectos#readme"
-
+    "mysql2": "^3.9.2",
+    "aws-sdk": "^2.1589.0"
+  }
 }

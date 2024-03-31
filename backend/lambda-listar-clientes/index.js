@@ -1,6 +1,6 @@
-import mysql from 'mysql';
+const mysql = require('mysql2');
 
-export const handler = async (event) => {
+const handler = async (event) =>  {
     try {
         // Crear una conexión a la base de datos
         const connection = await mysql.createConnection({
@@ -59,3 +59,6 @@ export const handler = async (event) => {
         };
     }
 };
+
+
+module.exports = { handler };
