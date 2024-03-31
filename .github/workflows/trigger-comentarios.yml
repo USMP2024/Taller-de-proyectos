@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '14' # O la versión que necesites
 
-      # Opcionalmente instala Jest globalmente si es necesario para tu proyecto
+      # Si es necesario instalar Jest
       - name: Instalar Jest Globalmente (opcional)
         if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         run: npm install -g jest
@@ -27,5 +27,42 @@ jobs:
           cd backend/lambda-listar-clientes
           npm install
           npm test
-
-      # Puedes agregar más pasos con diferentes condiciones para otros números de issue aquí
+      
+      # Mover la issue a la columna con ID 98236657 si los tests son exitosos
+      - name: Mover issue a la columna deseada después de tests exitosos
+        if: success() && contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const column_id = 98236657; // El ID de la columna a la que se moverá la issue
+            const issue_number = context.issue.number; // El número de la issue actual
+            const repository = context.repo.repo; // El repositorio donde se está ejecutando el workflow
+            const owner = context.repo.owner; // El propietario del repositorio
+            
+            // Obtener la lista de tarjetas de proyecto en la columna "Hecho"
+            const cards = await github.rest.projects.listCards({
+              column_id: column_id
+            });
+            
+            // Encontrar la tarjeta que corresponde a la issue
+            const card = cards.data.find(card => card.content_url.includes(`/issues/${issue_number}`));
+            
+            if (card) {
+              // Si la tarjeta ya existe en la columna, nada que hacer
+              console.log(`La issue #${issue_number} ya está en la columna deseada.`);
+            } else {
+              // Si no, obtener el ID de la issue
+              const issue = await github.rest.issues.get({
+                owner: owner,
+                repo: repository,
+                issue_number: issue_number,
+              });
+              
+              // Crear una nueva tarjeta en la columna
+              await github.rest.projects.createCard({
+                column_id: column_id,
+                content_id: issue.data.id,
+                content_type: 'Issue',
+              });
+              console.log(`La issue #${issue_number} ha sido movida a la columna deseada.`);
+            }
