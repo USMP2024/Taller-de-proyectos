@@ -14,11 +14,9 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // No es necesario instalar @octokit/rest ni crear una nueva instancia
-            // El objeto 'github' ya es una instancia autenticada de Octokit
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
             
-            const { owner, repo } = github.context.repo;
-
             // Obtener la lista de issues del repositorio
             const issues = await github.rest.issues.listForRepo({
               owner,
@@ -40,7 +38,7 @@ jobs:
               for (const comment of comments.data) {
                 if (comment.body.includes('#listo')) {
                   issuesConListo.push(issue.number);
-                  break; // Si encontramos #listo, no necesitamos buscar más en esta issue
+                  break;
                 }
               }
             }
