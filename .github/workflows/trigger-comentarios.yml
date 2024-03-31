@@ -14,12 +14,12 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-            const context = github.context;
-            const { owner, repo } = context.repo;
+            const myOctokit = github.getOctokit(process.env.GITHUB_TOKEN);
+            const myContext = github.context;
+            const { owner, repo } = myContext.repo;
             
             // Obtener la lista de issues del repositorio
-            const issues = await octokit.rest.issues.listForRepo({
+            const issues = await myOctokit.rest.issues.listForRepo({
               owner,
               repo,
               state: 'all',
@@ -29,7 +29,7 @@ jobs:
 
             // Revisar cada issue para buscar comentarios con #listo
             for (const issue of issues.data) {
-              const comments = await octokit.rest.issues.listComments({
+              const comments = await myOctokit.rest.issues.listComments({
                 owner,
                 repo,
                 issue_number: issue.number,
