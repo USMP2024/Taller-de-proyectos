@@ -1,4 +1,4 @@
-name: Selenium Tests
+name: Selenium Tests and Unit Tests
 
 on:
   push:
@@ -39,3 +39,6 @@ jobs:
 
       - name: Run Selenium Tests
         run: python test_selenium.py
+
+      - name: Run Unit Tests
+        run: npm test ./backend/lambda-listar-clientes/app.test.js  # Assuming Node.js and npm are set up
