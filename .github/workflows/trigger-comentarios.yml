@@ -16,32 +16,26 @@ jobs:
         with:
           node-version: '14'
 
-      # Condición para verificar si se debe ejecutar Jest basado en el comentario de la issue
       - name: Instalar Jest Globalmente (opcional)
         if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         run: npm install -g jest
 
-      # Ejecutar pruebas unitarias específicamente si el comentario contiene '#listo' y es en la issue número 44
       - name: Ejecutar pruebas unitarias
         if: contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         run: |
           cd backend/lambda-listar-clientes
           npm install
           npm test
-        # Este paso fallará si `npm test` devuelve un código de salida diferente de cero, lo que indica que alguno de los tests falló.
 
-      # Este paso asume que deseas mover la issue solo si los tests anteriores fueron exitosos.
-      # Dado que GitHub Actions detendrá el flujo de trabajo si algún paso falla (a menos que se especifique lo contrario),
-      # este paso solo se ejecutará si todos los tests pasan exitosamente.
       - name: Mover issue a la columna deseada después de tests exitosos
         if: success() && contains(github.event.comment.body, '#listo') && github.event.issue.number == 44
         uses: actions/github-script@v5
         with:
           script: |
-            const projectId = "PVTV_lADOCatWXc4AePLTzgDCvdw"; // Reemplaza esto con el ID de tu proyecto V2
-            const itemId = "I_kwDOLcr7k86Dzazt"; // Reemplaza esto con el ID del item que deseas actualizar
-            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgT62AI"; // Reemplaza esto con el ID del campo que deseas actualizar
-            const fieldValue = "98236657"; // Nuevo valor para el campo
+            const projectId = "PVTV_lADOCatWXc4AePLTzgDCvdw"; // ID de tu proyecto V2
+            const itemId = "I_kwDOLcr7k86Dzazt"; // ID del item a actualizar
+            const fieldId = "PVTSSF_lADOCatWXc4AePLTzgT62AI"; // ID del campo a actualizar
+            const fieldValue = "98236657"; // ID de la opción de selección única
 
             const mutation = `mutation($input: UpdateProjectV2ItemFieldValueInput!) {
               updateProjectV2ItemFieldValue(input: $input) {
@@ -54,13 +48,13 @@ jobs:
                 projectId: projectId,
                 itemId: itemId,
                 fieldId: fieldId,
-                value: { singleSelectOptionId: fieldValue }
+                value: JSON.stringify({ singleSelectOptionId: fieldValue })
               },
               headers: {
-                authorization: `token ${process.env.GITHUB_TOKEN}`,
+                authorization: `token ${process.env.MI_PAT}`,
               },
             });
 
             console.log("Resultado de la actualización:", result);
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          MI_PAT: ${{ secrets.PAT }} # Cambia 'MI_PAT' por el nombre que prefieras, y asegúrate de que 'PAT' es el nombre correcto de tu secreto.
