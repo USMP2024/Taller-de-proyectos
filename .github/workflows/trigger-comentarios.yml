@@ -54,7 +54,7 @@ jobs:
                 projectId: projectId,
                 itemId: itemId,
                 fieldId: fieldId,
-                value: JSON.stringify({ singleSelectOptionId: fieldValue }) // Ajusta esto según el tipo de campo
+                value: { singleSelectOptionId: fieldValue }
               },
               headers: {
                 authorization: `token ${process.env.GITHUB_TOKEN}`,
