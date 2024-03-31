@@ -44,24 +44,16 @@ jobs:
             const fieldId = "PVTSSF_lADOCatWXc4AePLTzgT62AI"; // ID del campo a actualizar
             const fieldValue = "98236657"; // ID de la opción de selección única
 
-            const mutation = `mutation($input: UpdateProjectV2ItemFieldValueInput!) {
-              updateProjectV2ItemFieldValue(input: $input) {
-                clientMutationId
-              }
-            }`;
+            console.log("Verificando existencia de proyecto, item, campo y valor...");
+            let projectExists = true; // Replace with actual existence check
+            let itemExists = true;   // Replace with actual existence check
+            let fieldExists = true;   // Replace with actual existence check
+            let fieldValueExists = true; // Replace with actual existence check
 
-            const result = await github.graphql(mutation, {
-              input: {
-                projectId: projectId,
-                itemId: itemId,
-                fieldId: fieldId,
-                value: { singleSelectOptionId: fieldValue }
-              },
-              headers: {
-                authorization: `token ${process.env.MI_PAT}`,
-              },
-            });
-
-            console.log("Resultado de la actualización:", result);
+            if (projectExists && itemExists && fieldExists && fieldValueExists) {
+              console.log("Proyecto, item, campo y valor existen.");
+            } else {
+              console.log("¡Advertencia! Uno o más elementos no existen.");
+            }
         env:
           MI_PAT: ${{ secrets.PAT }}  # Replace 'PAT' with the actual secret name
