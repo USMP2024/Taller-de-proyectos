@@ -148,7 +148,7 @@ Resources:
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-eliminar-usuario/       
+      CodeUri: backend/lambda-eliminar-usuarios/       
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
