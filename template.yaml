@@ -97,7 +97,7 @@ Resources:
         LambdaListarClientes:
           Type: Api
           Properties:
-            Path: /user/ListarClientes
+            Path: /Usuarios/Compradores
             Method: get   
 
 Outputs:
