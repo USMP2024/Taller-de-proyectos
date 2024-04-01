@@ -130,7 +130,7 @@ Resources:
             Path: /Productos/Tendencias
             Method: get
 
-   LambdaMostrarColeccionesNuevas:
+  LambdaMostrarColeccionesNuevas:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-mostrar-colecciones-nuevas/
