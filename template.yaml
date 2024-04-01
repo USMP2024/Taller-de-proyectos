@@ -85,6 +85,21 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
+  lambda-administrador-community-manager:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-administrador-community-manager/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        lambda-administrador-community-manager:
+          Type: Api
+          Properties:
+            Path: /lambda-administrador-community-manager
+            Method: GET /events
+
 
 Outputs:
   ApiGatewayUrl:
