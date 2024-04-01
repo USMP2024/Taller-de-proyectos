@@ -100,6 +100,21 @@ Resources:
             Path: /Usuarios/Compradores
             Method: get   
 
+Lambda-Busqueda-por-texto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-busqueda-producto/       
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        Lambda-Busqueda-por-texto:
+          Type: Api
+          Properties:
+            Path: /Lambda-Busqueda-por-texto
+            Method: get
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
