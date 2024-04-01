@@ -69,7 +69,20 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: put
-
+  LambdaSubirArchivo:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-subir-archivo/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaSubirArchivo:
+          Type: Api
+          Properties:
+            Path: /user/SubirArchivo
+            Method: post
   DeleteUserFunction:
     Type: AWS::Serverless::Function
     Properties:
