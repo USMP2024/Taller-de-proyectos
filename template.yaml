@@ -112,8 +112,7 @@ Resources:
           Properties:
             Path: /Usuarios/Compradores
             Method: get
-            Integration:
-              Type: AWS_PROXY
+
 
 Outputs:
   ApiGatewayUrl:
