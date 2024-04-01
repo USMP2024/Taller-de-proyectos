@@ -1,5 +1,5 @@
 // Importar el SDK de AWS
-import AWS from "aws-sdk";
+const AWS = require("aws-sdk");
 
 // Función de controlador de evento asincrónico
 export const handler = async (event) => {
