@@ -69,6 +69,7 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: put
+            
   LambdaSubirArchivo:
     Type: AWS::Serverless::Function
     Properties:
@@ -83,6 +84,7 @@ Resources:
           Properties:
             Path: /user/SubirArchivo
             Method: post
+            
   DeleteUserFunction:
     Type: AWS::Serverless::Function
     Properties:
