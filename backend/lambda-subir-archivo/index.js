@@ -3,13 +3,6 @@ import AWS from "aws-sdk";
 
 // Función de controlador de evento asincrónico
 export const handler = async (event) => {
-  // Configurar las credenciales de AWS
-  //AWS.config.update({
-   // region: "us-east-1", // Región de AWS donde se almacenarán los archivos
-   // accessKeyId: "AKIAYS2NROC5ILEVRD66", // ID de clave de acceso de AWS
-   // secretAccessKey: "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", // Clave de acceso secreta de AWS
- // });
-
   // Crear una instancia de servicio S3 de AWS
   const s3 = new AWS.S3();
 
