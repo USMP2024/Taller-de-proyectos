@@ -84,7 +84,21 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: delete
-
+  LambdaCrearPaginaContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-crear-pagina-contribuidor/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCrearPaginaContribuidor:
+          Type: Api
+          Properties:
+            Path: /user/CrearPaginaContribuidor
+            Method: post
+  
   LambdaListarClientes:
     Type: AWS::Serverless::Function
     Properties:
