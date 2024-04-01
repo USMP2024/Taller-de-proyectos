@@ -145,7 +145,20 @@ Resources:
             Path: /Productos/Colecciones/NuevasColecciones
             Method: get
            
-
+  LambdaRegistrarComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-registrar-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRegistrarComprador:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/RegistroComprador
+            Method: post 
 
 Outputs:
   ApiGatewayUrl:
