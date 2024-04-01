@@ -102,7 +102,43 @@ Resources:
             Integration:
               Type: AWS_PROXY
 
+  LambdaMostrarTendencias:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendencias:
+          Type: Api
+          Properties:
+            Path: /Productos/Tendencias
+            Method: get
+            Integration:
+              Type: AWS_PROXY
+
+   LambdaMostrarColeccionesNuevas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-colecciones-nuevas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarColeccionesNuevas:
+          Type: Api
+          Properties:
+            Path: /Productos/Colecciones/NuevasColecciones
+            Method: get
+            Integration:
+              Type: AWS_PROXY
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
+
