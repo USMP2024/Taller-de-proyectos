@@ -145,8 +145,6 @@ Resources:
             Path: /Productos/Colecciones/NuevasColecciones
             Method: get
            
-
-
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
