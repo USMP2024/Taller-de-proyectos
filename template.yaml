@@ -115,7 +115,7 @@ Resources:
             Path: /Usuarios/Compradores
             Method: get
 
- LambdaMostrarTendencias:
+  LambdaMostrarTendencias:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-mostrar-tendencias/
