@@ -100,7 +100,7 @@ Resources:
             Path: /user/ListarClientes
             Method: get   
 
-<ElNombreDeTuLambdaAquí>:
+  LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-eliminar-usuario/       
@@ -109,10 +109,10 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        <ElNombreDeTuLambdaAquí>:
+        LambdaEliminarUsuario:
           Type: Api
           Properties:
-            Path: /user/EliminarUsuarios
+            Path: /Usuarios/EliminarUsuario
             Method: delete 
 
 Outputs:
