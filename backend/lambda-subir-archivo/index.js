@@ -2,7 +2,7 @@
 const AWS = require("aws-sdk");
 
 // Función de controlador de evento asincrónico
-export const handler = async (event) => {
+const handler = async (event) => {
   // Crear una instancia de servicio S3 de AWS
   const s3 = new AWS.S3();
 
@@ -34,3 +34,5 @@ export const handler = async (event) => {
   // Devolver la respuesta
   return response;
 };
+
+module.exports = { handler };
