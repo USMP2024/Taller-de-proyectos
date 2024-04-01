@@ -100,6 +100,21 @@ Resources:
             Path: /user/ListarClientes
             Method: get   
 
+<ElNombreDeTuLambdaAquí>:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-eliminar-usuario/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        <ElNombreDeTuLambdaAquí>:
+          Type: Api
+          Properties:
+            Path: /user/EliminarUsuarios
+            Method: delete 
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
