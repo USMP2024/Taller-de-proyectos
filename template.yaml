@@ -160,6 +160,23 @@ Resources:
             Path: /Usuarios/EliminarUsuario
             Method: delete 
 
+   LambdaObtenerTipoProductos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipo-productos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerTipoProductos:
+          Type: Api
+          Properties:
+            Path: /Productos/Tipos
+            Method: get
+           
+
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
