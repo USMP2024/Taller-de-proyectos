@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
 
     try {
         // Consulta SQL para seleccionar los datos de los productos, ordenados por contador de vistas
-        const [rows] = await connection.execute('SELECT col_txt_nombre_coleccion, col_int_id_coleccion FROM ora_colecciones  WHERE fecha_registro = (SELECT MAX(fecha_registro) FROM ora_colecciones) ');
+        const [rows] = await connection.execute('SELECT col_txt_nombre_coleccion, col_int_id_coleccion FROM ora_colecciones  WHERE col_val_fecha_registro = (SELECT MAX(col_val_fecha_registro) FROM ora_colecciones) ');
 
         // Procesar los resultados y generar la respuesta
         const coleccion = rows.map(row => ({
