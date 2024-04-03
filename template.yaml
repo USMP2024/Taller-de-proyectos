@@ -158,8 +158,22 @@ Resources:
           Type: Api
           Properties:
             Path: /Autenticacion/RegistroComprador
-            Method: post 
-
+            Method: post
+            
+   LambdaEliminarUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-eliminar-usuarios/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEliminarUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EliminarUsuario
+            Method: delete
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
