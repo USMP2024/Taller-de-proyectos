@@ -10,20 +10,22 @@ exports.handler = async (event, context) => {
         password: 'passworddev',
         database: 'db_cloud'
     });
-
+    
     try {
         // Consulta SQL para seleccionar los datos de los productos, ordenados por contador de vistas
-        const [rows] = await connection.execute('SELECT col_txt_nombre_coleccion, col_int_id_coleccion FROM ora_colecciones  WHERE col_val_fecha_registro = (SELECT MAX(col_val_fecha_registro) FROM ora_colecciones) ');
+        const [rows] = await connection.execute('SELECT tip_int_id_tipo, tip_txt_nombre_tipo, tip_txt_descripcion_tipo, tip_txt_imagen_tipo FROM ora_tipo_productos');
 
         // Procesar los resultados y generar la respuesta
-        const coleccion = rows.map(row => ({
-            id_coleccion: row.col_int_id_coleccion,
-            id_nombre: row.col_txt_nombre_coleccion,
+        const productos = rows.map(row => ({
+            id_producto: row.tip_int_id_tip,
+            nombre_tipos: row.tip_txt_nombre_tipo,
+            descripcion_producto: row.tip_txt_descripcion_tipo,
+            id_categoria: row.tip_txt_imagen_tipo,
         }));
 
         return {
             statusCode: 200,
-            body: JSON.stringify(coleccion)
+            body: JSON.stringify(productos)
         };
     } catch (error) {
         console.error('Error al ejecutar la consulta:', error);
