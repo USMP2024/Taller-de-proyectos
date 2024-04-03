@@ -160,7 +160,7 @@ Resources:
             Path: /Usuarios/EliminarUsuario
             Method: delete 
 
-   LambdaObtenerTipoProductos:
+  LambdaObtenerTipoProductos:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-obtener-tipo-productos/
