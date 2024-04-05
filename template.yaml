@@ -177,6 +177,21 @@ Resources:
            
 
 
+lambdaobtenerproductoportexto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-busqueda-producto-por-texto/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        lambdaobtenerproductoportexto:
+          Type: Api
+          Properties:
+            Path: /lambdaobtenerproductoportexto
+            Method: get
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
