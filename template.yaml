@@ -100,19 +100,19 @@ Resources:
             Path: /Usuarios/Compradores
             Method: get   
 
-Lambda-Busqueda-por-texto:
+lambdaobtenerproductoportexto:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-busqueda-producto/       
+      CodeUri: backend/lambda-busqueda-producto-por-texto/       
       Handler: index.handler
-      Runtime: nodejs18.x
+      Runtime: nodejs20.x
       Architectures:
         - x86_64
       Events:
-        Lambda-Busqueda-por-texto:
+        lambdaobtenerproductoportexto:
           Type: Api
           Properties:
-            Path: /Lambda-Busqueda-por-texto
+            Path: /lambdaobtenerproductoportexto
             Method: get
 
 Outputs:
