@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline' 'unsafe-eval' https: localhost:* http://bucket-mfe-contenedor.s3-website-us-east-1.amazonaws.com http://bucket-mfe-sidebar.s3-website-us-east-1.amazonaws.com http://bucket-mfe-crear-usuario.s3-website-us-east-1.amazonaws.com http://bucket-mfe-lista-usuarios.s3-website-us-east-1.amazonaws.com">
+  <meta http-equiv="Content-Security-Policy">
   <title>Root Config</title>
 
   <!--
@@ -48,11 +48,8 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@usmp/root-config": "https://bucket-mfe-contenedor.s3.amazonaws.com/usmp-root-config.js",
-        "@usmp/mfe-sidebar": "https://bucket-mfe-sidebar.s3.amazonaws.com/usmp-mfe-sidebar.js",
-        "@usmp/mfe-lista-usuarios": "https://bucket-mfe-lista-usuarios.s3.amazonaws.com/usmp-mfe-lista-usuarios.js",
-        "@usmp/mfe-crear-usuario": "https://bucket-mfe-crear-usuario.s3.amazonaws.com/usmp-mfe-crear-usuario.js",
-        "@usmp/mfe-footer": "https://bucket-mfe-footer.s3.amazonaws.com/usmp-mfe-footer.js"
+        "@usmp/root-config": "http://bucket-mfe-contenedor.s3.amazonaws.com/usmp-root-config.js",
+        "@usmp/mfe-header": "http://bucket-mfe-header.s3.amazonaws.com/usmp-mfe-header.js"
       }
     }
   </script>
@@ -72,54 +69,6 @@
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
   <% } %>
 
-  <style>
-    /* Estilos para el header */
-    .header {
-        background-color: #ffcc00; /* Un tono vibrante de amarillo */
-        color: #4A4E69; /* Un color oscuro para el texto para contrastar con el amarillo */
-        padding: 20px;
-        font-family: 'Arial', sans-serif;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
-        margin-bottom: 30px;
-    }
-
-    /* Estilos para la navegación */
-    .nav-links {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        display: inline-flex;
-        gap: 40px; /* Espacio entre los enlaces de navegación */
-    }
-
-    .nav-links a {
-        text-decoration: none;
-        color: inherit; /* Hereda el color del elemento padre */
-        font-weight: bold;
-    }
-
-    .nav-links a:hover {
-        color: #665d1e; /* Un color más oscuro al pasar el mouse para mejorar la interacción */
-    }
-
-    /* Estilos previos aquí */
-
-
-    .contenedor{
-      display: flex;
-    }
-
-    .content{
-      width: 80%;
-    }
-
-    .sidebar{
-      width: 20%;
-      text-align: center;
-    }
-
-  </style>
-
 </head>
 <body>
   <noscript>
@@ -131,3 +80,5 @@
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>
 </html>
+
+
