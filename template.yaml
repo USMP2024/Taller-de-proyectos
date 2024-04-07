@@ -14,7 +14,7 @@ Resources:
   LambdaSubirArchivo:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-subir-archivo/       
+      CodeUri: backend/lambda-subir-archivo/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -120,7 +120,7 @@ Resources:
   LambdaObtenerProductoPorTexto:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-busqueda-producto-por-texto/       
+      CodeUri: backend/lambda-busqueda-producto-por-texto/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -135,7 +135,7 @@ Resources:
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-eliminar-usuario/       
+      CodeUri: backend/lambda-eliminar-usuario/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -145,7 +145,7 @@ Resources:
           Type: Api
           Properties:
             Path: /Usuarios/EliminarUsuario
-            Method: delete 
+            Method: delete
 
 Outputs:
   ApiGatewayUrl:
