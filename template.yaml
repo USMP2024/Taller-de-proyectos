@@ -188,7 +188,22 @@ Resources:
           Type: Api
           Properties:
             Path: /Autenticacion/RegisterContribuidor
-            Method: post         
+            Method: post     
+
+    LambdaLoginContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-login-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaLoginContribuidor:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/LoginContribuidor
+            Method: post        
 
 
 Outputs:
