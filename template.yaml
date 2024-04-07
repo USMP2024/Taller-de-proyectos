@@ -10,65 +10,6 @@ Globals:
     Timeout: 3
 
 Resources:
-  CreateUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/createUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        CreateUser:
-          Type: Api
-          Properties:
-            Path: /user
-            Method: post
-
-  GetUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /user/{userId}
-            Method: get
-
-  GetUsersFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUsers/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /users/
-            Method: get
-
-  UpdateUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/updateUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        UpdateUser:
-          Type: Api
-          Properties:
-            Path: /user/{userId}
-            Method: put
             
   LambdaSubirArchivo:
     Type: AWS::Serverless::Function
