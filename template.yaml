@@ -186,7 +186,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        lambdaobtenerproductoportexto:
+        LambdaObtenerProductoPorTexto:
           Type: Api
           Properties:
             Path: /Productos/BuscarPorNombre
