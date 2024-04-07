@@ -69,7 +69,22 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: put
-
+            
+  LambdaSubirArchivo:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-subir-archivo/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaSubirArchivo:
+          Type: Api
+          Properties:
+            Path: /user/SubirArchivo
+            Method: post
+            
   DeleteUserFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -85,21 +100,126 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
-  lambda-administrador-community-manager:
+
+  LambdaAdministradorCommunityManager:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-administrador-community-manager/       
+      CodeUri: backend/lambda-administrador-community-manager/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
         - x86_64
       Events:
-        lambda-administrador-community-manager:
+        LambdaAdministradorCommunityManager:
           Type: Api
           Properties:
             Path: /lambda-administrador-community-manager
-            Method: GET /events
+            Method: get
 
+  LambdaListarClientes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-clientes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaListarClientes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/Compradores
+            Method: get
+
+  LambdaMostrarTendencias:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendencias:
+          Type: Api
+          Properties:
+            Path: /Productos/Tendencias
+            Method: get
+
+  LambdaMostrarColeccionesNuevas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-colecciones-nuevas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarColeccionesNuevas:
+          Type: Api
+          Properties:
+            Path: /Productos/Colecciones/NuevasColecciones
+            Method: get
+           
+  LambdaEliminarUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-eliminar-usuarios/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEliminarUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EliminarUsuario
+            Method: delete 
+
+  LambdaObtenerTipoProductos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipo-productos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerTipoProductos:
+          Type: Api
+          Properties:
+            Path: /Productos/Tipos
+            Method: get
+           
+  LambdaObtenerProductoPorTexto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-busqueda-producto-por-texto/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductoPorTexto:
+          Type: Api
+          Properties:
+            Path: /Productos/BuscarPorNombre
+            Method: get
+
+  LambdaEliminarUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-eliminar-usuario/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEliminarUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EliminarUsuario
+            Method: delete 
 
 Outputs:
   ApiGatewayUrl:
