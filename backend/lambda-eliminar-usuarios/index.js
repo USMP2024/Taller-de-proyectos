@@ -1,6 +1,6 @@
-import mysql from 'mysql';
+const mysql = require('mysql');
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
     const idusuario = event.queryStringParameters.idusuario;
 
     // Verificar si idusuario es nulo
