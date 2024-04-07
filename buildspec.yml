@@ -19,6 +19,7 @@ phases:
       - cd ../mfe-lista-usuarios && npm install && npm run build
       - cd ../mfe-crear-usuario && npm install && npm run build
       - cd ../mfe-sidebar && npm install && npm run build
+      - cd ../mfe-header && npm install && npm run build
       - cd ../../
       - sam build --use-container
 
@@ -31,6 +32,7 @@ phases:
       - aws s3 sync ./frontend/mfe-lista-usuarios/dist s3://s3-mf-lista-usuarios --delete
       - aws s3 sync ./frontend/mfe-crear-usuario/dist s3://s3-mf-crear-usuario --delete
       - aws s3 sync ./frontend/mfe-sidebar/dist s3://s3-mf-sidebar --delete
+      - aws s3 sync ./frontend/mfe-header/dist s3://s3-mf-header --delete
 
 artifacts:
   files:

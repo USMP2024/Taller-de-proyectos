@@ -1,0 +1,21 @@
+.botones{
+    margin-left: 75rem;
+
+}
+.botonheader{
+    margin-right: 15px;
+    border-radius: 15px;
+    width: 120px;
+    height: 40px;
+    border-color: #E8E9E9;
+    color: #6D7177;
+    border-width: 2px;
+    font-size: 16px;
+}
+.btn1{
+    background-color: #fff;
+
+}
+.btn2{
+    background-color: #E2E3E4;
+}
