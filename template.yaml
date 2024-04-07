@@ -69,7 +69,22 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: put
-
+            
+  LambdaSubirArchivo:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-subir-archivo/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaSubirArchivo:
+          Type: Api
+          Properties:
+            Path: /user/SubirArchivo
+            Method: post
+            
   DeleteUserFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -97,8 +112,40 @@ Resources:
         LambdaListarClientes:
           Type: Api
           Properties:
-            Path: /user/ListarClientes
-            Method: get   
+            Path: /Usuarios/Compradores
+            Method: get
+
+  LambdaMostrarTendencias:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendencias:
+          Type: Api
+          Properties:
+            Path: /Productos/Tendencias
+            Method: get
+
+  LambdaMostrarColeccionesNuevas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-colecciones-nuevas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarColeccionesNuevas:
+          Type: Api
+          Properties:
+            Path: /Productos/Colecciones/NuevasColecciones
+            Method: get
+           
+
 
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
