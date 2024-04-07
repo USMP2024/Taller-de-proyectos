@@ -160,16 +160,16 @@ Resources:
             Path: /Usuarios/EliminarUsuario
             Method: delete
 
-  LambdaObtenerTipoProductos:
+  LambdaObtenerTipoProducto:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-obtener-tipo-productos/
+      CodeUri: backend/lambda-obtener-tipo-producto/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
         - x86_64
       Events:
-        LambdaObtenerTipoProductos:
+        LambdaObtenerTipoProducto:
           Type: Api
           Properties:
             Path: /Productos/Tipos
@@ -195,7 +195,7 @@ Resources:
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-eliminar-usuario/
+      CodeUri: backend/lambda-eliminar-usuarios/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
