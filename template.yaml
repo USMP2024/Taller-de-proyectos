@@ -100,6 +100,22 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
+
+  LambdaAdministradorCommunityManager:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-administrador-community-manager/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaAdministradorCommunityManager:
+          Type: Api
+          Properties:
+            Path: /lambda-administrador-community-manager
+            Method: get
+
   LambdaListarClientes:
     Type: AWS::Serverless::Function
     Properties:
@@ -175,8 +191,6 @@ Resources:
             Path: /Productos/Tipos
             Method: get
            
-
-
   LambdaObtenerProductoPorTexto:
     Type: AWS::Serverless::Function
     Properties:
