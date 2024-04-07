@@ -174,7 +174,21 @@ Resources:
           Properties:
             Path: /Productos/Tipos
             Method: get
-           
+
+    LambdaRegistrarContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-registrar-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRegistrarContribuidor:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/RegisterContribuidor
+            Method: post         
 
 
 Outputs:
