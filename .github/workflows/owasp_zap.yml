@@ -15,4 +15,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.4.0
         with:
-          target: 'https://tu-sitio-web-aqui.com'
+          target: 'https://d1gvejrxvpfna1.cloudfront.net'
