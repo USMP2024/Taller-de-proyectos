@@ -177,7 +177,7 @@ Resources:
            
 
 
-lambdaobtenerproductoportexto:
+  LambdaObtenerProductoPorTexto:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-busqueda-producto-por-texto/       
@@ -189,7 +189,7 @@ lambdaobtenerproductoportexto:
         lambdaobtenerproductoportexto:
           Type: Api
           Properties:
-            Path: /lambdaobtenerproductoportexto
+            Path: /Productos/BuscarPorNombre
             Method: get
 
   LambdaEliminarUsuario:
