@@ -2,7 +2,7 @@
   "name": "lambda-editar-usuarios",
   "version": "1.0.0",
   "dependencies": {
-    "mysql2": "^2.0.0"
+    "mysql2": "^3.9.2"
   },
   "description": "",
   "main": "app.js",
