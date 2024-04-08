@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     
     try {
         // Consulta SQL para seleccionar los datos de los productos, ordenados por contador de vistas
-        const [rows] = await connection.execute('SELECT tip_int_id_tipo, tip_txt_nombre_tipo, tip_txt_descripcion_tipo, tip_txt_imagen_tipo FROM ora_tipo_productos');
+        const [rows] = await connection.execute('SELECT tip_int_id_tipo, tip_txt_nombre_tipo, tip_txt_descripcion_tipo, tip_txt_imagen_tipo FROM ora_tipos_producto');
 
         // Procesar los resultados y generar la respuesta
         const productos = rows.map(row => ({
