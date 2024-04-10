@@ -145,7 +145,52 @@ Resources:
             Path: /Productos/Colecciones/NuevasColecciones
             Method: get
            
+  LambdaEliminarUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-eliminar-usuarios/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEliminarUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EliminarUsuario
+            Method: delete 
 
+  LambdaObtenerTipoProductos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipo-productos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerTipoProductos:
+          Type: Api
+          Properties:
+            Path: /Productos/Tipos
+            Method: get
+           
+
+
+lambdaobtenerproductoportexto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-busqueda-producto-por-texto/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        lambdaobtenerproductoportexto:
+          Type: Api
+          Properties:
+            Path: /lambdaobtenerproductoportexto
+            Method: get
 
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function

@@ -1,6 +1,7 @@
 const mysql = require('mysql2');
 
 exports.handler = async (event) => {
+
     const idusuario = event.queryStringParameters.idusuario;
 
     // Verificar si idusuario es nulo
@@ -69,4 +70,8 @@ exports.handler = async (event) => {
     } finally {
         connection.end(); // Cerrar la conexión después de usarla
     }
+ 
 };
+
+
+ 
