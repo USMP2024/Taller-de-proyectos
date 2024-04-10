@@ -1,5 +1,5 @@
 {
-  "name": "lambda-eliminar-usuario",
+  "name": "lambda-editar-usuarios",
   "version": "1.0.0",
   "dependencies": {
     "mysql2": "^3.9.2"

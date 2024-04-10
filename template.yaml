@@ -145,7 +145,22 @@ Resources:
           Type: Api
           Properties:
             Path: /Usuarios/EliminarUsuario
-            Method: delete 
+            Method: delete
+
+  LambdaEditarUsuarios:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-usuarios/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEditarUsuarios:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EditarUsuarios
+            Method: put 
 
 Outputs:
   ApiGatewayUrl:
