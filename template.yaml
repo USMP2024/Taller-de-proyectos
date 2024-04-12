@@ -145,7 +145,22 @@ Resources:
           Type: Api
           Properties:
             Path: /Usuarios/EliminarUsuario
-            Method: delete
+            Method: delete 
+  
+  LambdaRegistrarComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-registrar-comprador/  
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+      LambdaRegistrarComprador:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/RegistroComprador
+            Method: post  
 
   LambdaEditarUsuarios:
     Type: AWS::Serverless::Function
@@ -156,12 +171,26 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        LambdaEditarUsuarios:
+      LambdaEditarUsuarios:
           Type: Api
           Properties:
             Path: /Usuarios/EditarUsuarios
             Method: put 
 
+  LambdaLoginComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-login-comprador/  
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaLoginComprador:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/LoginComprador
+            Method: post 
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
