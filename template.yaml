@@ -177,7 +177,7 @@ Resources:
             Path: /Usuarios/EditarUsuarios
             Method: put 
 
-    LambdaRegistrarContribuidor:
+  LambdaRegistrarContribuidor:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-registrar-contribuidor/
@@ -192,7 +192,7 @@ Resources:
             Path: /Autenticacion/RegisterContribuidor
             Method: post     
 
-    LambdaLoginContribuidor:
+  LambdaLoginContribuidor:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-login-contribuidor/
