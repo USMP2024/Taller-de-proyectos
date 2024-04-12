@@ -156,7 +156,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-      LambdaRegistrarComprador:
+        LambdaRegistrarComprador:
           Type: Api
           Properties:
             Path: /Autenticacion/RegistroComprador
@@ -171,7 +171,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-      LambdaEditarUsuarios:
+        LambdaEditarUsuarios:
           Type: Api
           Properties:
             Path: /Usuarios/EditarUsuarios
