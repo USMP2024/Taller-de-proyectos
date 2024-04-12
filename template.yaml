@@ -156,11 +156,26 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        LambdaRegistrarComprador:
+      LambdaRegistrarComprador:
           Type: Api
           Properties:
             Path: /Autenticacion/RegistroComprador
-            Method: post             
+            Method: post  
+
+  LambdaEditarUsuarios:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-usuarios/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+      LambdaEditarUsuarios:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EditarUsuarios
+            Method: put 
 
   LambdaLoginComprador:
     Type: AWS::Serverless::Function
