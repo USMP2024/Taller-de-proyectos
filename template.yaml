@@ -178,34 +178,34 @@ Resources:
             Method: put 
 
     LambdaRegistrarContribuidor:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/lambda-registrar-contribuidor/
-      Handler: index.handler
-      Runtime: nodejs20.x
-      Architectures:
-        - x86_64
-      Events:
-        LambdaRegistrarContribuidor:
-          Type: Api
-          Properties:
-            Path: /Autenticacion/RegisterContribuidor
-            Method: post     
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-registrar-contribuidor/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+          LambdaRegistrarContribuidor:
+            Type: Api
+            Properties:
+              Path: /Autenticacion/RegisterContribuidor
+              Method: post     
 
     LambdaLoginContribuidor:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/lambda-login-contribuidor/
-      Handler: index.handler
-      Runtime: nodejs20.x
-      Architectures:
-        - x86_64
-      Events:
-        LambdaLoginContribuidor:
-          Type: Api
-          Properties:
-            Path: /Autenticacion/LoginContribuidor
-            Method: post        
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-login-contribuidor/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+          LambdaLoginContribuidor:
+            Type: Api
+            Properties:
+              Path: /Autenticacion/LoginContribuidor
+              Method: post        
 
   LambdaLoginComprador:
     Type: AWS::Serverless::Function
