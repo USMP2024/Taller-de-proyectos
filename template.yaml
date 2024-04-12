@@ -10,70 +10,11 @@ Globals:
     Timeout: 3
 
 Resources:
-  CreateUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/createUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        CreateUser:
-          Type: Api
-          Properties:
-            Path: /user
-            Method: post
-
-  GetUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /user/{userId}
-            Method: get
-
-  GetUsersFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUsers/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /users/
-            Method: get
-
-  UpdateUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/updateUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        UpdateUser:
-          Type: Api
-          Properties:
-            Path: /user/{userId}
-            Method: put
             
   LambdaSubirArchivo:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-subir-archivo/       
+      CodeUri: backend/lambda-subir-archivo/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -99,6 +40,22 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: delete
+
+
+  LambdaAdministradorCommunityManager:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-administrador-community-manager/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaAdministradorCommunityManager:
+          Type: Api
+          Properties:
+            Path: /lambda-administrador-community-manager
+            Method: get
 
   LambdaListarClientes:
     Type: AWS::Serverless::Function
@@ -145,10 +102,40 @@ Resources:
             Path: /Productos/Colecciones/NuevasColecciones
             Method: get
            
+  LambdaObtenerTipoProductos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipo-producto/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerTipoProducto:
+          Type: Api
+          Properties:
+            Path: /Productos/Tipos
+            Method: get
+           
+  LambdaObtenerProductoPorTexto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-busqueda-producto-por-texto/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductoPorTexto:
+          Type: Api
+          Properties:
+            Path: /Productos/BuscarPorNombre
+            Method: get
+
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-eliminar-usuarios/       
+      CodeUri: backend/lambda-eliminar-usuarios/  
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -159,21 +146,36 @@ Resources:
           Properties:
             Path: /Usuarios/EliminarUsuario
             Method: delete 
-
-  LambdaObtenerTipoProductos:
+  
+  LambdaRegistrarComprador:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-obtener-tipo-productos/
+      CodeUri: backend/lambda-registrar-comprador/  
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
         - x86_64
       Events:
-        LambdaObtenerTipoProductos:
+        LambdaRegistrarComprador:
           Type: Api
           Properties:
-            Path: /Productos/Tipos
-            Method: get
+            Path: /Autenticacion/RegistroComprador
+            Method: post  
+
+  LambdaEditarUsuarios:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-usuarios/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEditarUsuarios:
+          Type: Api
+          Properties:
+          Path: /Usuarios/EditarUsuarios
+          Method: put 
 
     LambdaRegistrarContribuidor:
     Type: AWS::Serverless::Function
@@ -205,7 +207,20 @@ Resources:
             Path: /Autenticacion/LoginContribuidor
             Method: post        
 
-
+  LambdaLoginComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-login-comprador/  
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaLoginComprador:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/LoginComprador
+            Method: post 
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"

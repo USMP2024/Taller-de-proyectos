@@ -1,32 +1,11 @@
 <single-spa-router>
-  <header class="header">
-    <nav>
-        <ul class="nav-links">
-            <li><a href="/lista-usuarios">Lista de Usuarios</a></li>
-            <li><a href="/crear-usuario">Crear Usuario</a></li>
-        </ul>
-    </nav>
-  </header>
-<!-- Sidebar como un microfrontend siempre visible -->
-<div class="contenedor">
+  <div class="contenedor" style="display: flex; flex-direction: column; height: 100vh;">
 
-
-    <main class="content">
-      <route default>
-        <application name="@usmp/mfe-lista-usuarios"></application>
-      </route>
-      <route path="/crear-usuario">
-        <application name="@usmp/mfe-crear-usuario"></application>
-      </route>
-      <!-- Más rutas y microfrontends según sea necesario -->
-    </main>
-    <div class="sidebar">
-      <application name="@usmp/mfe-sidebar"></application>
-    </div>
-    <div class="footer">
-      <application name="@usmp/mfe-footer"></application>
-    </div>
-    
-</div>
-    
+      <div class="header" style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+        <application name="@usmp/mfe-header"></application>
+      </div>
+      <div class="footer" style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+        <application name="@usmp/mfe-prueba"></application>
+      </div>
+  </div>
 </single-spa-router>

@@ -1,0 +1,49 @@
+.engine{
+    height: 44px; /* Define la altura del elemento con la clase .engine */
+    width: 180px; /* Define el ancho del elemento con la clase .engine */
+    text-align: right; /* Alinea el texto a la derecha */
+    background-color:#fff; /* Define el color de fondo del elemento como blanco */
+    border-radius:10px; /* Define el radio del borde del elemento */
+    border: none; /* Elimina el borde del elemento */
+    margin-right: 80px; /* Define el margen derecho del elemento */
+    color: #333; /* Define el color de la letra */
+    font-size: 14px;
+    margin-left: 80px;
+}
+.dropdown {
+    position: relative; /* Establece la posición del elemento como relativa */
+    display: inline-block; /* El contenedor se muestra en línea con otros elementos */
+}
+  
+.dropdown-toggle {
+    background-color: #ffff; /* Define el color de fondo del botón que activa el menú desplegable */
+    border: 1px solid #ffff; /* Define el borde del botón que activa el menú desplegable */
+    padding: 10px; /* Define el relleno del botón que activa el menú desplegable */
+    cursor: pointer; /* El cursor se convierte en un puntero al pasar sobre el botón que activa el menú desplegable */
+}
+  
+.dropdown-menu {
+    display: none; /* El menú desplegable está oculto por defecto */
+    position: absolute; /* Posición absoluta para el menú desplegable */
+    background-color: #fff; /* Color de fondo del menú desplegable como blanco */
+    border: 1px solid #fff; /* Borde del menú desplegable */
+    border-radius: 10px; /* redondeo del borde del menu desplegable */
+    margin-left: 80px; /* Margen izquierdo del menú desplegable */
+    width: 177px; /* Ancho del menú desplegable */
+}
+  
+.dropdown:hover .dropdown-menu {
+    display: block; /* El menú desplegable se muestra cuando se pasa el ratón sobre el contenedor con la clase .dropdown */
+}
+  
+.dropdown-menu a {
+    display: block; /* Los enlaces del menú desplegable se muestran en bloques */
+    padding: 6px; /* Espacio interior de los enlaces del menú desplegable */
+    text-decoration: none; /* Sin decoración de texto para los enlaces del menú desplegable */
+    color: #333; /* Color de los enlaces del menú desplegable */
+    font-size: 14px;
+}
+  
+.dropdown-menu a:hover {
+    background-color: #ffffff; /* Color de fondo de los enlaces del menú desplegable al pasar el ratón por encima */
+}
