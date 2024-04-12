@@ -174,8 +174,8 @@ Resources:
         LambdaEditarUsuarios:
           Type: Api
           Properties:
-          Path: /Usuarios/EditarUsuarios
-          Method: put 
+            Path: /Usuarios/EditarUsuarios
+            Method: put 
 
     LambdaRegistrarContribuidor:
     Type: AWS::Serverless::Function
