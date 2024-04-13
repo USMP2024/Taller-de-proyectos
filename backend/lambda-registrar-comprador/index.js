@@ -25,10 +25,10 @@ exports.handler = async (event, context) => {
 
     // Configuración de Cognito
     const cognito = new AWS.CognitoIdentityServiceProvider();
-    const userPoolId = 'us-east-1_YcnohWASY';
-    const groupName = 'compradores-arte';
-    const clientId = '558o7dr2cg51jrb71ilvhj08vj';
-    const clientSecret = '17sioav7qnoldni8eiiatu56jtlrnr0n4qknqjj5522d2eh1k7na';
+    const userPoolId = 'us-east-1_yEMhAlbc4';
+    const groupName = 'comprador-intipachaartes';
+    const clientId = '1i6e60046ghcsj1l3j8fqal9gm';
+    const clientSecret = 'd0c07fu1jd830ekrts6lqd8fd3dns07mlbqjbcnbqcjjk5fnld0';
 
     // Calcula el hash secreto
     const message = correo + clientId;
@@ -59,9 +59,12 @@ exports.handler = async (event, context) => {
         const userSub = signUpResponse.UserSub;
 
         // Guardar datos en MySQL
-        const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario) VALUES (?, ?, ?, ?)`;
+        const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario, usr_val_fecha_registro, usr_txt_apellido_usuario) VALUES (?, ?, ?, ?, ?, ?)`;
         const rolValue = 'Cliente'; // Valor ENUM válido
-        await connection.execute(insertQuery, [nombreCompleto, correo, contrasena, rolValue]);
+        const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        await connection.execute(insertQuery, [nombre, correo, contrasena, rolValue, currentDate, apellido]);
+        
 
         // Añadir usuario al grupo en Cognito
         const addUserToGroupParams = {
@@ -82,7 +85,7 @@ exports.handler = async (event, context) => {
         console.error('Error:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Usuario registrado' })
+            body: JSON.stringify({ message: 'Usuario no registrado' })
         };
     }
 };
