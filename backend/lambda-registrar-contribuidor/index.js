@@ -24,11 +24,12 @@ exports.handler = async (event, context) => {
     const nombreCompleto = `${nombre} ${apellido}`;
 
     // Configuración de Cognito
-    const cognito = new AWS.CognitoIdentityServiceProvider();
-    const userPoolId = 'us-east-1_yEMhAlbc4';
-    const groupName = 'comprador-intipachaartes';
-    const clientId = '1i6e60046ghcsj1l3j8fqal9gm';
-    const clientSecret = 'd0c07fu1jd830ekrts6lqd8fd3dns07mlbqjbcnbqcjjk5fnld0';
+
+const cognito = new AWS.CognitoIdentityServiceProvider();
+const userPoolId = 'us-east-1_K0WcEp2e0';
+const groupName = 'cognito-intipachaartes-contribuidor';
+const clientId = '5r7lhelfg091fpj2q5at7vcfse';
+const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
 
     // Calcula el hash secreto
     const message = correo + clientId;
@@ -36,32 +37,16 @@ exports.handler = async (event, context) => {
     hmac.update(message);
     const secretHash = hmac.digest('base64');
 
+    // Configuración de conexión a MySQL utilizando async/await
     try {
+        
         const connection = await mysql.createConnection({
             host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
             user: 'admindev',
             password: 'passworddev',
             database: 'db_cloud'
         });
-    
-        // Guardar datos en MySQL
-        const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario, usr_val_fecha_registro, usr_txt_apellido_usuario) VALUES (?, ?, ?, ?, ?, ?)`;
-        const rolValue = 'Cliente'; // Valor ENUM válido
-        const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    
-        await connection.execute(insertQuery, [nombre, correo, contrasena, rolValue, currentDate, apellido]);
-    
-        // Cerrar conexión a MySQL
-        await connection.end();
-    } catch (dbError) {
-        console.error('Error en la inserción de la base de datos:', dbError);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ message: 'Error en la inserción de la base de datos.' })
-        };
-    }
 
-    try {
         // Registro de usuario en Cognito
         const signUpParams = {
             ClientId: clientId,
@@ -72,25 +57,34 @@ exports.handler = async (event, context) => {
                 { Name: 'email', Value: correo }
             ]
         };
-        await cognito.signUp(signUpParams).promise(); // Ignorar el resultado
-    
+        const signUpResponse = await cognito.signUp(signUpParams).promise();
+        const userSub = signUpResponse.UserSub;
+
+        // Guardar datos en MySQL
+        const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario) VALUES (?, ?, ?, ?)`;
+        const rolValue = 'Cliente'; // Valor ENUM válido
+        await connection.execute(insertQuery, [nombreCompleto, correo, contrasena, rolValue]);
+
         // Añadir usuario al grupo en Cognito
         const addUserToGroupParams = {
             UserPoolId: userPoolId,
-            Username: correo,
+            Username: userSub,
             GroupName: groupName
         };
-        await cognito.adminAddUserToGroup(addUserToGroupParams).promise(); // Ignorar el resultado
-    
+        await cognito.adminAddUserToGroup(addUserToGroupParams).promise();
+
+        // Cerrar conexión a MySQL
+        await connection.end();
+
         return {
             statusCode: 200,
             body: JSON.stringify({ message: 'Usuario registrado y añadido al grupo exitosamente.' })
         };
-    } catch (cognitoError) {
-        console.error('Error en el registro de usuario en Cognito:', cognitoError);
+    } catch (error) {
+        console.error('Error:', error);
         return {
-            statusCode: 200, // O puedes devolver un código de éxito si lo deseas
-            body: JSON.stringify({ message: 'Usuario registrado correctamente.' })
+            statusCode: 500,
+            body: JSON.stringify({ message: 'Usuario registrado' })
         };
     }
 };
