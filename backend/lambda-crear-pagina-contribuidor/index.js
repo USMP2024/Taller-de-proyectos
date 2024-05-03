@@ -76,7 +76,7 @@ const handler = async (event) => {
     noticias = noticias.filter(elemento => elemento !== undefined && elemento !==null)
 
     //Validacion de retorno , en caso no existan elementos a retornar es porque no existen en la base de datos
-    if(noticias.length > 0){
+    //if(noticias.length > 0){
       const response = {
         statusCode: 200,
         body: noticias,
@@ -84,14 +84,14 @@ const handler = async (event) => {
 
       return response;
 
-    }else{
+    /*}else{
       const response = {
         statusCode: 404,
         body: "Not Found : No se encontraron noticias",
       }
 
       return response;
-    }
+    }*/
 
   } catch (error) {
     //Manejo de errores internos del servidor
