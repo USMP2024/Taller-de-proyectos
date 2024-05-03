@@ -5,6 +5,15 @@ const handler = async (event) => {
   const dynamobd = new AWS.DynamoDB();
   const s3client = new AWS.S3();
 
+  console.log({"Variables de entorno":{
+                        host: process.env.host,
+                        user: process.env.user,
+                        password: process.env.password,
+                        database: process.env.database
+                      }})
+
+
+  
   // Validacion de existencia del campo Start date
   if (!event.queryStringParameters.start_date) {
     const response = {
@@ -59,10 +68,11 @@ const handler = async (event) => {
       console.log(fechaPublicacion >= start_date_validate)
       console.log(fechaPublicacion <= end_date_validate)
       if (
-        noticia.tituloNoticia.S.includes(event.queryStringParameters.title) &&
+        noticia.tituloNoticia.S.includes(event.title) &&
         fechaPublicacion >= start_date_validate &&
         fechaPublicacion <= end_date_validate
       ){
+        console.log('Se paso al MAP')
         const expedienteMap = {};
         for (let key in noticia) {
           expedienteMap[key] = noticia[key].S;
@@ -77,15 +87,12 @@ const handler = async (event) => {
             "getObject",
             paramS3
           );
+          console.log("S3 URL : " + expedienteMap.portadaNoticia)
           return expedienteMap;
 
         }catch(error){
           console.log("Error de S3 : " +  error)
         }
-
-        console.log(expedienteMap)
-        
-        return expedienteMap;
       }
     });
     noticias = noticias.filter(elemento => elemento !== undefined && elemento !==null)
