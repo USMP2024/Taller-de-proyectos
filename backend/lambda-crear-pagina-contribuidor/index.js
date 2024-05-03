@@ -68,14 +68,20 @@ const handler = async (event) => {
           expedienteMap[key] = noticia[key].S;
         }
         //Obtener la URL firmada de la imagen de la noticia desde s3
-        const paramS3 = {
-          Bucket: "s3-noticias-bucket",
-          Key: "Sources/" + expedienteMap.Idnoticias + ".jpg",
-        };
-        expedienteMap.portadaNoticia = s3client.getSignedUrl(
-          "getObject",
-          paramS3
-        );
+        try{
+          const paramS3 = {
+            Bucket: "s3-noticias-bucket",
+            Key: "Sources/" + expedienteMap.Idnoticias + ".jpg",
+          };
+          expedienteMap.portadaNoticia = s3client.getSignedUrl(
+            "getObject",
+            paramS3
+          );
+          return expedienteMap;
+
+        }catch(error){
+          console.log("Error de S3 : " +  error)
+        }
 
         console.log(expedienteMap)
         
