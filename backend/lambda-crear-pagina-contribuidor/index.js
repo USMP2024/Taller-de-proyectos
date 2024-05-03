@@ -6,10 +6,10 @@ const handler = async (event) => {
   const s3client = new AWS.S3();
 
   // Validacion de existencia del campo Start date
-  if (!event.start_date) {
+  if (!event.queryStringParameters.start_date) {
     const response = {
       statusCode: 404,
-      body: "start_date is required",
+      body: "start_date is required....",
     };
     return response;
   }
@@ -18,7 +18,7 @@ const handler = async (event) => {
 
   // Validacion de la fecha de fin proporcionada del evento
   try {
-    end_date_validate = event.end_date ? new Date(event.end_date) : new Date();
+    end_date_validate = event.queryStringParameters.end_date ? new Date(event.queryStringParameters.end_date) : new Date();
   } catch {
     const response = {
       statusCode: 404,
@@ -29,7 +29,7 @@ const handler = async (event) => {
 
   // Validacion de la fecha de incio proporcionada
   try {
-    start_date_validate = new Date(event.start_date);
+    start_date_validate = new Date(event.queryStringParameters.start_date);
   } catch {
     const response = {
       statusCode: 404,
@@ -53,7 +53,7 @@ const handler = async (event) => {
       let fechaPublicacion = new Date(anio,mes ,dia);
 
       if (
-        noticia.tituloNoticia.S.includes(event.title) &&
+        noticia.tituloNoticia.S.includes(event.queryStringParameters.title) &&
         fechaPublicacion >= start_date_validate &&
         fechaPublicacion <= end_date_validate
       ){
