@@ -1,13 +1,6 @@
 const AWS = require("aws-sdk");
 // Función para manejar el evento de Lambda
 const handler = async (event) => {
- // Configuracion de credenciales para AWS
-  AWS.config.update({
-    region: "us-east-1",
-    accessKeyId: "AKIAZQ3DU6LHBA6HOP5I",
-    secretAccessKey: "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",
-  });
-
   // creacion de instancias de Dynamo y S3
   const dynamobd = new AWS.DynamoDB();
   const s3client = new AWS.S3();
