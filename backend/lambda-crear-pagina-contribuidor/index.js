@@ -9,7 +9,7 @@ const handler = async (event) => {
   if (!event.queryStringParameters.start_date) {
     const response = {
       statusCode: 404,
-      body: "start_date is required....",
+      body: "start_date is required.....",
     };
     return response;
   }
