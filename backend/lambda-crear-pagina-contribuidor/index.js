@@ -69,8 +69,8 @@ const handler = async (event) => {
       console.log(fechaPublicacion <= end_date_validate)
       if (
         noticia.tituloNoticia.S.includes(event.queryStringParameters.title) ||
-        fechaPublicacion >= start_date_validate &&
-        fechaPublicacion <= end_date_validate
+        (fechaPublicacion >= start_date_validate &&
+        fechaPublicacion <= end_date_validate)
       ){
         console.log('Se paso al MAP')
         const expedienteMap = {};
