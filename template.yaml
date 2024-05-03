@@ -221,6 +221,36 @@ Resources:
           Properties:
             Path: /Autenticacion/LoginComprador
             Method: post 
+
+  LambdaVerReporteMensualesEnBaseAAno:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-mensuales-en-base-a-ano/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+         LambdaVerReporteMensualesEnBaseAAno:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ReportesMensualesPorAño
+            Method: post
+
+  LambdaVerReporteDiariosEnBaseAMes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-diarios-en-base-a-mes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+         LambdaVerReporteDiariosEnBaseAMes:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ReportesDiariosPorMes
+            Method: post
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
