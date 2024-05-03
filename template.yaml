@@ -115,7 +115,7 @@ Resources:
           Type: Api
           Properties:
             Path: /user/CrearPaginaContribuidor
-            Method: post
+            Method: get
           
   LambdaObtenerTipoProductos:
     Type: AWS::Serverless::Function
