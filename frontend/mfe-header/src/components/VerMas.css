@@ -1,0 +1,13 @@
+.botonRojo{
+    background-color: #FC3441;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    width: 300px;
+    height: 35px;
+    font-size: 20px;
+}
+.botonRojo:hover{
+    background-color: #fc3441b9;
+    cursor: pointer;
+}
