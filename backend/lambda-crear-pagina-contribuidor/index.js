@@ -53,7 +53,11 @@ const handler = async (event) => {
       let fechaPublicacion = new Date(anio,mes ,dia);
 
       console.log(noticia)
-      
+      console.log(event.queryStringParameters.start_date)
+      console.log(event.queryStringParameters.end_date)
+      console.log(noticia.tituloNoticia.S.includes(event.queryStringParameters.title))
+      console.log(fechaPublicacion >= start_date_validate)
+      console.log(fechaPublicacion <= end_date_validate)
       if (
         noticia.tituloNoticia.S.includes(event.queryStringParameters.title) &&
         fechaPublicacion >= start_date_validate &&
