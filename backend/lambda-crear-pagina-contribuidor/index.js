@@ -101,7 +101,7 @@ const handler = async (event) => {
     if(noticias.length > 0){
       const response = {
         statusCode: 200,
-        body: noticias,
+        body: JSON.stringify(noticias),
       };
 
       return response;
