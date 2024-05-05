@@ -266,6 +266,23 @@ Resources:
           Properties:
             Path: /Finanzas/ReportesDiariosPorMes
             Method: get
+
+  LambdaDetalleProducto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-detalle-producto/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaDetalleProducto:
+          Type: Api
+          Properties:
+            Path: /Productos/DetalleProducto
+            Method: get
+
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
