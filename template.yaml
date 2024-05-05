@@ -266,6 +266,36 @@ Resources:
           Properties:
             Path: /Finanzas/ReportesDiariosPorMes
             Method: post
+    
+    LambdaMostrarTendenciasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias-general      
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendenciasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/TendenciasGeneral
+            Method: get
+    
+    LambdaMostrarBlogTutoriales:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-blog-tutoriales     
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendenciasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/ObtenerBlogsTutoriales
+            Method: get
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
