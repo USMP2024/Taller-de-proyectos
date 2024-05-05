@@ -291,11 +291,29 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        LambdaMostrarTendenciasGeneral:
+        LambdaMostrarBlogTutoriales:
           Type: Api
           Properties:
             Path: /Productos/ObtenerBlogsTutoriales
             Method: get
+    
+
+
+    LambdaMostrarCategoriasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-categorias-general     
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarCategoriasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/CategoriasGeneral
+            Method: get
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
