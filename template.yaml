@@ -250,7 +250,7 @@ Resources:
           Type: Api
           Properties:
             Path: /Finanzas/ReportesMensualesPorAño
-            Method: post
+            Method: get
 
   LambdaVerReporteDiariosEnBaseAMes:
     Type: AWS::Serverless::Function
@@ -265,7 +265,7 @@ Resources:
           Type: Api
           Properties:
             Path: /Finanzas/ReportesDiariosPorMes
-            Method: post
+            Method: get
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
