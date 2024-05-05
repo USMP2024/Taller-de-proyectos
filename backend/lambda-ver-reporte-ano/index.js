@@ -12,10 +12,10 @@ exports.handler = async (event, context) => {
     
     // Configuración de conexión a MySQL
     const connection = await mysql.createConnection({
-        host: 'database-1.cfu642m4mp23.us-east-1.rds.amazonaws.com',
-        user: 'back_piero',
-        password: 'Pieroangel123*',
-        database: 'back_piero'
+        host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
+        user: 'admindev',
+        password: 'passworddev',
+        database: 'db_cloud'
     });
 
     try {
