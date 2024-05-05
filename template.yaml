@@ -126,7 +126,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        LambdaObtenerTipoProducto:
+        LambdaObtenerTipoProductos:
           Type: Api
           Properties:
             Path: /Productos/Tipos
