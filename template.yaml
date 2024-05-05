@@ -220,7 +220,52 @@ lambdaobtenerproductoportexto:
           Type: Api
           Properties:
             Path: /Usuarios/EditarUsuarios
-            Method: put 
+            Method: put
+
+  LambdaCrearColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-crear-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCrearColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/CrearColeccion
+            Method: post 
+
+  LambdaGuardarProductoEnColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-guardar-producto-en-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaGuardarProductoEnColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/GuardarProductoEnColeccion
+            Method: post 
+
+  LambdaObtenerColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerColeccion
+            Method: get
 
 Outputs:
   ApiGatewayUrl:
