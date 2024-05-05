@@ -1,4 +1,4 @@
-const mysql = require('mysql/promise'); // Importa las bibliotecas necesarias
+const mysql = require('mysql2/promise'); // Importa las bibliotecas necesarias
 
   // Configura la conexión a la base de datos
   const dbConfig = {
