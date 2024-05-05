@@ -297,8 +297,6 @@ Resources:
             Path: /Productos/ObtenerBlogsTutoriales
             Method: get
     
-
-
     LambdaMostrarCategoriasGeneral:
     Type: AWS::Serverless::Function
     Properties:
