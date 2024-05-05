@@ -251,6 +251,69 @@ Resources:
           Properties:
             Path: /Finanzas/ReportesDiariosPorMes
             Method: post
+
+             LambdaVerReporteAno:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-ano/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+         LambdaVerReporteAno:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerReportesAnuales
+            Method: post
+
+LambdaRankingArtistas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ranking-artistas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+         LambdaRankingArtistas:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerRankingArtistas
+            Method: post
+
+
+LambdaObtenerCarritosAbandonados:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-carritos-abandonados/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+         LambdaObtenerCarritosAbandonados:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerCarritosAbandonados
+            Method: post
+
+
+LambdaGenerarExcel
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-excel/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+         LambdaGenerarExcel:
+          Type: Api
+          Properties:
+            Path: /Finanzas/GenerarReporteExcel
+            Method: post
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
