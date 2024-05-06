@@ -41,7 +41,6 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
-
   LambdaAdministradorCommunityManager:
     Type: AWS::Serverless::Function
     Properties:
@@ -237,10 +236,10 @@ Resources:
             Path: /Autenticacion/LoginComprador
             Method: post 
 
-  LambdaVerReporteMensualesEnBaseAAno:
+  LambdaVerReporteMensualesEnBaseAAño:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-ver-reporte-mensuales-en-base-a-ano/
+      CodeUri: backend/lambda-ver-reporte-mensuales-en-base-a-año/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
