@@ -246,7 +246,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-         LambdaVerReporteMensualesEnBaseAAno:
+        LambdaVerReporteMensualesEnBaseAAno:
           Type: Api
           Properties:
             Path: /Finanzas/ReportesMensualesPorAño
@@ -261,7 +261,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-         LambdaVerReporteDiariosEnBaseAMes:
+        LambdaVerReporteDiariosEnBaseAMes:
           Type: Api
           Properties:
             Path: /Finanzas/ReportesDiariosPorMes
