@@ -236,10 +236,10 @@ Resources:
             Path: /Autenticacion/LoginComprador
             Method: post 
 
-  LambdaVerReporteMensualesEnBaseAAño:
+  LambdaVerReporteMensualesEnBaseAAno:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-ver-reporte-mensuales-en-base-a-año/
+      CodeUri: backend/lambda-ver-reporte-mensuales-en-base-a-ano/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -248,7 +248,7 @@ Resources:
         LambdaVerReporteMensualesEnBaseAAno:
           Type: Api
           Properties:
-            Path: /Finanzas/ReportesMensualesPorAño
+            Path: /Finanzas/ReportesMensualesPorAno
             Method: get
 
   LambdaVerReporteDiariosEnBaseAMes:
