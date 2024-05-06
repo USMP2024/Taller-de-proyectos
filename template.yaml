@@ -41,7 +41,6 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
-
   LambdaAdministradorCommunityManager:
     Type: AWS::Serverless::Function
     Properties:
@@ -101,7 +100,22 @@ Resources:
           Properties:
             Path: /Productos/Colecciones/NuevasColecciones
             Method: get
-           
+
+  LambdaCrearPaginaContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-crear-pagina-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCrearPaginaContribuidor:
+          Type: Api
+          Properties:
+            Path: /user/CrearPaginaContribuidor
+            Method: get
+          
   LambdaObtenerTipoProductos:
     Type: AWS::Serverless::Function
     Properties:
@@ -111,12 +125,12 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        LambdaObtenerTipoProducto:
+        LambdaObtenerTipoProductos:
           Type: Api
           Properties:
             Path: /Productos/Tipos
             Method: get
-           
+             
   LambdaObtenerProductoPorTexto:
     Type: AWS::Serverless::Function
     Properties:
@@ -135,7 +149,7 @@ Resources:
   LambdaEliminarUsuario:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-eliminar-usuarios/  
+      CodeUri: backend/lambda-eliminar-usuarios/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -150,7 +164,7 @@ Resources:
   LambdaRegistrarComprador:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-registrar-comprador/  
+      CodeUri: backend/lambda-registrar-comprador/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -165,7 +179,7 @@ Resources:
   LambdaEditarUsuarios:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-editar-usuarios/       
+      CodeUri: backend/lambda-editar-usuarios/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -210,7 +224,7 @@ Resources:
   LambdaLoginComprador:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-login-comprador/  
+      CodeUri: backend/lambda-login-comprador/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -231,11 +245,11 @@ Resources:
       Architectures:
         - x86_64
       Events:
-         LambdaVerReporteMensualesEnBaseAAno:
+        LambdaVerReporteMensualesEnBaseAAno:
           Type: Api
           Properties:
-            Path: /Finanzas/ReportesMensualesPorAño
-            Method: post
+            Path: /Finanzas/ReportesMensualesPorAno
+            Method: get
 
   LambdaVerReporteDiariosEnBaseAMes:
     Type: AWS::Serverless::Function
@@ -246,73 +260,71 @@ Resources:
       Architectures:
         - x86_64
       Events:
-         LambdaVerReporteDiariosEnBaseAMes:
+        LambdaVerReporteDiariosEnBaseAMes:
           Type: Api
           Properties:
             Path: /Finanzas/ReportesDiariosPorMes
-            Method: post
+            Method: get
 
-             LambdaVerReporteAno:
+  LambdaDetalleProducto:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-ver-reporte-ano/
+      CodeUri: backend/lambda-detalle-producto/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
         - x86_64
       Events:
-         LambdaVerReporteAno:
+       LambdaDetalleProducto:
           Type: Api
           Properties:
-            Path: /Finanzas/ObtenerReportesAnuales
-            Method: post
+            Path: /Productos/DetalleProducto
+            Method: get
 
-LambdaRankingArtistas:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/lambda-ranking-artistas/
-      Handler: index.handler
-      Runtime: nodejs20.x
-      Architectures:
-        - x86_64
-      Events:
-         LambdaRankingArtistas:
-          Type: Api
-          Properties:
-            Path: /Finanzas/ObtenerRankingArtistas
-            Method: post
+  LambdaRankingArtistas:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-ranking-artistas/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+           LambdaRankingArtistas:
+            Type: Api
+            Properties:
+              Path: /Finanzas/ObtenerRankingArtistas
+              Method: get
 
+  LambdaObtenerCarritosAbandonados:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-obtener-carritos-abandonados/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+           LambdaObtenerCarritosAbandonados:
+            Type: Api
+            Properties:
+              Path: /Finanzas/ObtenerCarritosAbandonados
+              Method: get
 
-LambdaObtenerCarritosAbandonados:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/lambda-obtener-carritos-abandonados/
-      Handler: index.handler
-      Runtime: nodejs20.x
-      Architectures:
-        - x86_64
-      Events:
-         LambdaObtenerCarritosAbandonados:
-          Type: Api
-          Properties:
-            Path: /Finanzas/ObtenerCarritosAbandonados
-            Method: post
-
-
-LambdaGenerarExcel
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/lambda-generar-excel/
-      Handler: index.handler
-      Runtime: nodejs20.x
-      Architectures:
-        - x86_64
-      Events:
-         LambdaGenerarExcel:
-          Type: Api
-          Properties:
-            Path: /Finanzas/GenerarReporteExcel
-            Method: post
+  LambdaGenerarExcel:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-generar-excel/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+           LambdaGenerarExcel:
+            Type: Api
+            Properties:
+              Path: /Finanzas/GenerarReporteExcel
+              Method: get
 
 Outputs:
   ApiGatewayUrl:
