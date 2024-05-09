@@ -1,3 +1,3 @@
 export default function Root(props) {
-  return <section>Prueba exitosa</section>;
+  return <section>Prueba 3</section>;
 }
