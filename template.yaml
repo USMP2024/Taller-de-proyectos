@@ -281,6 +281,36 @@ Resources:
             Path: /Autenticacion/LoginComprador
             Method: post 
 
+  LambdaEvaluarImagenes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-evaluar-imagenes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEvaluarImagenes:
+          Type: Api
+          Properties:
+            Path: /*
+            Method: update   
+
+  LambdaListarImagenesValidar:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-imagenes-validar/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaListarImagenesValidar:
+          Type: Api
+          Properties:
+            Path: /*
+            Method: get
+
   LambdaVerReporteMensualesEnBaseAAno:
     Type: AWS::Serverless::Function
     Properties:
@@ -320,7 +350,7 @@ Resources:
       Architectures:
         - x86_64
       Events:
-       LambdaDetalleProducto:
+        LambdaDetalleProducto:
           Type: Api
           Properties:
             Path: /Productos/DetalleProducto
@@ -335,7 +365,7 @@ Resources:
         Architectures:
           - x86_64
         Events:
-           LambdaRankingArtistas:
+          LambdaRankingArtistas:
             Type: Api
             Properties:
               Path: /Finanzas/ObtenerRankingArtistas
