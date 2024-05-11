@@ -350,11 +350,26 @@ Resources:
         Architectures:
           - x86_64
         Events:
-           LambdaObtenerCarritosAbandonados:
+          LambdaObtenerCarritosAbandonados:
             Type: Api
             Properties:
               Path: /Finanzas/ObtenerCarritosAbandonados
               Method: get
+
+  LambdaGenerarExcel:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-generar-excel/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+          LambdaGenerarExcel:
+            Type: Api
+            Properties:
+              Path: /Finanzas/GenerarReporteExcel
+              Method: post
 
 Outputs:
   ApiGatewayUrl:
