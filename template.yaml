@@ -10,69 +10,11 @@ Globals:
     Timeout: 3
 
 Resources:
-  CreateUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/createUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        CreateUser:
-          Type: Api
-          Properties:
-            Path: /user
-            Method: post
-
-  GetUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /user/{userId}
-            Method: get
-
-  GetUsersFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/getUsers/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        GetUser:
-          Type: Api
-          Properties:
-            Path: /users/
-            Method: get
-
-  UpdateUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: backend/updateUser/
-      Handler: index.handler
-      Runtime: nodejs18.x
-      Architectures:
-        - x86_64
-      Events:
-        UpdateUser:
-          Type: Api
-          Properties:
-            Path: /user/{userId}
-            Method: put
+            
   LambdaSubirArchivo:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-subir-archivo/       
+      CodeUri: backend/lambda-subir-archivo/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -83,6 +25,7 @@ Resources:
           Properties:
             Path: /user/SubirArchivo
             Method: post
+            
   DeleteUserFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -98,6 +41,425 @@ Resources:
             Path: /user/{userId}
             Method: delete
 
+  LambdaAdministradorCommunityManager:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-administrador-community-manager/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaAdministradorCommunityManager:
+          Type: Api
+          Properties:
+            Path: /lambda-administrador-community-manager
+            Method: get
+
+  LambdaListarClientes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-clientes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaListarClientes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/Compradores
+            Method: get
+
+  LambdaMostrarTendencias:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendencias:
+          Type: Api
+          Properties:
+            Path: /Productos/Tendencias
+            Method: get
+
+  LambdaMostrarColeccionesNuevas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-colecciones-nuevas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarColeccionesNuevas:
+          Type: Api
+          Properties:
+            Path: /Productos/Colecciones/NuevasColecciones
+            Method: get
+
+  LambdaCrearPaginaContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-crear-pagina-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCrearPaginaContribuidor:
+          Type: Api
+          Properties:
+            Path: /user/CrearPaginaContribuidor
+            Method: get
+          
+  LambdaObtenerTipoProductos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipo-producto/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerTipoProductos:
+          Type: Api
+          Properties:
+            Path: /Productos/Tipos
+            Method: get
+             
+  LambdaObtenerProductoPorTexto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-busqueda-producto-por-texto/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductoPorTexto:
+          Type: Api
+          Properties:
+            Path: /Productos/BuscarPorNombre
+            Method: get
+
+  LambdaEliminarUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-eliminar-usuarios/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEliminarUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EliminarUsuario
+            Method: delete 
+  
+  LambdaRegistrarComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-registrar-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRegistrarComprador:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/RegistroComprador
+            Method: post  
+
+  LambdaEditarUsuarios:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-usuarios/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEditarUsuarios:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EditarUsuarios
+            Method: put
+
+  LambdaCrearColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-crear-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCrearColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/CrearColeccion
+            Method: post 
+
+  LambdaGuardarProductoEnColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-guardar-producto-en-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaGuardarProductoEnColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/GuardarProductoEnColeccion
+            Method: post 
+
+  LambdaObtenerColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerColeccion
+            Method: get
+
+  LambdaRegistrarContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-registrar-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRegistrarContribuidor:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/RegisterContribuidor
+            Method: post     
+
+  LambdaLoginContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-login-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaLoginContribuidor:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/LoginContribuidor
+            Method: post        
+
+  LambdaLoginComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-login-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaLoginComprador:
+          Type: Api
+          Properties:
+            Path: /Autenticacion/LoginComprador
+            Method: post 
+
+  LambdaEvaluarImagenes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-evaluar-imagenes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEvaluarImagenes:
+          Type: Api
+          Properties:
+            Path: /Juez/EvaluarImagenes
+            Method: put   
+
+  LambdaListarImagenesValidar:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-imagenes-validar/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaListarImagenesValidar:
+          Type: Api
+          Properties:
+            Path: /Juez/ObtenerImagenesValidar
+            Method: get
+
+  LambdaVerReporteMensualesEnBaseAAno:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-mensuales-en-base-a-ano/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaVerReporteMensualesEnBaseAAno:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ReportesMensualesPorAno
+            Method: get
+
+  LambdaVerReporteDiariosEnBaseAMes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-diarios-en-base-a-mes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaVerReporteDiariosEnBaseAMes:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ReportesDiariosPorMes
+            Method: get
+
+  LambdaDetalleProducto:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-detalle-producto/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaDetalleProducto:
+          Type: Api
+          Properties:
+            Path: /Productos/DetalleProducto
+            Method: get
+
+  LambdaRankingArtistas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ranking-artistas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRankingArtistas:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerRankingArtistas
+            Method: get
+
+  LambdaObtenerCarritosAbandonados:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-carritos-abandonados/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerCarritosAbandonados:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerCarritosAbandonados
+            Method: get
+
+  LambdaGenerarExcel:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-excel/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaGenerarExcel:
+          Type: Api
+          Properties:
+            Path: /Finanzas/GenerarReporteExcel
+            Method: post
+
+  LambdaIniciarCheckout:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-orden-pago/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaIniciarCheckout:
+          Type: Api
+          Properties:
+            Path: /Pago/IniciarCheckout
+            Method: post
+   
+  LambdaMostrarTendenciasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias-general/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendenciasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/TendenciasGeneral
+            Method: get
+    
+  LambdaMostrarBlogTutoriales:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-blog-tutoriales/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarBlogTutoriales:
+          Type: Api
+          Properties:
+            Path: /Productos/ObtenerBlogsTutoriales
+            Method: get
+    
+  LambdaMostrarCategoriasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-categorias-general/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarCategoriasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/CategoriasGeneral
+            Method: get
 
 Outputs:
   ApiGatewayUrl:

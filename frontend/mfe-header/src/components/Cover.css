@@ -1,0 +1,11 @@
+/* Cover.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+  h1 {
+    font-size: 3rem;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    margin-top: 150px;
+  }
+  

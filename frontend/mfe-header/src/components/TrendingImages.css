@@ -1,0 +1,7 @@
+.tendencias{
+    display: flex;
+}
+hr{
+    width:300px;
+    color: red;
+}
