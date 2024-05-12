@@ -21,7 +21,7 @@ exports.handler = async (event) => {
         const { sol_int_id_solicitud, sol_int_id_usuario, sol_txt_estado_aprobacion } = JSON.parse(event.body); // Asume que el cuerpo de la solicitud contiene el ID, nombre y email del usuario a actualizar
         const result = await new Promise((resolve, reject) => {
             const query = 'UPDATE ora_solicitudes_aprobacion SET sol_txt_estado_aprobacion = ? WHERE sol_int_id_solicitud = ? AND sol_int_id_usuario = ?';
-            connection.query(query, [sol_int_id_solicitud, sol_int_id_usuario, sol_txt_estado_aprobacion], (error, results) => {
+            connection.query(query, [sol_txt_estado_aprobacion,sol_int_id_solicitud, sol_int_id_usuario], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
