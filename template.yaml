@@ -189,7 +189,52 @@ Resources:
           Type: Api
           Properties:
             Path: /Usuarios/EditarUsuarios
-            Method: put 
+            Method: put
+
+  LambdaCrearColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-crear-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCrearColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/CrearColeccion
+            Method: post 
+
+  LambdaGuardarProductoEnColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-guardar-producto-en-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaGuardarProductoEnColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/GuardarProductoEnColeccion
+            Method: post 
+
+  LambdaObtenerColeccion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-coleccion/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerColeccion
+            Method: get
 
   LambdaRegistrarContribuidor:
     Type: AWS::Serverless::Function
@@ -236,6 +281,36 @@ Resources:
             Path: /Autenticacion/LoginComprador
             Method: post 
 
+  LambdaEvaluarImagenes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-evaluar-imagenes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEvaluarImagenes:
+          Type: Api
+          Properties:
+            Path: /*
+            Method: update   
+
+  LambdaListarImagenesValidar:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-imagenes-validar/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaListarImagenesValidar:
+          Type: Api
+          Properties:
+            Path: /*
+            Method: get
+
   LambdaVerReporteMensualesEnBaseAAno:
     Type: AWS::Serverless::Function
     Properties:
@@ -281,6 +356,50 @@ Resources:
             Path: /Productos/DetalleProducto
             Method: get
 
+  LambdaRankingArtistas:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-ranking-artistas/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+          LambdaRankingArtistas:
+            Type: Api
+            Properties:
+              Path: /Finanzas/ObtenerRankingArtistas
+              Method: get
+
+  LambdaObtenerCarritosAbandonados:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-obtener-carritos-abandonados/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+          LambdaObtenerCarritosAbandonados:
+            Type: Api
+            Properties:
+              Path: /Finanzas/ObtenerCarritosAbandonados
+              Method: get
+
+  LambdaGenerarExcel:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-generar-excel/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+          - x86_64
+        Events:
+          LambdaGenerarExcel:
+            Type: Api
+            Properties:
+              Path: /Finanzas/GenerarReporteExcel
+              Method: post
 
 Outputs:
   ApiGatewayUrl:
