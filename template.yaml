@@ -293,8 +293,8 @@ Resources:
         LambdaEvaluarImagenes:
           Type: Api
           Properties:
-            Path: /*
-            Method: update   
+            Path: /Juez/EvaluarImagenes
+            Method: put   
 
   LambdaListarImagenesValidar:
     Type: AWS::Serverless::Function
@@ -308,7 +308,7 @@ Resources:
         LambdaListarImagenesValidar:
           Type: Api
           Properties:
-            Path: /*
+            Path: /Juez/ObtenerImagenesValidar
             Method: get
 
   LambdaVerReporteMensualesEnBaseAAno:
