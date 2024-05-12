@@ -401,6 +401,21 @@ Resources:
               Path: /Finanzas/GenerarReporteExcel
               Method: post
 
+  LambdaIniciarCheckout:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-orden-pago/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaIniciarCheckout:
+          Type: Api
+          Properties:
+            Path: /Pago/IniciarCheckout
+            Method: post
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
