@@ -386,7 +386,7 @@ Resources:
               Path: /Finanzas/ObtenerCarritosAbandonados
               Method: get
 
-  LambdaGenerarExcel:
+    LambdaGenerarExcel:
       Type: AWS::Serverless::Function
       Properties:
         CodeUri: backend/lambda-generar-excel/
@@ -415,6 +415,51 @@ Resources:
           Properties:
             Path: /Pago/IniciarCheckout
             Method: post
+   
+  LambdaMostrarTendenciasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias-general      
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendenciasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/TendenciasGeneral
+            Method: get
+    
+  LambdaMostrarBlogTutoriales:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-blog-tutoriales     
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarBlogTutoriales:
+          Type: Api
+          Properties:
+            Path: /Productos/ObtenerBlogsTutoriales
+            Method: get
+    
+  LambdaMostrarCategoriasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-categorias-general     
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarCategoriasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/CategoriasGeneral
+            Method: get
 
 Outputs:
   ApiGatewayUrl:
