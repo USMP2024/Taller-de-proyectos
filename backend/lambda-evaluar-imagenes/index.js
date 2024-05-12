@@ -9,10 +9,10 @@ const config = {
 };
 
 const connection = mysql.createConnection({
-    host: config.dbHost,
-    user: config.dbUser,
-    password: config.dbPassword,
-    database: config.dbName
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database
 });
 
 exports.handler = async (event) => {
