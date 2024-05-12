@@ -4,10 +4,10 @@ const mysql = require('mysql2/promise');
 exports.handler = async () => {
     // Configurar la conexión a la base de datos MySQL en AWS RDS
     const connection = await mysql.createConnection({
-  //      host: 'bddavgpp.c5kgggo4cxrf.us-east-1.rds.amazonaws.com',
-  //      user: 'adminavgp',
-  //      password: 'ca311297',
-  //      database: 'int_pacha_arte'
+        host: process.env.host,
+        user: process.env.user,
+        password: process.env.password,
+        database: process.env.database
     });
 
     try {
