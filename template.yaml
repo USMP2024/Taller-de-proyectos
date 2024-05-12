@@ -357,49 +357,49 @@ Resources:
             Method: get
 
   LambdaRankingArtistas:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-ranking-artistas/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
-          - x86_64
-        Events:
-          LambdaRankingArtistas:
-            Type: Api
-            Properties:
-              Path: /Finanzas/ObtenerRankingArtistas
-              Method: get
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ranking-artistas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRankingArtistas:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerRankingArtistas
+            Method: get
 
   LambdaObtenerCarritosAbandonados:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-obtener-carritos-abandonados/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
-          - x86_64
-        Events:
-          LambdaObtenerCarritosAbandonados:
-            Type: Api
-            Properties:
-              Path: /Finanzas/ObtenerCarritosAbandonados
-              Method: get
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-carritos-abandonados/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerCarritosAbandonados:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerCarritosAbandonados
+            Method: get
 
-    LambdaGenerarExcel:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-generar-excel/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
-          - x86_64
-        Events:
-          LambdaGenerarExcel:
-            Type: Api
-            Properties:
-              Path: /Finanzas/GenerarReporteExcel
-              Method: post
+  LambdaGenerarExcel:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-excel/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaGenerarExcel:
+          Type: Api
+          Properties:
+            Path: /Finanzas/GenerarReporteExcel
+            Method: post
 
   LambdaIniciarCheckout:
     Type: AWS::Serverless::Function
