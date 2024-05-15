@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     if (!año) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ message: 'Falta el campo obligatorio "año" en la solicitud.' })
+            body: JSON.stringify({ message: 'Falta el campo obligatorio "año" en la solicitud..' })
         };
     }
 
