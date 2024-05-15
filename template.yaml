@@ -461,6 +461,23 @@ Resources:
             Path: /Productos/CategoriasGeneral
             Method: get
 
+LambdaObtenerFestividadesporMes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-festividades-por-mes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerFestividadesporMes:
+          Type: Api
+          Properties:
+            Path: /Festividades
+            Method: get
+
+
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
