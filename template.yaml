@@ -476,9 +476,9 @@ Resources:
             Path: /Festividades
             Method: get
 
-  MyS3Bucket:  # Check for existing bucket
+  MyS3Bucket:
     Type: AWS::S3::Bucket
-    Condition: !If [!Ref MyS3Bucket, !Ref BucketExists, true]  # Create bucket only if it doesn't exist
+    Condition: BucketExists
     Properties:
       BucketName: s3-mf-prueba
       AccessControl: PublicRead
@@ -489,4 +489,14 @@ Outputs:
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
   BucketName:
     Description: Name of the created (or existing) S3 bucket
-    Value: !If [!Ref MyS3Bucket, !Ref MyS3Bucket, Fn::GetAtt [MyS3Bucket, BucketName]]
+    Value: !If
+      - BucketExists
+      - !Ref MyS3Bucket
+      - s3-mf-prueba
+
+Conditions:
+  BucketExists:
+    Fn::Not:
+      - Fn::Equals:
+          - ""
+          - !Ref MyS3Bucket
