@@ -475,7 +475,20 @@ Resources:
           Properties:
             Path: /Festividades
             Method: get
-      
+
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: s3-mf-prueba
+      AccessControl: PublicRead
+
+  MyS3BucketObject:
+    Type: AWS::S3::BucketObject
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      Key: usmp-mfe-prueba.js
+      Source: ./frontend/mfe-prueba/dist/usmp-mfe-prueba.js
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
