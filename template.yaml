@@ -478,17 +478,21 @@ Resources:
 
   MyS3Bucket:
     Type: AWS::S3::Bucket
-    Condition: BucketDoesNotExist
     Properties:
       BucketName: s3-mf-prueba
 
-Conditions:
-  BucketDoesNotExist:
-    Fn::Not:
-      - Fn::If:
-          - MyS3BucketExists
-          - true
-          - false
+  MyBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      PolicyDocument:
+        Statement:
+          - Sid: AllowPutObject
+            Effect: Allow
+            Principal:
+              AWS: "*"
+            Action: s3:PutObject
+            Resource: !Sub "arn:aws:s3:::${MyS3Bucket}/*"
 
 Outputs:
   ApiGatewayUrl:
