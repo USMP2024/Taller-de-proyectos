@@ -478,25 +478,17 @@ Resources:
 
   MyS3Bucket:
     Type: AWS::S3::Bucket
-    Condition: BucketExists
+    Condition: BucketDoesNotExist
     Properties:
       BucketName: s3-mf-prueba
-      AccessControl: PublicRead
+
+Conditions:
+  BucketDoesNotExist:
+    Fn::Not:
+      - Fn::Condition:
+          Fn::IfExists: MyS3Bucket
 
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
-  BucketName:
-    Description: Name of the created (or existing) S3 bucket
-    Value: !If
-      - BucketExists
-      - !Ref MyS3Bucket
-      - s3-mf-prueba
-
-Conditions:
-  BucketExists:
-    Fn::Not:
-      - Fn::Equals:
-          - ""
-          - !Ref MyS3Bucket
