@@ -476,20 +476,17 @@ Resources:
             Path: /Festividades
             Method: get
 
-  MyS3Bucket:
+  MyS3Bucket:  # Check for existing bucket
     Type: AWS::S3::Bucket
+    Condition: !If [!Ref MyS3Bucket, !Ref BucketExists, true]  # Create bucket only if it doesn't exist
     Properties:
       BucketName: s3-mf-prueba
       AccessControl: PublicRead
-
-  MyS3BucketObject:
-    Type: AWS::S3::Bucket::Object
-    Properties:
-      Bucket: !Ref MyS3Bucket
-      Key: usmp-mfe-prueba.js
-      Source: ./frontend/mfe-header/dist/usmp-mfe-prueba.js
 
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  BucketName:
+    Description: Name of the created (or existing) S3 bucket
+    Value: !If [!Ref MyS3Bucket, !Ref MyS3Bucket, Fn::GetAtt [MyS3Bucket, BucketName]]
