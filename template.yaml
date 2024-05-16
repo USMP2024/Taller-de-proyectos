@@ -483,11 +483,11 @@ Resources:
       AccessControl: PublicRead
 
   MyS3BucketObject:
-    Type: AWS::S3::BucketObject
+    Type: AWS::S3::Object
     Properties:
       Bucket: !Ref MyS3Bucket
       Key: usmp-mfe-prueba.js
-      Source: ./frontend/mfe-prueba/dist/usmp-mfe-prueba.js
+      Source: ./frontend/mfe-header/dist/usmp-mfe-prueba.js
 
 Outputs:
   ApiGatewayUrl:
