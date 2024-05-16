@@ -477,9 +477,9 @@ Resources:
             Method: get
 
   MyS3Bucket:
-  Type: AWS::S3::Bucket
-  Properties:
-    BucketName: s3-mf-prueba
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: s3-mf-prueba
 
   MyBucketPolicy:
     Type: AWS::S3::BucketPolicy
