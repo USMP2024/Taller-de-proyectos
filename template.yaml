@@ -479,7 +479,7 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: s3-mf-prueba
+      BucketName: s3-mf-prueba-jose
 
   MyBucketPolicy:
     Type: AWS::S3::BucketPolicy
