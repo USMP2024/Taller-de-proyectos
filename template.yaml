@@ -485,7 +485,7 @@ Resources:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
       Bucket:
-        Ref: 'MyBucket'
+        Ref: 'MyS3Bucket'
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -496,7 +496,7 @@ Resources:
               Fn::Join:
                 - ''
                 - - 'arn:aws:s3:::'
-                  - Ref: 'MyBucket'
+                  - Ref: 'MyS3Bucket'
                   - '/*'
 
 Outputs:
