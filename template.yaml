@@ -476,16 +476,20 @@ Resources:
             Path: /Festividades
             Method: get
 
-  MyS3Bucket:
-    Type: AWS::S3::Bucket
+  MyBucket:
+    Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: s3-mf-prueba-jose
-
+      BucketName: my-bucket
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
   MyBucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
       Bucket:
-        Ref: 'MyS3Bucket'
+        Ref: 'MyBucket'
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -496,7 +500,7 @@ Resources:
               Fn::Join:
                 - ''
                 - - 'arn:aws:s3:::'
-                  - Ref: 'MyS3Bucket'
+                  - Ref: 'MyBucket'
                   - '/*'
 
 Outputs:
