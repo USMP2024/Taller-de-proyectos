@@ -485,8 +485,10 @@ Resources:
 Conditions:
   BucketDoesNotExist:
     Fn::Not:
-      - Fn::Condition:
-          Fn::IfExists: MyS3Bucket
+      - Fn::If:
+          - MyS3BucketExists
+          - true
+          - false
 
 Outputs:
   ApiGatewayUrl:
