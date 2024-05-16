@@ -482,17 +482,22 @@ Resources:
       BucketName: s3-mf-prueba-jose
 
   MyBucketPolicy:
-    Type: AWS::S3::BucketPolicy
+    Type: 'AWS::S3::BucketPolicy'
     Properties:
-      Bucket: !Ref MyS3Bucket
+      Bucket:
+        Ref: 'MyBucket'
       PolicyDocument:
+        Version: '2012-10-17'
         Statement:
-          - Sid: AllowPutObject
-            Effect: Allow
-            Principal:
-              AWS: "*"
-            Action: s3:PutObject
-            Resource: !Sub "arn:aws:s3:::${MyS3Bucket}/*"
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: 'MyBucket'
+                  - '/*'
 
 Outputs:
   ApiGatewayUrl:
