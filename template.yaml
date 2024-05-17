@@ -476,22 +476,6 @@ Resources:
             Path: /Festividades
             Method: get
 
-  MyBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: my-bucket
-
-  MyBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      PolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal: '*'
-            Action: 
-              - s3:GetObject
-            Resource: !Sub 'arn:aws:s3:::${MyBucket}/*'
-      Bucket: !Ref MyBucket
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
