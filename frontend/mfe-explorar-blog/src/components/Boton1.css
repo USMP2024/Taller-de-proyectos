@@ -1,0 +1,14 @@
+.styled-button{
+
+    width: 500px; /* Cambiar el ancho del boton */
+    height: 20px; /* Cambiar la altura del boton */
+    font-size: 12px; /* Tamaño de la fuente*/
+    text-align: center;
+    background-Color: #ddd;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 10px;
+    border: none;
+
+  }
+  

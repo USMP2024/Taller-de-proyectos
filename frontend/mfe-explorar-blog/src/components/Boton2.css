@@ -1,0 +1,13 @@
+.right-aligned-button{
+
+    width: 500px; /* Cambiar el ancho del boton */
+    height: 21px; /* Cambiar la altura del boton */
+    font-size: 12px; /* Tamaño de la fuente*/
+    text-align: center;
+    background-Color: red;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 10px;
+    border: none;
+
+  }
