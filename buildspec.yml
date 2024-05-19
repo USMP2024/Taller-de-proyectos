@@ -23,7 +23,7 @@ phases:
       - cd ../../
       - sam build --use-container
 
-  post_build:  # Package and deploy your application
+  post_build:
     commands:
       - sam package template.yaml --output-template-file packaged.yaml --s3-bucket s3-ipa-compilado
       - aws cloudformation deploy --template-file packaged.yaml --stack-name stack-prueba --capabilities CAPABILITY_NAMED_IAM --region us-east-1
