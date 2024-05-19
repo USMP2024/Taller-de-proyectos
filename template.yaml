@@ -267,6 +267,36 @@ lambdaobtenerproductoportexto:
             Path: /Usuarios/ObtenerColeccion
             Method: get
 
+  LambdaObtenerDescargasUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-descargas-usuario/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDescargasUsuario
+            Method: get
+
+  LambdaObtenerDetallesUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-detalles-usuario/       
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccion:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDetallesUsuario
+            Method: get
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
