@@ -276,7 +276,7 @@ lambdaobtenerproductoportexto:
       Architectures:
         - x86_64
       Events:
-        LambdaObtenerColeccion:
+        LambdaObtenerDescargasUsuario:
           Type: Api
           Properties:
             Path: /Usuarios/ObtenerDescargasUsuario
@@ -291,7 +291,7 @@ lambdaobtenerproductoportexto:
       Architectures:
         - x86_64
       Events:
-        LambdaObtenerColeccion:
+        LambdaObtenerDetallesUsuario:
           Type: Api
           Properties:
             Path: /Usuarios/ObtenerDetallesUsuario
