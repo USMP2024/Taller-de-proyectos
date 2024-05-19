@@ -506,7 +506,6 @@ Resources:
             Path: /Usuarios/ObtenerProductosArtista
             Method: get
 
-
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
