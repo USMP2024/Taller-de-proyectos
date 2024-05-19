@@ -505,10 +505,7 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerProductosArtista
             Method: get
-  MyS3Bucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: prueba-ultima-id-unico-170203
+
 
 Outputs:
   ApiGatewayUrl:
