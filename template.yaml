@@ -505,6 +505,10 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerProductosArtista
             Method: get
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-unique-bucket-name
 
 Outputs:
   ApiGatewayUrl:
