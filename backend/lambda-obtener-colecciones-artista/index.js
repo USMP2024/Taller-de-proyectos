@@ -28,7 +28,7 @@ const handler = async (event) => {
     console.log(response);
     return response;
   }
-
+ 
   try {
     // Conexión a la base de datos MySQL usando mysql2/promise
     const connection = await mysql.createConnection({

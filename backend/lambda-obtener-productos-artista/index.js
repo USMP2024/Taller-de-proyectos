@@ -1,7 +1,4 @@
-// Importamos el módulo 'mysql2/promise' para manejar conexiones a bases de datos MySQL usando Promesas.
 const mysql = require('mysql2/promise');
-
-// Definimos el handler asíncrono para el evento Lambda.
 exports.handler = async (event, context) => {
   // Establecemos la conexión con la base de datos MySQL usando las credenciales proporcionadas.
   const connection = await mysql.createConnection({
@@ -12,13 +9,13 @@ exports.handler = async (event, context) => {
   });
 
   try {
-    // Extraemos los parámetros del encabezado de la solicitud.
-    const cadenaBusqueda = event.headers.cadenaBusqueda;
-    const orden = event.headers.orden;
-    const pagina = parseInt(event.headers.pagina);
-    const imagenesPorPagina = parseInt(event.headers.imagenesPorPagina);
-    const tipoBusqueda = event.headers.tipoBusqueda;
-    const idUsuario = parseInt(event.headers.idUsuario);
+    // Extraemos los parámetros de la consulta.
+    const cadenaBusqueda = event.queryStringParameters.cadenaBusqueda;
+    const orden = event.queryStringParameters.orden;
+    const pagina = parseInt(event.queryStringParameters.pagina);
+    const imagenesPorPagina = parseInt(event.queryStringParameters.imagenesPorPagina);
+    const tipoBusqueda = event.queryStringParameters.tipoBusqueda;
+    const idUsuario = parseInt(event.queryStringParameters.idUsuario);
 
     // Comenzamos a construir la consulta SQL.
     let query = `
@@ -45,7 +42,7 @@ exports.handler = async (event, context) => {
       query += ` AND p.pro_int_id_artista = ${idUsuario} `;
     }
 
-    // Ordenamos los resultados según el criterio especificado en los encabezados.
+    // Ordenamos los resultados según el criterio especificado en los parámetros.
     if (orden === 'Mejores imagenes') {
       query += ` ORDER BY p.pro_int_contador_vistas ASC `;
     } else if (orden === 'imagenes nuevas') {
@@ -96,13 +93,3 @@ exports.handler = async (event, context) => {
     await connection.end();
   }
 };
-
-
-/*ejemplo header:  
-  pagina : 1
-  imagenesPorPagina: 10
-  cadenaBusqueda : paisaje
-  orden : Mejores imagenes | imagenes nuevas
-  tipoBusqueda: Imagen |video|vector|objeto 3d|ilustraciones|
-  userId:6
-*/

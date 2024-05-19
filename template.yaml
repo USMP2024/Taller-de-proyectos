@@ -475,7 +475,7 @@ Resources:
           Properties:
             Path: /Festividades
             Method: get
-
+              
   LambdaObtenerColeccionesArtista:
     Type: AWS::Serverless::Function
     Properties:
