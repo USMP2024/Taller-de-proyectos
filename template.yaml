@@ -476,6 +476,36 @@ Resources:
             Path: /Festividades
             Method: get
 
+  LambdaObtenerColeccionesArtista:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-colecciones-artista/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccionesArtista:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerColecciones
+            Method: get
+
+  LambdaObtenerProductosArtista:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-productos-artista/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductosArtista:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerProductosArtista
+            Method: get
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
