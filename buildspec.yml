@@ -25,8 +25,12 @@ phases:
 
   post_build:
     commands:
+      - aws s3 rb s3://prueba-ultima-id-unico-170203f --force || true  # Elimina el bucket si existe, y continúa aunque falle
+
       - sam package template.yaml --output-template-file packaged.yaml --s3-bucket s3-ipa-compilado
       - aws cloudformation deploy --template-file packaged.yaml --stack-name stack-prueba --capabilities CAPABILITY_NAMED_IAM --region us-east-1
+
+      - aws s3 sync ./frontend/mfe-prueba/dist s3://prueba-ultima-id-unico-170203f --delete
 
 artifacts:
   files:
