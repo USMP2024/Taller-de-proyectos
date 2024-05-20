@@ -511,6 +511,13 @@ Resources:
     Properties:
       BucketName: prueba-ultima-id-unico-170203f
 
+# Comentario aleatorio para forzar la actualización de CloudFormation
+RandomComment: 
+  !Join
+    - ''
+    - - 'Esta es una modificación aleatoria para forzar la actualización de CloudFormation - '
+      - !Ref BuildDate
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
