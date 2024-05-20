@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "dependencies": {
     "aws-sdk": "^2.1594.0",
-    "mysql": "^2.18.1"
+    "axios": "^1.6.8",
+    "mysql": "^2.18.1",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
