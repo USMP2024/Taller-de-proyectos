@@ -1,0 +1,124 @@
+.pago-mercado-pago-container {
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pago-mercado-pago-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pago-mercado-pago-logo {
+    max-width: 200px;
+    height: auto;
+  }
+  
+  .pago-mercado-pago-body {
+    text-align: center;
+  }
+  
+  .pago-mercado-pago-body h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .pago-mercado-pago-input-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .pago-mercado-pago-body input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .pago-mercado-pago-input-error {
+    border-color: #ff0000;
+  }
+  
+  .pago-mercado-pago-error {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .pago-mercado-pago-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .pago-mercado-pago-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  
+  .pago-mercado-pago-continuar {
+    background-color: #009ee3;
+    color: #fff;
+    border: none;
+  }
+  
+  .pago-mercado-pago-continuar:hover {
+    background-color: #007baf;
+  }
+  
+  .pago-mercado-pago-crear-cuenta {
+    background-color: transparent;
+    color: #009ee3;
+    border: 1px solid #009ee3;
+  }
+  
+  .pago-mercado-pago-crear-cuenta:hover {
+    background-color: #009ee3;
+    color: #fff;
+  }
+  
+  .pago-mercado-pago-problems {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pago-mercado-pago-problems h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .pago-mercado-pago-problem-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    color: #009ee3;
+    font-size: 14px;
+  }
+  
+  .pago-mercado-pago-problem-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .pago-mercado-pago-problem-button i {
+    margin-right: 10px;
+  }
+  
+  .pago-mercado-pago-body p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+  }

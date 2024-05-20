@@ -1,0 +1,84 @@
+.revision-mercado-pago-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .revision-mercado-pago-container h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .revision-mercado-pago-tarjeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .revision-mercado-pago-tarjeta-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .revision-mercado-pago-tarjeta-info img {
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .revision-mercado-pago-tarjeta button {
+    background-color: transparent;
+    color: #009ee3;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .revision-mercado-pago-detalle {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .revision-mercado-pago-detalle h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .revision-mercado-pago-detalle p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .revision-mercado-pago-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .revision-mercado-pago-total p {
+    font-size: 16px;
+  }
+  
+  .revision-mercado-pago-pagar {
+    background-color: #009ee3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .revision-mercado-pago-seguro {
+    font-size: 14px;
+    color: #666;
+  }

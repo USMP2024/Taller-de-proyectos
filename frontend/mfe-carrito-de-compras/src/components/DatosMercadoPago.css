@@ -1,0 +1,94 @@
+.datos-mercado-pago-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.datos-mercado-pago-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.datos-mercado-pago-header h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.datos-mercado-pago-header p {
+  color: #666;
+}
+
+.datos-mercado-pago-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.datos-mercado-pago-field {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.datos-mercado-pago-field input {
+  width: 200px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.datos-mercado-pago-input-error {
+  border-color: #ff6347;
+}
+
+.datos-mercado-pago-error {
+  color: #ff6347;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.datos-mercado-pago-detalle {
+  background-color: #d9edf7;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.datos-mercado-pago-detalle h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.datos-mercado-pago-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.datos-mercado-pago-volver,
+.datos-mercado-pago-continuar {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.datos-mercado-pago-volver {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+}
+
+.datos-mercado-pago-continuar {
+  background-color: #31b0d5;
+  color: #fff;
+  border: none;
+}

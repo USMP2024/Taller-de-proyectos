@@ -1,0 +1,63 @@
+.pago-paypal-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .paypal-logo {
+    max-width: 100px;
+  }
+  
+  .precio {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .envio {
+    margin-bottom: 20px;
+  }
+  
+  .metodo-pago {
+    margin-bottom: 20px;
+  }
+  
+  .tarjeta {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .tarjeta img {
+    max-width: 50px;
+    margin-right: 10px;
+  }
+  
+  .info-adicional {
+    margin-bottom: 10px;
+  }
+  
+  .completar-compra {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #0070ba;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .cancelar {
+    color: #0070ba;
+    text-decoration: none;
+  }

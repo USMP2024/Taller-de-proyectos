@@ -1,0 +1,35 @@
+.pago-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.metodos-pago {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.metodo-pago {
+  display: flex;
+  flex-direction: olumn;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.metodo-pago img {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+.metodo-pago button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
