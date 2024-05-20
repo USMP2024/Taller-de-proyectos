@@ -512,12 +512,12 @@ Resources:
             Path: /Usuarios/ObtenerProductosArtista
             Method: get
 
-  MyS3Bucket:
+  PruebaF:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: prueba-ultima-id-unico-170203f
 
-  MyS3Bucket:
+  PruebaT:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: prueba-ultima-id-unico-170203t
