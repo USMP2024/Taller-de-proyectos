@@ -512,6 +512,7 @@ Resources:
       BucketName: prueba-ultima-id-unico-170203f
 
 Outputs:
+  #19/05/2024 20:40
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
