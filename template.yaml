@@ -509,12 +509,12 @@ Resources:
   PruebaF:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: prueba-ultima-id-unico-170203f
+      BucketName: prueba-id-unico-170203f
 
   PruebaT:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: prueba-ultima-id-unico-170203t
+      BucketName: prueba-id-unico-170203t
 
 Outputs:
   ApiGatewayUrl:
