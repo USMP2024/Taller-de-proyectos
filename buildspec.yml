@@ -8,29 +8,29 @@ phases:
       - npm install  # Install Node.js dependencies (if applicable)
       - pip install --upgrade aws-sam-cli  # Upgrade the AWS SAM CLI
 
-  pre_build:  # Optional: Validate template or application (if applicable)
+  pre_build:
     commands:
       - sam validate --template-file template.yaml
 
-  build:  # Build your application
+  build:
     commands:
-      - cd frontend/mfe-contenedor && npm install && npm run build
-      - cd ../mfe-lista-usuarios && npm install && npm run build
-      - cd ../mfe-crear-usuario && npm install && npm run build
-      - cd ../mfe-sidebar && npm install && npm run build
-      - cd ../mfe-header && npm install && npm run build
-      - cd ../mfe-prueba && npm install && npm run build
-      - cd ../../
+      #- cd frontend/mfe-contenedor && npm install && npm run build
+      #- cd ../mfe-lista-usuarios && npm install && npm run build
+      #- cd ../mfe-crear-usuario && npm install && npm run build
+      #- cd ../mfe-sidebar && npm install && npm run build
+      #- cd ../mfe-header && npm install && npm run build
+      #- cd ../mfe-prueba && npm install && npm run build
+      #- cd ../../
+
       - sam build --use-container
 
   post_build:
     commands:
-      #- aws s3 rb s3://prueba-ultima-id-unico-170203f --force || true 
 
       - sam package template.yaml --output-template-file packaged.yaml --s3-bucket s3-ipa-compilado
       - aws cloudformation deploy --template-file packaged.yaml --stack-name stack-prueba --capabilities CAPABILITY_NAMED_IAM --region us-east-1
 
-      # - aws s3 sync ./frontend/mfe-prueba/dist s3://prueba-ultima-id-unico-170203f --delete
+      - aws s3 sync ./frontend/mfe-prueba/dist s3://s3-mf-prueba --delete
 
 artifacts:
   files:

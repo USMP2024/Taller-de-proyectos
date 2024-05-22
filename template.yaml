@@ -536,15 +536,35 @@ Resources:
             Path: /Usuarios/ObtenerDetallesUsuario
             Method: get
 
-  PruebaF:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: prueba-id-unico-170203f
-
-  PruebaT:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: prueba-id-unico-170203t
+  S3MFPrueba:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: s3-mf-prueba
+    AccessControl: PublicRead
+    CorsConfiguration:
+      CorsRules:
+        - AllowedOrigins:
+            - "*"
+          AllowedMethods:
+            - GET
+            - PUT
+            - POST
+            - DELETE
+            - HEAD
+          AllowedHeaders:
+            - "*"
+          MaxAge: 3000
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: false
+      BlockPublicPolicy: false
+      IgnorePublicAcls: false
+      RestrictPublicBuckets: false
+    PolicyDocument:
+      Statement:
+        - Action: s3:GetObject
+          Effect: Allow
+          Resource: arn:aws:s3:::s3-mf-prueba/*
+          Principal: "*"
 
 Outputs:
   ApiGatewayUrl:
