@@ -537,37 +537,42 @@ Resources:
             Method: get
 
   S3MFPrueba:
-  Type: AWS::S3::Bucket
-  Properties:
-    BucketName: s3-mf-prueba
-    AccessControl: PublicRead
-    CorsConfiguration: 
-      CorsRules:
-        - AllowedOrigins:
-            - "*"
-          AllowedMethods:
-            - GET
-            - PUT
-            - POST
-            - DELETE
-            - HEAD
-          AllowedHeaders:
-            - "*"
-          Id: CORS1
-          MaxAge: 3000
-    PublicAccessBlockConfiguration:
-      BlockPublicAcls: false
-      BlockPublicPolicy: false
-      IgnorePublicAcls: false
-      RestrictPublicBuckets: false
-    PolicyDocument:
-      Version: 2012-10-17
-      Statement:
-        - Action: 
-            - s3:GetObject
-          Effect: Allow
-          Resource: arn:aws:s3:::s3-mf-prueba/*
-          Principal: "*"
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: s3-mf-prueba
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred
+      CorsConfiguration: 
+        CorsRules:
+          - AllowedOrigins:
+              - "*"
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            AllowedHeaders:
+              - "*"
+            Id: S3MFPruebaCORS
+            MaxAge: 3000
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+  
+  S3MFPruebaBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3MFPrueba
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Resource: arn:aws:s3:::s3-mf-prueba/*
+            Principal: "*"
 
 Outputs:
   ApiGatewayUrl:
