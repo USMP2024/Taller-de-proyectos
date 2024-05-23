@@ -31,6 +31,7 @@ phases:
       - aws cloudformation deploy --template-file packaged.yaml --stack-name stack-prueba --capabilities CAPABILITY_NAMED_IAM --region us-east-1
 
       - aws s3 sync ./frontend/mfe-prueba/dist s3://s3-mf-prueba --delete
+      - aws s3 sync ./frontend/mfe-registro-logueo-comprador/dist s3://s3-mf-registro-logueo-comprador --delete
 
 artifacts:
   files:
