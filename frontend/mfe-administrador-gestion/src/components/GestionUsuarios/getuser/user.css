@@ -1,0 +1,94 @@
+.userTable {
+    width: 60%;
+    background-color: white;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    border-radius: 5px;
+    margin: 50px auto;
+    padding: 50px;
+}
+.addButton {
+    text-decoration: none;
+    background-color: #c7d9ed;
+    color: #124152;
+    font-weight: 500;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    border-radius: 5px;
+    padding: 10px;
+}
+.userTable table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+.userTable table thead th {
+    background-color: #286C81;
+    color: white;
+    padding: 10px;
+}
+.userTable table tbody td {
+    padding: 10px;
+    text-align: center;
+}
+.actionButtons button {
+    border: 0;
+    outline: none;
+    background: #da456b;
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.actionButtons a {
+    background: #121f30;
+    padding: 6px 10px;
+    color: white;
+    border-radius: 5px;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.titulo h1 {
+    text-align: center; 
+    color: #121f30; 
+    }
+
+.btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+
+
+}
+
+.Clientes{
+    border: none;
+    background: #146b80;
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 5px;
+    margin:  10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Artista{
+    border: none;
+    background: #146b80;
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 5px;
+    margin:  10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Todos{
+    border: none;
+    background: #146b80;
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 5px;
+    margin:  10px;
+    font-weight: bold;
+    cursor: pointer;
+}
