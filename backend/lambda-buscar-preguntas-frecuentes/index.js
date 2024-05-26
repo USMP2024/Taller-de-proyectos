@@ -3,43 +3,33 @@ import AWS from 'aws-sdk';
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 export const handler = async (event) => {
-    const categories = ["Comenzar", "Revisión del contenido", "Su cartera", "Centro legal"];
-    const results = {};
+    const { cadenaDeBusqueda } = JSON.parse(event.body);
 
-    for (const category of categories) {
-        const params = {
-            TableName: 'dynamo-preguntas-frecuentes',
-            IndexName: 'idPregunta',  // Assuming there is a secondary index on categoriaPregunta
-            KeyConditionExpression: '#cat = :category',
-            ExpressionAttributeNames: {
-                '#cat': 'categoria'
-            },
-            ExpressionAttributeValues: {
-                ':category': category
-            }
-        };
-
-        try {
-            const response = await dynamodb.query(params).promise();
-            const items = response.Items;
-
-            // Sort the items by nroMeGustas in descending order
-            items.sort((a, b) => b.nroMeGustas - a.nroMeGustas);
-
-            // Get the top 3 items
-            const topItems = items.slice(0, 3);
-            results[category] = topItems;
-        } catch (error) {
-            console.error(`Error querying for category ${category}:`, error);
-            return {
-                statusCode: 500,
-                body: JSON.stringify({ error: `Error querying for category ${category}` })
-            };
+    const params = {
+        TableName: 'dynamo-preguntas-frecuentes',
+        FilterExpression: 'contains(pregunta, :search) OR contains(respuesta, :search)',
+        ExpressionAttributeValues: {
+            ':search': cadenaDeBusqueda
         }
-    }
-
-    return {
-        statusCode: 200,
-        body: JSON.stringify(results)
     };
+
+    try {
+        const data = await dynamodb.scan(params).promise();
+        const resultadoBusqueda = data.Items.map(item => ({
+            idPregunta: item.idPregunta,
+            pregunta: item.pregunta,
+            categoriaPregunta: item.categoriaPregunta
+        }));
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ resultadoBusqueda })
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Error al buscar preguntas frecuentes' })
+        };
+    }
 };
