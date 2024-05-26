@@ -521,6 +521,67 @@ Resources:
             Path: /Usuarios/ObtenerDescargasUsuario
             Method: get
 
+  LambdaBuscarPreguntasFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-buscar-preguntas-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaBuscarPreguntasFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/BuscarPreguntasFrecuentes
+            Method: get
+
+  LambdaObtenerPreguntasFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-preguntas-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerPreguntasFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerPreguntasFrecuentes
+            Method: get
+
+  LambdaMostrarArticuloFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-articulo-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarArticuloFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/MostrarArticuloFrecuentes
+            Method: get
+
+  LambdaCalificarArticuloFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-calificar-articulo-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCalificarArticuloFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/CalificarArticuloFrecuentes
+            Method: get
+
+
   LambdaObtenerDetallesUsuario:
     Type: AWS::Serverless::Function
     Properties:
