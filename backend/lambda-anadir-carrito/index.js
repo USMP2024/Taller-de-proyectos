@@ -37,8 +37,8 @@ exports.handler = async (event, context) => {
         // Insertar los productos en el carrito
         for (let producto of listaProductos) {
             await connection.execute(
-                'INSERT INTO temp_car_detalles_carrito (temp_det_int_id_carrito, temp_det_int_id_producto, temp_det_int_cantidad, temp_det_val_precio, temp_det_txt_nombre_producto, temp_det_txt_descripcion_producto) VALUES (?, ?, ?, ?, ?, ?)',
-                [idCarrito, producto.idProducto, producto.cantidad, producto.precio, producto.nombreProducto, producto.descripcionProducto]
+                'INSERT INTO temp_car_detalles_carrito (temp_det_int_id_carrito, temp_det_int_id_producto) VALUES (?, ?)',
+                [idCarrito, producto.idProducto]
             );
         }
 
