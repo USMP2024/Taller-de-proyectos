@@ -24,12 +24,11 @@ exports.handler = async (event, context) => {
     const nombreCompleto = `${nombre} ${apellido}`;
 
     // Configuración de Cognito
-
-const cognito = new AWS.CognitoIdentityServiceProvider();
-const userPoolId = 'us-east-1_K0WcEp2e0';
-const groupName = 'cognito-intipachaartes-contribuidor';
-const clientId = '5r7lhelfg091fpj2q5at7vcfse';
-const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
+    const cognito = new AWS.CognitoIdentityServiceProvider();
+    const userPoolId = 'us-east-1_YcnohWASY';
+    const groupName = 'compradores-arte';
+    const clientId = '558o7dr2cg51jrb71ilvhj08vj';
+    const clientSecret = '17sioav7qnoldni8eiiatu56jtlrnr0n4qknqjj5522d2eh1k7na';
 
     // Calcula el hash secreto
     const message = correo + clientId;
@@ -39,7 +38,6 @@ const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
 
     // Configuración de conexión a MySQL utilizando async/await
     try {
-        
         const connection = await mysql.createConnection({
             host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
             user: 'admindev',
@@ -62,7 +60,7 @@ const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
 
         // Guardar datos en MySQL
         const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario) VALUES (?, ?, ?, ?)`;
-        const rolValue = 'Cliente'; // Valor ENUM válido
+        const rolValue = 'Contribuidor'; // Valor ENUM válido
         await connection.execute(insertQuery, [nombreCompleto, correo, contrasena, rolValue]);
 
         // Añadir usuario al grupo en Cognito
