@@ -536,15 +536,111 @@ Resources:
             Path: /Usuarios/ObtenerDetallesUsuario
             Method: get
 
-  PruebaF:
-    Type: AWS::S3::Bucket
+  LambdaAnadirCarrito:
+    Type: AWS::Serverless::Function
     Properties:
-      BucketName: prueba-id-unico-170203f
+      CodeUri: backend/lambda-anadir-carrito/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaAnadirCarrito:
+          Type: Api
+          Properties:
+            Path: /Usuarios/AñadirCarrito
+            Method: post
 
-  PruebaT:
+  LambdaObtenerProductoRecomendado:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-producto-recomendado/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductoRecomendado:
+          Type: Api
+          Properties:
+            Path: /Productos/ProductoRecomendado
+            Method: get
+
+  # S3MFPrueba:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-prueba
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFPruebaCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFPruebaBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFPrueba
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-prueba/*
+  #           Principal: "*"
+  
+  S3MFRegistroLogueoComprador:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: prueba-id-unico-170203t
+      BucketName: s3-mf-registro-logueo-comprador
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred
+      CorsConfiguration: 
+        CorsRules:
+          - AllowedOrigins:
+              - "*"
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            AllowedHeaders:
+              - "*"
+            Id: S3MFRegistroLogueoCompradorCORS
+            MaxAge: 3000
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+  
+  S3MFRegistroLogueoCompradorBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3MFRegistroLogueoComprador
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Resource: arn:aws:s3:::s3-mf-registro-logueo-comprador/*
+            Principal: "*"
 
 Outputs:
   ApiGatewayUrl:
