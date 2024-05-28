@@ -1,34 +1,52 @@
 const mercadopago = require('mercadopago');
+const mysql = require('mysql2/promise');
 
-// Función para crear una orden de pago
+
+mercadopago.configure({
+  access_token: 'TEST-1563637811256460-032009-3e33ecc00169eca40dc41a4340928514-300692119'
+});
+
+
 exports.handler = async (event, context) => {
-  // Configurar credenciales de MercadoPago
-  mercadopago.configure({
-    access_token: 'TEST-1563637811256460-032009-3e33ecc00169eca40dc41a4340928514-300692119'
+  
+  const connection = await mysql.createConnection({
+    host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
+    user: 'admindev',
+    password: 'passworddev',
+    database: 'db_cloud'
   });
 
   try {
-    // Obtener parámetros del evento
-    const { titulo, cantidad, montoSoles } = JSON.parse(event.body);
+   
+    const { id_usuario, titulo, cantidad, montoSoles } = JSON.parse(event.body);
 
-    // Crear una preferencia de pago
+    
     const preference = {
       items: [
         {
-          title: titulo, // Título recibido
-          quantity: cantidad, // Cantidad recibida
-          currency_id: 'PEN', // Moneda en soles
-          unit_price: montoSoles // Monto en soles recibido
+          title: titulo,
+          quantity: cantidad, 
+          currency_id: 'PEN',
+          unit_price: montoSoles 
         }
       ]
     };
 
     const response = await mercadopago.preferences.create(preference);
 
-    // Obtener el enlace de pago (init_point)
+    
     const init_point = response.body.init_point;
 
-    // Enviar el enlace de pago como respuesta
+    
+    const [result] = await connection.execute(
+      'INSERT INTO ora_checkout_cliente (id_usuario, titulo, cantidad, monto_soles, init_point) VALUES (?, ?, ?, ?, ?)',
+      [id_usuario, titulo, cantidad, montoSoles, init_point]
+    );
+
+    
+    await connection.end();
+
+   
     return {
       statusCode: 200,
       body: JSON.stringify({
@@ -37,6 +55,10 @@ exports.handler = async (event, context) => {
     };
   } catch (error) {
     console.error('Hubo un error al procesar la solicitud:', error);
+
+   
+    await connection.end();
+
     return {
       statusCode: 500,
       body: JSON.stringify({
