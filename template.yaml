@@ -535,6 +535,22 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerDetallesUsuario
             Method: get
+
+  LambdaAnadirCarrito:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-anadir-carrito/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaAnadirCarrito:
+          Type: Api
+          Properties:
+            Path: /Usuarios/AñadirCarrito
+            Method: post
+
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
