@@ -4,8 +4,12 @@ const crypto = require('crypto');
 
 const handler = async (event) => {
     const { userName, lastnames, password, email } = event.body;
+    console.log(event.body);
+    console.log(userName);
+    console.log(lastnames);
     console.log(password);
-
+    console.log(email);
+    
     if (!userName || !lastnames || !email || !password) {
         return {
             statusCode: 400,
