@@ -1,0 +1,3 @@
+[submodule "frontend/mfe-menu-inicio"]
+	path = frontend/mfe-menu-inicio
+	url = https://github.com/USMP2024/Taller-de-proyectos.git
