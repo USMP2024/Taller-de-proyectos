@@ -4,7 +4,11 @@ const crypto = require('crypto');
 
 const handler = async (event) => {
     const { legalName, username, password, email } = event.body;
+    console.log(event.body);
+    console.log(legalName);
+    console.log(username);
     console.log(password);
+    console.log(email);
     
     if (!legalName || !username || !email || !password) {
         return {
