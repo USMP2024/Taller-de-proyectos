@@ -627,7 +627,7 @@ Resources:
             Path: /Productos/ProductoRecomendado
             Method: get
     
-    LambdaObtenerProductoRecomendado:
+    LambdaObtenerDetalleCarrito:
       Type: AWS::Serverless::Function
       Properties:
         CodeUri: backend/lambda-obtener-detalle-carrito/
@@ -636,7 +636,7 @@ Resources:
         Architectures:
           - x86_64
         Events:
-          LambdaObtenerProductoRecomendado:
+          LambdaObtenerDetalleCarrito:
             Type: Api
             Properties:
               Path: /Usuarios/ObtenerDetalleCarrito
