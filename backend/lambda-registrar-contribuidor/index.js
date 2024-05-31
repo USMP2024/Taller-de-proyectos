@@ -1,69 +1,137 @@
 const AWS = require('aws-sdk');
-const crypto = require('crypto');
 const mysql = require('mysql2/promise');
+const crypto = require('crypto');
 
-exports.handler = async (event, context) => {
-    // Verificar si el cuerpo de la solicitud está presente y es un JSON válido
-    if (!event.body) {
-        return {
-            statusCode: 400,
-            body: JSON.stringify({ message: 'Cuerpo de solicitud no válido.' })
-        };
-    }
+const handler = async (event) => {
+    const { legalName, username, password, email } = event.body;
+    console.log(password);
+    
+    AWS.config.update({
+        region: "us-east-1",
+        accessKeyId: "AKIAZQ3DU6LHBA6HOP5I",
+        secretAccessKey: "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"
+    });
 
-    let { nombre, apellido, correo, contrasena } = JSON.parse(event.body);
-
-    // Validar campos requeridos
-    if (!nombre || !apellido || !correo || !contrasena) {
+    if (!legalName || !username || !email || !password) {
         return {
             statusCode: 400,
             body: JSON.stringify({ message: 'Faltan campos obligatorios en la solicitud.' })
         };
     }
 
-    const nombreCompleto = `${nombre} ${apellido}`;
+    const connection = await mysql.createConnection({
+        host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
+        user: 'admindev',
+        password: 'passworddev',
+        database: 'db_cloud'
+    });
 
-    // Configuración de Cognito
+    const legalNameArray = legalName.split(' ');
+    const [name, firstLastName, secondLastName] = legalNameArray;
+    const lastName = `${firstLastName} ${secondLastName}`
+    if (legalNameArray.length < 3) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ message: "No se introdujo el nombre completo (nombre, apellido paterno, apellido materno) o las separaciones necesarias, (ej. Alberto Castillo Mendoza)" })
+        };
+    }
+
+    if (!validatePassword(password)) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ message: "La contraseña debe tener por lo menos 8 caracteres, contener al menos un carácter especial y una letra minúscula." })
+        };
+    }
+
+    if (!validateEmail(email)) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ message: "Correo electrónico no válido." })
+        };
+    }
+
+    try {
+        const query = `SELECT * FROM ora_usuarios WHERE usr_txt_nombre_legal = ?`;
+        const [rows] = await connection.execute(query, [legalName]);
+
+        if (rows.length > 0) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: `El con nombre legal ${legalName} ya se encuentra registrado` })
+            };
+        }
+
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: `ERROR BUSCAR USUARIO: ${error}` })
+        };
+    }
+
+    try {
+        const query = `SELECT * FROM ora_usuarios WHERE usr_txt_correo_electronico = ?`;
+        const [rows] = await connection.execute(query, [email]);
+
+        if (rows.length > 0) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: "El usuario ya se encuentra registrado" })
+            };
+        }
+
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: `ERROR BUSCAR USUARIO: ${error}` })
+        };
+    }
+
+    let usuarioId;
+    try {
+        const query = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_apellido_usuario,usr_txt_nombre_legal,usr_txt_correo_electronico, usr_txt_contrasena,usr_val_fecha_registro, usr_txt_tipo_usuario,usr_txt_nickname) VALUES (?,?,?,?,?,?,?,?)`
+        const rolValue = 'Contribuidor';
+        const currentDate = new Date();
+
+        const [result] = await connection.execute(query, [name, lastName, legalName, email, password, currentDate, rolValue,username]);
+
+        console.log(result)
+        usuarioId = result.insertId;
+        console.log(usuarioId + " " + typeof(usuarioId))
+
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: `ERROR INSERT: ${error}` })
+        };
+    }
+
     const cognito = new AWS.CognitoIdentityServiceProvider();
-    const userPoolId = 'us-east-1_YcnohWASY';
-    const groupName = 'compradores-arte';
-    const clientId = '558o7dr2cg51jrb71ilvhj08vj';
-    const clientSecret = '17sioav7qnoldni8eiiatu56jtlrnr0n4qknqjj5522d2eh1k7na';
+    const userPoolId = 'us-east-1_MCOvPBJxj';
+    const groupName = 'Contribuidores';
+    const clientId = '3qeneeb39gfcaq8ci2jvhq1koj';
+    const clientSecret = '101tvrap5lq33oca6lfmvjkmitqhpkk6bjp7arm7bpjq211kuo1g';
 
-    // Calcula el hash secreto
-    const message = correo + clientId;
+    const message = email + clientId;
     const hmac = crypto.createHmac('sha256', clientSecret);
     hmac.update(message);
     const secretHash = hmac.digest('base64');
 
-    // Configuración de conexión a MySQL utilizando async/await
+    const rolValue = 'Contribuidor';
     try {
-        const connection = await mysql.createConnection({
-            host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
-            user: 'admindev',
-            password: 'passworddev',
-            database: 'db_cloud'
-        });
-
-        // Registro de usuario en Cognito
         const signUpParams = {
             ClientId: clientId,
-            Username: correo,
-            Password: contrasena,
+            Username: email,
+            Password: password,
             SecretHash: secretHash,
             UserAttributes: [
-                { Name: 'email', Value: correo }
+                { Name: 'email', Value: email },
+                { Name: 'custom:idUsuario', Value: usuarioId.toString()},
+                { Name: 'custom:rolUsuario', Value: rolValue }
             ]
         };
         const signUpResponse = await cognito.signUp(signUpParams).promise();
         const userSub = signUpResponse.UserSub;
 
-        // Guardar datos en MySQL
-        const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario) VALUES (?, ?, ?, ?)`;
-        const rolValue = 'Contribuidor'; // Valor ENUM válido
-        await connection.execute(insertQuery, [nombreCompleto, correo, contrasena, rolValue]);
-
-        // Añadir usuario al grupo en Cognito
         const addUserToGroupParams = {
             UserPoolId: userPoolId,
             Username: userSub,
@@ -71,18 +139,27 @@ exports.handler = async (event, context) => {
         };
         await cognito.adminAddUserToGroup(addUserToGroupParams).promise();
 
-        // Cerrar conexión a MySQL
-        await connection.end();
-
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Usuario registrado y añadido al grupo exitosamente.' })
+            body: JSON.stringify({ message: "Usuario registrado exitosamente", usuarioId, rolValue })
         };
+
     } catch (error) {
-        console.error('Error:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Usuario registrado' })
+            body: JSON.stringify({ message: `ERROR: ${error}` })
         };
     }
 };
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function validatePassword(password) {
+    const re = /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    return re.test(password);
+}
+
+exports.handler = handler;
