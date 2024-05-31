@@ -5,12 +5,6 @@ const crypto = require('crypto');
 const handler = async (event) => {
     const { userName, lastnames, password, email } = event.body;
     console.log(password);
-    
-    AWS.config.update({
-        region: "us-east-1",
-        accessKeyId: "AKIAZQ3DU6LHBA6HOP5I",
-        secretAccessKey: "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"
-    });
 
     if (!userName || !lastnames || !email || !password) {
         return {
