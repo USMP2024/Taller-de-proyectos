@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 
 exports.handler = async (event, context) => {
     // ID del usuario recibido desde el frontend
-    const idUsuario = event.idUsuario;
+    //const idUsuario = event.idUsuario;
 
     // Configuración de conexión a MySQL
     const connection = await mysql.createConnection({
@@ -28,13 +28,13 @@ exports.handler = async (event, context) => {
             LEFT JOIN
                 temp_car_detalles_carrito tcdc ON tcc.temp_car_int_id_carrito = tcdc.temp_det_int_id_carrito
             WHERE
-                temp_car_int_id_usuario = ? AND
                 temp_car_val_fecha_creacion < ? 
             GROUP BY
                 tcc.temp_car_int_id_carrito;
         `;
-        const [rows] = await connection.execute(query, [idUsuario, now]);
-
+        //const [rows] = await connection.execute(query, [idUsuario, now]);
+        const [rows] = await connection.execute(query, [now]);
+        
         // Formatear la respuesta
         const carritosAbandonados = rows.map(row => ({
             idCarrito: row.idCarrito,
