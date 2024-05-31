@@ -47,7 +47,7 @@ exports.handler = async (event, context) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ idUsuario, cantidadCarritosAbandonados, carritosAbandonados })
+            body: JSON.stringify({cantidadCarritosAbandonados, carritosAbandonados })
         };
     } catch (error) {
         console.error('Error:', error);
