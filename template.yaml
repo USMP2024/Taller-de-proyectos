@@ -627,20 +627,20 @@ Resources:
             Path: /Productos/ProductoRecomendado
             Method: get
     
-    LambdaObtenerDetalleCarrito:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-obtener-detalle-carrito/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
+  LambdaObtenerDetalleCarrito:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-detalle-carrito/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
           - x86_64
-        Events:
-          LambdaObtenerDetalleCarrito:
-            Type: Api
-            Properties:
-              Path: /Usuarios/ObtenerDetalleCarrito
-              Method: get
+      Events:
+        LambdaObtenerDetalleCarrito:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDetalleCarrito
+            Method: get
 
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
