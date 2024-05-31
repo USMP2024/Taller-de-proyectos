@@ -6,8 +6,8 @@ exports.handler = async (event) => {
     const { username, password } = JSON.parse(event.body);
 
     // Configuración de Cognito
-    const clientId = '1i6e60046ghcsj1l3j8fqal9gm';
-    const clientSecret = 'd0c07fu1jd830ekrts6lqd8fd3dns07mlbqjbcnbqcjjk5fnld0';
+    const clientId = '36d4j58hqarae04v8408v4phk';
+    const clientSecret = '1kscic77oe9j79jlbqbsuucav0b4aqsphu137ho2pimpsm8bflrp';
 
     // Calcula el hash secreto
     const message = username + clientId;
