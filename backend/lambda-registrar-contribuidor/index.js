@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 const crypto = require('crypto');
 
 const handler = async (event) => {
-    const { legalName, username, password, email } = event.body;
+    const { legalName, username, password, email } = JSON.parse(event.body);
     console.log(event.body);
     console.log(event.body.legalName);
     console.log(username);
