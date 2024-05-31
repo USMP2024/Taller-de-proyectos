@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "aws-sdk": "^2.1594.0",
-    "mercadopago": "^1.5.16",
+    "mercadopago": "^2.0.9",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
