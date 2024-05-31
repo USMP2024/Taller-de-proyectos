@@ -31,7 +31,7 @@ exports.handler = async (event) => {
         // Si el inicio de sesión es exitoso, devolver el token de acceso
         return {
             statusCode: 200,
-            body: JSON.stringify({ accessToken: data.AuthenticationResult.AccessToken })
+            body: JSON.stringify({ accessToken: data.AuthenticationResult.AccessToken,idToken: data.AuthenticationResult.IdToken })
         };
     } catch (error) {
         // Manejar errores de inicio de sesión
