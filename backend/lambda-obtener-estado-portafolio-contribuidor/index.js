@@ -1,63 +1,99 @@
-// Función para manejar solicitudes de consulta de estado de aprobaciones de imágenes de un usuario
+const mysql = require('mysql2/promise');
+
 exports.handler = async (event) => {
-  // Extraer el ID del usuario del cuerpo de la solicitud
-  const { sol_int_id_usuario } = JSON.parse(event.body);
+    const { sol_int_id_usuario, TipoSolicitud } = JSON.parse(event.body);
+    let tipoSolicitudQuery;
 
-  // Configurar la conexión a la base de datos
-  const connection = await mysql.createConnection({
-      host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
-      user: 'admindev',
-      password: 'passworddev',
-      database: 'db_cloud'
-  });
+    // Definir el tipo de archivo basado en el tipo de solicitud
+    if (TipoSolicitud === 'Videos') {
+        tipoSolicitudQuery = "('video/mp4')";
+    } else if (TipoSolicitud === 'Imagenes') {
+        tipoSolicitudQuery = "('model/obj', 'image/png', 'image/jpeg')";
+    } else {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ message: 'Tipo de solicitud no válido' })
+        };
+    }
 
-  try {
-      // Ejecutar la consulta para obtener el estado de aprobaciones de imágenes del usuario
-      const [rows] = await connection.execute(`
-          SELECT sol_txt_tipo_imagen, sol_txt_estado_aprobacion, COUNT(*) as count
-          FROM ora_solicitudes_aprobacion
-          WHERE sol_int_id_usuario = ?
-          GROUP BY sol_txt_tipo_imagen, sol_txt_estado_aprobacion
-      `, [sol_int_id_usuario]);
+    try {
+        // Crear una conexión a la base de datos
+        const connection = await mysql.createConnection({
+            host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
+            user: 'admindev',
+            password: 'passworddev',
+            database: 'db_cloud'
+        });
 
-      // Procesar los resultados
-      let response = {};
-      
-      rows.forEach(row => {
-          // Inicializar el objeto de respuesta para cada tipo de imagen si no existe
-          if (!response[row.sol_txt_tipo_imagen]) {
-              response[row.sol_txt_tipo_imagen] = {
-                  Noenviado: 0,
-                  pendiente: 0,
-                  aprobada: 0
-              };
-          }
+        // Consultar la base de datos para obtener los nombres de archivo y estados de aprobación
+        const [rows] = await connection.query(
+            `SELECT sol_txt_nombre_archivo, sol_txt_estado_aprobacion 
+             FROM ora_solicitudes_aprobacion 
+             WHERE sol_int_id_usuario = ? 
+             AND sol_txt_tipo_imagen IN ${tipoSolicitudQuery}`, 
+             [sol_int_id_usuario]
+        );
 
-          // Asignar el conteo a la categoría correspondiente del estado de aprobación
-          if (row.sol_txt_estado_aprobacion === 'No enviado') {
-              response[row.sol_txt_tipo_imagen].Noenviado = row.count;
-          } else if (row.sol_txt_estado_aprobacion === 'pendiente') {
-              response[row.sol_txt_tipo_imagen].pendiente = row.count;
-          } else if (row.sol_txt_estado_aprobacion === 'aprobada') {
-              response[row.sol_txt_tipo_imagen].aprobada = row.count;
-          }
-      });
+        // Inicializar los contadores y la lista de archivos
+        let counts = {
+            Aprobados: { count: 0, archivos: [] },
+            Pendientes: { count: 0, archivos: [] },
+            NoEnviados: { count: 0, archivos: [] }
+        };
 
-      // Devolver la respuesta con el estado de aprobaciones
-      return {
-          statusCode: 200,
-          body: JSON.stringify(response)
-      };
+        let archivosInfo = [];
 
-  } catch (error) {
-      // Manejar errores durante la ejecución de la consulta
-      console.error('Error executing query:', error);
-      return {
-          statusCode: 500,
-          body: JSON.stringify({ error: error.message })
-      };
-  } finally {
-      // Cerrar la conexión a la base de datos
-      await connection.end();
-  }
+        // Procesar los resultados para contar por estado de aprobación y recopilar nombres de archivos
+        rows.forEach(row => {
+            const archivo = row.sol_txt_nombre_archivo;
+            const estado = row.sol_txt_estado_aprobacion.toLowerCase();
+
+            archivosInfo.push({
+                sol_txt_nombre_archivo: archivo,
+                sol_txt_estado_aprobacion: estado
+            });
+
+            if (estado === 'aprobada') {
+                counts.Aprobados.count++;
+                counts.Aprobados.archivos.push(archivo);
+            } else if (estado === 'pendiente') {
+                counts.Pendientes.count++;
+                counts.Pendientes.archivos.push(archivo);
+            } else if (estado === 'no enviado') {
+                counts.NoEnviados.count++;
+                counts.NoEnviados.archivos.push(archivo);
+            }
+        });
+
+        // Calcular el total
+        const Total = counts.Aprobados.count + counts.Pendientes.count + counts.NoEnviados.count;
+
+        // Construir la respuesta
+        const responseBody = {
+            sol_int_id_usuario,
+            TipoSolicitud,
+            archivos: archivosInfo,
+            total: {
+                Aprobados: { count: counts.Aprobados.count },
+                Pendientes: { count: counts.Pendientes.count },
+                NoEnviados: { count: counts.NoEnviados.count },
+                Total: Total
+            }
+        };
+
+        const response = {
+            statusCode: 200,
+            body: JSON.stringify(responseBody, null, 2) // Formato de impresión legible
+        };
+
+        await connection.end();
+
+        return response;
+    } catch (error) {
+        console.error('Error al conectar a la base de datos:', error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: 'Error al conectar a la base de datos' })
+        };
+    }
 };
