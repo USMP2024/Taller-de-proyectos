@@ -70,7 +70,7 @@ exports.handler = async (event) => {
     let connection;
     try {
         // Asegurarse de que el cuerpo del evento es un objeto JSON
-        const body = event.body; 
+        const body = JSON.parse(event.body); 
         const { idColeccion, idProducto } = body;
         console.log("Id Coleccion : " + idColeccion + " IdProducto" + idProducto)
 
