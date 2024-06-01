@@ -13,23 +13,30 @@ exports.handler = async (event, context) => {
 
   try {
     // Obtener los parámetros de la solicitud
-    const page = parseInt(event.headers.page); 
-    const imagesPerPage = parseInt(event.headers.imagesPerPage); 
-    const tipoTendencia = event.headers.tipoTendencia;
+    const page = parseInt(event.queryStringParameters.page); 
+    const imagesPerPage = parseInt(event.queryStringParameters.imagesPerPage); 
+    const tipoTendencia = event.queryStringParameters.tipoTendencia;
+    console.log(typeof(tipoTendencia))
     // Calcular el offset para la consulta SQL
 
-    // Construir la consulta SQL en función del tipo de tendencia
-    let query = 'SELECT pro_int_id_producto, pro_txt_nombre_producto, pro_txt_descripcion_producto, pro_int_id_tipo, pro_int_id_artista, pro_txt_url_producto FROM ora_productos WHERE ';
-    if (tipoTendencia !== null) {
-      query += `pro_int_id_tipo = ? AND `;
+    let query = 'SELECT pro_int_id_producto, pro_txt_nombre_producto, pro_txt_descripcion_producto, pro_int_id_tipo, pro_int_id_artista, pro_txt_url_producto FROM ora_productos WHERE pro_int_contador_vistas > 0 ';
+    const queryParams = [];
+
+    if (tipoTendencia !== null && tipoTendencia !== undefined) {
+      query += 'AND pro_int_id_tipo = ? ';
+      queryParams.push(tipoTendencia);
     }
-    query += `pro_int_contador_vistas > 0 ORDER BY pro_int_contador_vistas DESC LIMIT ?, ?`;
 
     // Ejecutar la consulta SQL
     const offset = (page - 1) * imagesPerPage;
     const offsetInt = parseInt(offset.toString(), 10);
     const imagesPerPageInt = parseInt(imagesPerPage.toString(), 10);
-    const [rows] = await connection.execute(connection.format(query, [tipoTendencia, offsetInt, imagesPerPageInt]));
+
+    query += 'ORDER BY pro_int_contador_vistas DESC LIMIT ?, ?';
+    queryParams.push(offsetInt, imagesPerPageInt);
+    console.log(query)
+
+    const [rows] = await connection.execute(connection.format(query, queryParams));
 
     // Procesar los resultados y generar la respuesta
     const productos = rows.map(row => ({
