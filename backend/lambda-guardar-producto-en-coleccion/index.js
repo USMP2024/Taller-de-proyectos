@@ -44,13 +44,14 @@ function validarExistencia(connection, idColeccion, idProducto) {
     });
 }
 
-function insertarDetalleColeccion(connection, idDetalle, idColeccion, idProducto) {
+function insertarDetalleColeccion(connection, idColeccion, idProducto) {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log("Id Coleccion " + idColeccion + "  ---- IdProducto  " + idProducto)
             // Primero validar la existencia de idColeccion e idProducto
             await validarExistencia(connection, idColeccion, idProducto);
 
-            const sql = `INSERT INTO ora_detalles_coleccion (det_int_id_detalle_coleccion, det_int_id_coleccion, det_int_id_producto) VALUES (${idDetalle}, ${idColeccion}, ${idProducto})`;
+            const sql = `INSERT INTO ora_detalles_coleccion (det_int_id_coleccion, det_int_id_producto) VALUES (${idColeccion}, ${idProducto})`;
             connection.query(sql, (err, result) => {
                 if (err) {
                     reject(err);
@@ -70,13 +71,14 @@ exports.handler = async (event) => {
     try {
         // Asegurarse de que el cuerpo del evento es un objeto JSON
         const body = event.body; 
-        const { idDetalle, idColeccion, idProducto } = body;
+        const { idColeccion, idProducto } = body;
+        console.log("Id Coleccion : " + idColeccion + " IdProducto" + idProducto)
 
         // Conectar a la base de datos
         connection = await conectarBaseDeDatos();
 
         // Insertar el detalle en la base de datos
-        const result = await insertarDetalleColeccion(connection, idDetalle, idColeccion, idProducto);
+        const result = await insertarDetalleColeccion(connection, idColeccion, idProducto);
 
         return {
             statusCode: 200,
