@@ -1,9 +1,12 @@
-import AWS from 'aws-sdk';
+const AWS = require('aws-sdk');
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+//const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-export const handler = async (event) => {
+const handler = async (event) => {
     const idPregunta  = event.queryStringParameters.idPregunta;
+
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
+
 
     const params = {
         TableName: 'dynamo-preguntas-frecuentes',
@@ -43,3 +46,5 @@ export const handler = async (event) => {
         };
     }
 };
+
+exports.handler = handler;
