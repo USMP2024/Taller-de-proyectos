@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import Add from "../components/GestionUsuarios/adduser/Add";
 import Edit from "../components/GestionUsuarios/updateuser/Edit";
 import App from "../App";
-import Solicitud from "../components/GestionSolicitudes/getuser/Solicitud";
+import Solicitud from "../components/GestionSolicitudes/getSolicitudes/Solicitud";
+import User from "../components/GestionUsuarios/getuser/User";
+import Devolucion from "../components/GestionDevoluciones/getDevoluciones/Devolucion";
 
 const route = createBrowserRouter([
   {
@@ -32,10 +33,7 @@ const route = createBrowserRouter([
       path:"/edit/:id",
       element: <Edit/> ,
     },
-    {
-      path:"/Solicitud",
-      element: <Solicitud/> ,
-    },
+    
   ])
 
 export default route
