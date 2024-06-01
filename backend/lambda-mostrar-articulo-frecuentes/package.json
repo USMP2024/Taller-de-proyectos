@@ -2,7 +2,8 @@
   "name": "lambda-mostrar-articulo-frecuentes",
   "version": "1.0.0",
   "dependencies": {
-    "mysql2": "^2.0.0"
+    "mysql2": "^2.0.0",
+    "aws-sdk": "^2.1632.0"
   },
   "description": "",
   "main": "app.js",
