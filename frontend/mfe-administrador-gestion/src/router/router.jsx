@@ -6,11 +6,24 @@ import App from "../App";
 import Solicitud from "../components/GestionSolicitudes/getuser/Solicitud";
 
 const route = createBrowserRouter([
-    {
-      path:"/",
-      element: <App/>,
-
-    },
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: '/',
+        element: <User />,
+      },
+      {
+        path:"/Solicitud",
+        element: <Solicitud/> ,
+      },
+      {
+        path:"/Devolucion",
+        element: <Devolucion/> ,
+      },
+    ],
+  },
     {
       path:"/add",
       element: <Add/>,
