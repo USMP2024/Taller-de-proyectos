@@ -60,7 +60,8 @@ exports.handler = async (event) => {
     let connection;
     try {
         // Asegurarse de que el cuerpo del evento es un objeto JSON
-        const body = event.body; 
+        const body = JSON.parse(event.body);
+        console.log(body);
         const { idUsuario, nombreColeccion } = body;
 
         // Conectar a la base de datos
