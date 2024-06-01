@@ -97,3 +97,4 @@ exports.handler = async (event) => {
         };
     }
 };
+//{ "body": "{\"sol_int_id_usuario\": 1, \"TipoSolicitud\": \"Imagenes\"}"
