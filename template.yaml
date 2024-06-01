@@ -641,6 +641,20 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerDetalleCarrito
             Method: get
+  LambdaObtenerEstadoPortafolioContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-estado-portafolio-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstadoPortafolioContribuidor:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
+            Method: get
 
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
