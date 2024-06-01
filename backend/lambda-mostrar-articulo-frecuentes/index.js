@@ -3,7 +3,7 @@ import AWS from 'aws-sdk';
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 export const handler = async (event) => {
-    const idPregunta  = event.queryStringParameters;
+    const idPregunta  = event.queryStringParameters.idPregunta;
 
     const params = {
         TableName: 'dynamo-preguntas-frecuentes',
