@@ -653,7 +653,7 @@ Resources:
         LambdaObtenerEstadoPortafolioContribuidor:
           Type: Api
           Properties:
-            Path: /Usuarios/ObtenerDetalleCarrito
+            Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
             Method: get
 
   # S3MFPrueba:
