@@ -1,7 +1,11 @@
 const mysql = require('mysql2/promise');
 
 exports.handler = async (event) => {
-    const { sol_int_id_usuario, TipoSolicitud } = JSON.parse(event.body);
+    //const { sol_int_id_usuario, TipoSolicitud } = JSON.parse(event.body);
+    
+    const sol_int_id_usuario = event.queryStringParameters.sol_int_id_usuario;
+    const TipoSolicitud = event.queryStringParameters.TipoSolicitud;
+    
     let tipoSolicitudQuery;
 
     // Definir el tipo de archivo basado en el tipo de solicitud
