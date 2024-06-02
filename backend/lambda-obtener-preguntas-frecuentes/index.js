@@ -9,10 +9,10 @@ exports.handler = async (event) => {
     for (const category of categories) {
         const params = {
             TableName: 'dynamo-preguntas-frecuentes',
-            IndexName: 'idPregunta',  // Assuming there is a secondary index on categoriaPregunta
+            IndexName: 'categoriaPreguntaIndex',  // Assuming there is a secondary index on categoriaPregunta
             KeyConditionExpression: '#cat = :category',
             ExpressionAttributeNames: {
-                '#cat': 'categoria'
+                '#cat': 'categoriaPregunta'
             },
             ExpressionAttributeValues: {
                 ':category': category
