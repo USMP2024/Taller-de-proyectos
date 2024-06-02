@@ -1,12 +1,6 @@
 import AWS from "aws-sdk";
 
-//export const handler = async (event) => {
-  // Configuración de AWS
-  //AWS.config.update({
-    //region: "us-east-1",
-   // accessKeyId: "",
-   // secretAccessKey: "",
-  //});
+export const handler = async (event) => {
 
   // Instancias de servicios de AWS
   const dynamodb = new AWS.DynamoDB();
