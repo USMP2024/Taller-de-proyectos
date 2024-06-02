@@ -3,7 +3,9 @@ const AWS = require('aws-sdk');
 //const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const handler = async (event) => {
-    const idPregunta  = event.queryStringParameters.idPregunta;
+    const idPregunta   = parseInt(event.queryStringParameters.idPregunta);
+    console.log(idPregunta + "---" + typeof(idPregunta))
+
 
     const dynamodb = new AWS.DynamoDB.DocumentClient();
 
