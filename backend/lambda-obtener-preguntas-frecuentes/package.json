@@ -2,7 +2,8 @@
   "name": "lambda-obtener-preguntas-frecuentes",
   "version": "1.0.0",
   "dependencies": {
-    "mysql2": "^2.0.0"
+    "mysql2": "^2.0.0",
+    "aws-sdk": "^2.1584.0"
   },
   "description": "",
   "main": "app.js",
