@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
 
     // Agregamos condiciones a la consulta según los parámetros recibidos.
     if (tipoBusqueda) {
-      query += ` AND t.tip_txt_descripcion_tipo LIKE '%${tipoBusqueda}%' `;
+      query += ` AND t.tip_txt_nombre_tipo LIKE '%${tipoBusqueda}%' `;
     }
 
     if (cadenaBusqueda) {
