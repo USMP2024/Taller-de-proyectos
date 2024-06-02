@@ -1,10 +1,10 @@
 const AWS = require('aws-sdk');
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-export const handler = async (event) => {
+exports.handler = async (event) => {
     const categories = ["Comenzar", "Revisión del contenido", "Su cartera", "Centro legal"];
     const results = {};
+
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     for (const category of categories) {
         const params = {
