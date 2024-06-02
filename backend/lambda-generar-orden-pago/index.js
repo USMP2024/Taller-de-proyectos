@@ -4,7 +4,7 @@ const mercadopago = require('mercadopago');
 exports.handler = async (event, context) => {
   // Configurar credenciales de MercadoPago
   mercadopago.configure({
-    access_token: 'TEST-1563637811256460-032009-3e33ecc00169eca40dc41a4340928514-300692119'
+    access_token: 'TEST-6179268364930701-060218-99ac3408d16d460230c77ba95ac00634-1444186216'
   });
 
   try {
