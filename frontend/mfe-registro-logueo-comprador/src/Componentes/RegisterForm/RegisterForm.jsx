@@ -9,16 +9,25 @@ const RegisterForm =()=>{
    
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
     const navigate=useNavigate()
-    const onSubmit = (data) =>{
-        //Función axios Form-Registro
-        axios.post("urlback",data).then(()=>{
-            navigate('/index')
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
-        
-        console.log(data);
+    const onSubmit = (data) => {
+        // Crear un nuevo objeto con los campos que se enviaran
+        const payload = {
+            nombre: data.nombre,
+            apellidos: data.apellidos,
+            email: data.email,
+            password: data.password1 
+        };
+
+        // Enviar los datos a la API
+        axios.post("https://c5nft1fhh1.execute-api.us-east-1.amazonaws.com/Prod/Autenticacion/RegistroComprador", payload)
+            .then(() => {
+                navigate('/index');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        console.log(payload);
     }; 
 
     //Formulario Registro
