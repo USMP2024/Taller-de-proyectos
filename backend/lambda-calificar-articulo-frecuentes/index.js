@@ -1,9 +1,16 @@
-import AWS from 'aws-sdk';
+const AWS = require('aws-sdk');
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-export const handler = async (event) => {
+const handler = async (event) => {
     const { idPregunta, tipoCalificacion } = event.body;
+    
+    AWS.config.update({
+        region: "us-east-1",
+        accessKeyId: "AKIAZQ3DU6LHBA6HOP5I",
+        secretAccessKey: "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"
+    });
+    
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     // Verificar que tipoCalificacion sea válido
     if (!['Like', 'Dislike'].includes(tipoCalificacion)) {
@@ -47,3 +54,5 @@ export const handler = async (event) => {
         };
     }
 };
+
+exports.handler = handler
