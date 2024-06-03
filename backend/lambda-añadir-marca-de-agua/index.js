@@ -9,45 +9,44 @@ const handler = async (event, context) => {
         password: 'passworddev',
         database: 'db_cloud'
     });
+};
 
-    const idProducto = event.idProducto;
+const Jimp = require('jimp/es');
+const AWS = require('aws-sdk');
 
-    try {
-        // Consulta SQL para seleccionar los datos de los productos, ordenados por contador de vistas
-        const [rows] = await connection.execute(`SELECT P.pro_int_id_producto AS idProducto, 
-        P.pro_txt_nombre_producto AS nombre_producto, 
-        P.pro_txt_descripcion_producto AS descripcion_producto, 
-        P.pro_int_contador_vistas AS contador_vistas, 
-        P.pro_val_precio_producto AS precio_producto, 
-        P.pro_txt_url_producto AS url_img_producto, 
-        P.pro_int_id_artista AS id_artista,
-        CONCAT(A.usr_txt_nombre_usuario, ' ', A.usr_txt_apellido_usuario) AS nombre_completo_artista
-        FROM ora_productos P
-        INNER JOIN ora_usuarios A ON P.pro_int_id_artista = A.usr_int_id_usuario
-        WHERE P.pro_int_id_producto = ${idProducto};`);
+const s3 = new AWS.S3();
 
-        // Procesar los resultados y generar la respuesta
+exports.handler = async (event, context) => {
+  const bucket = event.Records[0].s3.bucket.name;
+  const key = event.Records[0].s3.object.key;
 
-        console.log(rows)
+  try {
+    const image = await s3.getObject({
+      Bucket: bucket,
+      Key: key
+    }).promise();
 
-        const producto = rows.map(row => ({
-            id_producto: row.pro_int_id_producto,
-        }));
+    const processedImage = await Jimp.read(image.Body)
+      .text('your watermark text', 20, 20, {
+        textMargin: 10,
+        alignmentX: Jimp.ALIGN_LEFT,
+        alignmentY: Jimp.ALIGN_TOP,
+        font: '30px Arial #fff'
+      })
+      .quality(80)
+      .getBase64('image/jpeg');
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify(rows)
-        };
-    } catch (error) {
-        console.error('Error al ejecutar la consulta:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Error interno del servidor' })
-        };
-    } finally {
-        // Cerrar la conexión a la base de datos
-        await connection.end();
-    }
+    await s3.putObject({
+      Bucket: 'your-destination-bucket-name',
+      Key: key,
+      Body: processedImage,
+      ContentType: 'image/jpeg'
+    }).promise();
+
+    console.log('Image processed and saved successfully');
+  } catch (error) {
+    console.error('Error processing image:', error);
+  }
 };
 
 module.exports = {handler}
