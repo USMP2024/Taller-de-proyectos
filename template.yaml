@@ -579,7 +579,7 @@ Resources:
           Type: Api
           Properties:
             Path: /Usuarios/CalificarArticuloFrecuentes
-            Method: get
+            Method: post
 
 
   LambdaObtenerDetallesUsuario:
