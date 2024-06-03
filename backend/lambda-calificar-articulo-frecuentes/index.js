@@ -3,7 +3,7 @@ import AWS from 'aws-sdk';
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 export const handler = async (event) => {
-    const { idPregunta, tipoCalificacion } = JSON.parse(event.body);
+    const { idPregunta, tipoCalificacion } = event.body;
 
     // Verificar que tipoCalificacion sea válido
     if (!['Like', 'Dislike'].includes(tipoCalificacion)) {
