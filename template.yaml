@@ -534,7 +534,7 @@ Resources:
           Type: Api
           Properties:
             Path: /Usuarios/BuscarPreguntasFrecuentes
-            Method: get
+            Method: post
 
   LambdaObtenerPreguntasFrecuentes:
     Type: AWS::Serverless::Function
