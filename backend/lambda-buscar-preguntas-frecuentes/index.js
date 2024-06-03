@@ -1,9 +1,10 @@
 import AWS from 'aws-sdk';
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+exports.handler = async (event) => {
 
-export const handler = async (event) => {
-    const { cadenaDeBusqueda } = JSON.parse(event.body);
+    const cadenaDeBusqueda = event.queryStringParameters.cadenaDeBusqueda;
+
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     const params = {
         TableName: 'dynamo-preguntas-frecuentes',
