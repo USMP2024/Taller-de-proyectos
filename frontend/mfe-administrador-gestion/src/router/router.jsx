@@ -8,11 +8,11 @@ import Devolucion from "../components/GestionDevoluciones/getDevoluciones/Devolu
 
 const route = createBrowserRouter([
   {
-    path: '/',
+    path: '/mi-aplicacion',
     element: <App />,
     children: [
       {
-        path: '/',
+        path: '/Usuario',
         element: <User />,
       },
       {
