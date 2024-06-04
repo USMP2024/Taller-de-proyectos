@@ -31,7 +31,6 @@ const User = () => {
         await axios.delete(`http://localhost:8000/api/delete/${userId}`)
             .then((response) => {
                 setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
-                // toast.success(response.data.msg, { position: 'top-right' });
                 toast.success("Usuario Eliminado", { position: 'top-right' });
             })
             .catch((error) => {
@@ -53,7 +52,7 @@ const User = () => {
                 <button className='Todos' onClick={() => setFilterRole('')}>Todos</button>
             </div>
             <br />
-            <Link to={"/add"} className='addButton'>Registrar Usuario</Link>
+            
             <table border={1} cellPadding={10} cellSpacing={0}>
                 <thead>
                     <tr>
@@ -76,8 +75,8 @@ const User = () => {
                                     <td>{user.email}</td>
                                     <td>{user.rol}</td>
                                     <td className='actionButtons'>
-                                        <button onClick={() => deleteUser(user._id)}><i className="fa-solid fa-trash-can"></i></button>
-                                        <Link to={`/edit/${user._id}`}><i className="fa-solid fa-pen-to-square"></i></Link>
+                                        <button onClick={() => deleteUser(user._id)}>x</button>
+                                        <Link to={`/edit/${user._id}`}>Editar</Link>
                                     </td>
                                 </tr>
                             )

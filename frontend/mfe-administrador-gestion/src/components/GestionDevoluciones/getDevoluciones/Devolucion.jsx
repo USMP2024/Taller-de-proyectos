@@ -10,9 +10,44 @@ const Devolucion = () => {
 
     useEffect(() => {
         const fetchDevoluciones = async () => {
-            const response = await axios.get("/devoluciones.json");
-            setDevoluciones(response.data);
-            setDevolucionesFiltradas(response.data); // Inicialmente mostramos todas las devoluciones
+            // const response = await axios.get("/devoluciones.json");
+            const response = [
+                {
+                    "_idDevo": "1",
+                    "idCliente": "A1",
+                    "nombre": "Juan",
+                    "apellido": "Pérez",
+                    "codigo_compra": "COMP001",
+                    "precio_producto": 100,
+                    "motivo": "Producto defectuoso",
+                    "estado": "Pendiente"
+                },
+                {
+                    "_idDevo": "2",
+                    "idCliente": "A2",
+                    "nombre": "Ana",
+                    "apellido": "Gómez",
+                    "codigo_compra": "COMP002",
+                    "precio_producto": 200,
+                    "motivo": "No era lo que esperaba",
+                    "estado": "Pendiente"
+                },
+                {
+                    "_idDevo": "3",
+                    "idCliente": "A3",
+                    "nombre": "Carlos",
+                    "apellido": "Lopez",
+                    "codigo_compra": "COMP003",
+                    "precio_producto": 150,
+                    "motivo": "Cambio de opinión",
+                    "estado": "Pendiente"
+                }
+              ];
+            // Cambiar cuando se tenga el link del back
+            //   setDevoluciones(response.data);
+            //   setDevolucionesFiltradas(response.data);
+            setDevoluciones(response);
+            setDevolucionesFiltradas(response); // Inicialmente mostramos todas las devoluciones
         }
 
         fetchDevoluciones();

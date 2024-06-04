@@ -18,14 +18,14 @@ export const Header = () => {
         
         <ul className={menuOpen? "open" : ""}>
             <li>
-                <NavLink to="/">Gestionar Usuarios</NavLink>
+                <NavLink to="/Usuario">Gestionar Usuarios</NavLink>
             </li>
-            {/* <li>
+            <li>
                 <NavLink to="/Solicitud">Gestionar Solicitudes</NavLink>
             </li>
             <li>
-                <NavLink to="">Gestionar Devoluciones</NavLink>
-            </li> */}
+                <NavLink to="/Devolucion">Gestionar Devoluciones</NavLink>
+            </li>
         </ul>
     </nav>
     )

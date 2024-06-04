@@ -10,9 +10,43 @@ const Solicitud = () => {
 
     useEffect(() => {
         const fetchSolicitudes = async () => {
-            const response = await axios.get("/solicitudes.json");
-            setSolicitudes(response.data);
-            setFilteredSolicitudes(response.data); // Inicialmente mostramos todos los estados
+            // const response = await axios.get("./solicitudes.json");
+            const response = [
+                {
+                  "_idSoli": "1",
+                  "idArtista": "A1",
+                  "nombre": "Juan",
+                  "apellido": "Pérez",
+                  "codigo_arte": "ART001",
+                  "precio_inicial": 100,
+                  "precio_final": 150,
+                  "estado": "Pendiente"
+                },
+                {
+                  "_idSoli": "2",
+                  "idArtista": "A2",
+                  "nombre": "Ana",
+                  "apellido": "Gómez",
+                  "codigo_arte": "ART002",
+                  "precio_inicial": 200,
+                  "precio_final": 250,
+                  "estado": "Pendiente"
+                },
+                {
+                  "_idSoli": "3",
+                  "idArtista": "A3",
+                  "nombre": "Carlos",
+                  "apellido": "Lopez",
+                  "codigo_arte": "ART003",
+                  "precio_inicial": 150,
+                  "precio_final": 180,
+                  "estado": "Pendiente"
+                }
+              ];
+            // setSolicitudes(response.data);
+            // setFilteredSolicitudes(response.data); 
+            setSolicitudes(response);
+            setFilteredSolicitudes(response); 
         }
 
         fetchSolicitudes();
