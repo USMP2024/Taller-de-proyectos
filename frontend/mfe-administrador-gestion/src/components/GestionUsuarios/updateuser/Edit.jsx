@@ -40,14 +40,14 @@ const Edit = () =>{
         await axios.put(`http://localhost:8000/api/update/${id}`, user)
         .then((response)=>{
             toast.success("Datos Modificados", {position:"top-right"})
-            navigate("/")
+            navigate("/Usuario")
         })
         .catch(error => console.log(error))
     }
 
   return (
     <div className='updateUser'>
-        <Link to={"/"}>Volver</Link>
+        <Link to={"/Usuario"}>Volver</Link>
         <h3>Modificar Datos del Usuario</h3>
         <form className='updateUserForm' onSubmit={submitForm}>
             <div className='inputGroup'>

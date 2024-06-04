@@ -32,7 +32,7 @@ const AppRouter = () => {
         <Route path="/Devolucion" element={<Devolucion />} />         
         <Route path="/Solicitud" element={<Solicitud />} />
         <Route path="/Usuario" element={<User />} />  
-        <Route path="/Edit" element={<Edit />} />  
+        <Route path="/Edit/:id" element={<Edit />} />  
       </Routes>
     </Router>   
   ); 

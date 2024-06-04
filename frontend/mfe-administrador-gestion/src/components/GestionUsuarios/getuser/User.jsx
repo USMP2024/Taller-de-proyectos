@@ -45,9 +45,9 @@ const User = () => {
             </div>
             <br />
             <div className='btns'>
-                <button className='Clientes' onClick={() => setFilterRole('Cliente')}>Clientes</button>
+                <button className='Comprador' onClick={() => setFilterRole('comprador')}>Comprador</button>
                 {"   -   "}
-                <button className='Artista' onClick={() => setFilterRole('Artista')}>Artista</button>
+                <button className='Contribuidor' onClick={() => setFilterRole('contribuidor')}>Contribuidor</button>
                 {"   -   "}
                 <button className='Todos' onClick={() => setFilterRole('')}>Todos</button>
             </div>

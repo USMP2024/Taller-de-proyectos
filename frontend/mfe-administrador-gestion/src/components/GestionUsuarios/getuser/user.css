@@ -60,7 +60,7 @@
 
 }
 
-.Clientes{
+.Comprador{
     border: none;
     background: #146b80;
     padding: 10px;
@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-.Artista{
+.Contribuidor{
     border: none;
     background: #146b80;
     padding: 10px;
