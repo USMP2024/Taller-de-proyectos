@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "./solicitud.css";
 import axios from "axios";
+import { FaCheck } from "react-icons/fa";
+import { ImCancelCircle } from "react-icons/im";
 
 const Solicitud = () => {
     
@@ -132,13 +134,13 @@ const Solicitud = () => {
                                             className='Rechazado' 
                                             onClick={() => handleEstadoChange(solicitud._idSoli, 'Rechazado')}
                                         >
-                                            <i className="fa-solid fa-x"></i>
+                                            <ImCancelCircle />
                                         </button> - 
                                         <button 
                                             className='Aprobado' 
                                             onClick={() => handleEstadoChange(solicitud._idSoli, 'Aprobado')}
                                         >
-                                            <i className="fa-solid fa-check"></i>
+                                            <FaCheck />
                                         </button>
                                     </td>
                                     {/* <td><button className='Estado'>{solicitud.estado}</button></td> */}

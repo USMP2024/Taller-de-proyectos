@@ -2,7 +2,7 @@
     background-color: #1D4ED8;
 }
 
-nav {
+.nav-admin-gestion {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,7 +11,7 @@ nav {
     width: 100%;
 }
 
-nav .title {
+.nav-admin-gestion .title {
     font-size: 1.5rem;
     margin: 1rem;
     font-weight: bold;
@@ -19,20 +19,20 @@ nav .title {
     color: #FFF;
 }
 
-nav ul{
+.nav-admin-gestion ul{
     /* display: none; */
     display: flex;
 }
 
-nav ul.open {
+.nav-admin-gestion ul.open {
     display: flex;
 }
 
-nav ul li {
+.nav-admin-gestion ul li {
     list-style: none;
 }
 
-nav ul li a{
+.nav-admin-gestion ul li a{
     display: block;
     text-decoration: none;
     color: #FFF;
@@ -41,7 +41,7 @@ nav ul li a{
     border-radius: 0.5rem;
 }
 
-nav ul li a:not(.active):hover {
+.nav-admin-gestion ul li a:not(.active):hover {
     background-color: #296568;
 }
 
@@ -50,7 +50,7 @@ nav ul li a:not(.active):hover {
 }
 
 
-nav .menu {
+.nav-admin-gestion .menu {
     display: none;
     position: absolute;
     top: 0.75rem;
@@ -61,7 +61,7 @@ nav .menu {
     height: 2rem;
 }
 
-nav .menu span {
+.nav-admin-gestion .menu span {
     height: 0.4rem;
     width: 100%;
     background-color: #FFF;
@@ -69,28 +69,28 @@ nav .menu span {
 }
 
 @media (max-width: 480px) {
-    nav .menu {
+    .nav-admin-gestion .menu {
         display: flex;
     }
 
-    nav {
+    .nav-admin-gestion {
         flex-direction: column;
         align-items: start;
     }
 
-    nav ul {
+    .nav-admin-gestion ul {
         display: none;
         flex-direction: column;
         width: 100%;
         margin-bottom: 0.25rem;
     }
 
-    nav ul li {
+    .nav-admin-gestion ul li {
         width: 100%;
         text-align: center;
     }
 
-    nav ul li a {
+    .nav-admin-gestion ul li a {
         margin: 0.2rem 0.5rem;
     }
 }   

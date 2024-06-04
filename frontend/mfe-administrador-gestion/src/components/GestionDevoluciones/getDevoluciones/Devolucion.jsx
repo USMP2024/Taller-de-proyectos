@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "./devolucion.css";
 import axios from "axios";
+import { FaCheck } from "react-icons/fa";
+import { ImCancelCircle } from "react-icons/im";
 
 const Devolucion = () => {
     
@@ -124,13 +126,13 @@ const Devolucion = () => {
                                             className='Rechazado' 
                                             onClick={() => actualizarEstadoDevolucion(devolucion._idDevo, 'Rechazado')}
                                         >
-                                            <i className="fa-solid fa-x"></i>
-                                        </button> - 
+                                            <ImCancelCircle />
+                                        </button>-
                                         <button 
                                             className='Aprobado' 
                                             onClick={() => actualizarEstadoDevolucion(devolucion._idDevo, 'Aprobado')}
                                         >
-                                            <i className="fa-solid fa-check"></i>
+                                            <FaCheck />
                                         </button>
                                     </td>
                                     {/* <td><button className='Estado'>{devolucion.estado}</button></td> */}

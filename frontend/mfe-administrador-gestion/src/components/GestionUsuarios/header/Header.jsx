@@ -5,7 +5,7 @@ import "./Header.css";
 export const Header = () => {  
     const[menuOpen, setMenuOpen] = useState(false)
     return (
-    <nav>
+    <nav className='nav-admin-gestion'>
         <Link to="/" className='title'>Inti Pacha Artes - Admin</Link>
 
         <div className='menu' onClick={() =>{
