@@ -12,7 +12,7 @@ exports.handler = async (event) => {
     if (TipoSolicitud === 'Videos') {
         tipoSolicitudQuery = "('video/mp4')";
     } else if (TipoSolicitud === 'Imagenes') {
-        tipoSolicitudQuery = "('model/obj', 'image/png', 'image/jpeg')";
+        tipoSolicitudQuery = "('image/png', 'image/jpeg')";
     } else {
         return {
             statusCode: 400,
