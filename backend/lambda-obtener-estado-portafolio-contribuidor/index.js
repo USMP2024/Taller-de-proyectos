@@ -31,7 +31,7 @@ exports.handler = async (event) => {
 
         // Consultar la base de datos para obtener los nombres de archivo y estados de aprobación
         const [rows] = await connection.query(
-            `SELECT sol_txt_nombre_archivo, sol_txt_estado_aprobacion 
+            `SELECT sol_txt_nombre_archivo, sol_txt_estado_aprobacion,sol_txt_url_imagen,sol_txt_tipo_imagen 
              FROM ora_solicitudes_aprobacion 
              WHERE sol_int_id_usuario = ? 
              AND sol_txt_tipo_imagen IN ${tipoSolicitudQuery}`, 
@@ -51,10 +51,14 @@ exports.handler = async (event) => {
         rows.forEach(row => {
             const archivo = row.sol_txt_nombre_archivo;
             const estado = row.sol_txt_estado_aprobacion.toLowerCase();
+            const urlArchivo = row.sol_txt_url_imagen;
+            const tipoArchivo = row.sol_txt_tipo_imagen;
 
             archivosInfo.push({
                 sol_txt_nombre_archivo: archivo,
-                sol_txt_estado_aprobacion: estado
+                sol_txt_estado_aprobacion: estado,
+                sol_txt_url_imagen:urlArchivo,
+                sol_txt_tipo_imagen:tipoArchivo
             });
 
             if (estado === 'aprobada') {
