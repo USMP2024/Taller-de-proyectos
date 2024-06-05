@@ -45,10 +45,6 @@ export const TerminosCondiciones = () => {
                         <br />
                     <p>Al registrarte como usuario y utilizar nuestros servicios, aceptas estos términos y condiciones en su totalidad. Si tienes alguna pregunta o inquietud sobre estos términos, no dudes en contactarnos.</p>
 
-                        <br />
-                        <center>
-                        <p ><Link to="/index" style={{ color: 'black', textDecoration: 'none' }}>OK</Link></p>  
-                        </center>
 
             </div>
         </div>
