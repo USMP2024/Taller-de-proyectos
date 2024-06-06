@@ -91,6 +91,9 @@ exports.handler = async (event) => {
 
         const response = {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(responseBody, null, 2) // Formato de impresión legible
         };
 
@@ -101,6 +104,9 @@ exports.handler = async (event) => {
         console.error('Error al conectar a la base de datos:', error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Error al conectar a la base de datos' })
         };
     }
