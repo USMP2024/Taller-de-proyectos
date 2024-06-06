@@ -28,12 +28,18 @@ exports.handler = async (event, context) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(subcategorias)
         };
     } catch (error) {
         console.error('Error al ejecutar la consulta:', error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ error: 'Error interno del servidor' })
         };
     } finally {

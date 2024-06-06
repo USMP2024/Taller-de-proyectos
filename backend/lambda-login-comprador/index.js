@@ -31,6 +31,9 @@ exports.handler = async (event) => {
         // Si el inicio de sesión es exitoso, devolver el token de acceso
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ accessToken: data.AuthenticationResult.AccessToken,idToken: data.AuthenticationResult.IdToken })
         };
     } catch (error) {
@@ -38,6 +41,9 @@ exports.handler = async (event) => {
         console.log("Error al iniciar sesión:", error);
         return {
             statusCode: 401,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Credenciales inválidas' })
         };
     }

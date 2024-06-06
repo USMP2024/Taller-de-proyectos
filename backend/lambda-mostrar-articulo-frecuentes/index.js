@@ -22,6 +22,9 @@ const handler = async (event) => {
         if (!data.Item) {
             return {
                 statusCode: 404,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({ error: 'Pregunta no encontrada' })
             };
         }
@@ -30,6 +33,9 @@ const handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({
                 idPregunta,
                 pregunta,
@@ -44,6 +50,9 @@ const handler = async (event) => {
         console.error(error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ error: 'Error al obtener la pregunta frecuente' })
         };
     }

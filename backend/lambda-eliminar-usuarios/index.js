@@ -8,6 +8,9 @@ exports.handler = async (event) => {
     if (idusuario === null || idusuario === "") {
         return {
             statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "El valor de idusuario es nulo" })
         };
     }
@@ -37,6 +40,9 @@ exports.handler = async (event) => {
         if (count === 0) {
             return {
                 statusCode: 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({ message: "El usuario no existe" })
             };
         }
@@ -59,12 +65,18 @@ exports.handler = async (event) => {
 
         const response = {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "Se eliminó correctamente el usuario" }),
         };
         return response;
     } catch (error) {
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "Error al ejecutar la consulta en la base de datos" })
         };
     } finally {
