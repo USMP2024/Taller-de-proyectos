@@ -3,15 +3,7 @@ const AWS = require("aws-sdk");
 
 // Función de controlador de evento asincrónico
 const handler = async (event) => {
-  
-  
- // Configurar las credenciales de AWS
- // AWS.config.update({
- //  region: "us-east-1", // Región de AWS donde se almacenarán los archivos
- // accessKeyId: "", // ID de clave de acceso de AWS
- // secretAccessKey: "", // Clave de acceso secreta de AWS
-  //});
-  
+ 
   // Crear una instancia de servicio S3 de AWS
   const s3 = new AWS.S3();
 
@@ -37,6 +29,9 @@ const handler = async (event) => {
   // Preparar la respuesta de la función lambda
   const response = {
     statusCode: 200, // Código de estado HTTP de éxito
+    'headers': {
+      'Access-Control-Allow-Origin': '*'
+  },
     body: event, // Cuerpo de la respuesta que contiene el evento original
   };
 

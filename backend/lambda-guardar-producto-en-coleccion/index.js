@@ -82,12 +82,18 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ mensaje: 'Detalle de colección insertado correctamente', insertedId: result.insertId })
         };
     } catch (error) {
         console.error('Error al insertar detalle de colección:', error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ mensaje: error.message })
         };
     } finally {

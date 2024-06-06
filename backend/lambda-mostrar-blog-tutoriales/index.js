@@ -27,6 +27,9 @@ export const handler = async (event) => {
     // Devuelve los datos obtenidos con un código de estado 200
     return {
       statusCode: 200,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: JSON.stringify(data.Items),
     };
   } catch (error) {
@@ -34,6 +37,9 @@ export const handler = async (event) => {
     console.error(error);
     return {
       statusCode: 500,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: JSON.stringify({ message: error.message }),
     };
   }

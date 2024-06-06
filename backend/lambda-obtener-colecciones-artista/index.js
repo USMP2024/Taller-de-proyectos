@@ -9,6 +9,9 @@ const handler = async (event) => {
   if (!["Imagenes", "Videos", "All"].includes(tipoProducto)) {
     const response = {
       statusCode: 400,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: JSON.stringify({
         message: `El tipo "${tipoProducto}" no es un tipo valido para la consulta, solo se permiten "Imagenes", "Videos" o "All" que representa a imagenes y videos`
       })
@@ -21,6 +24,9 @@ const handler = async (event) => {
   if (idUsuario == null) {
     const response = {
       statusCode: 400,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: JSON.stringify({
         message: `No se recibio un "idUsuario", este es un parametro obligatorio`
       })
@@ -43,6 +49,9 @@ const handler = async (event) => {
     let parametrosSQL;
     let respuesta = {
       statusCode: 200,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+      },
       body: {
         listaColecciones: [] // Inicializar como un array vacío
       }
@@ -135,6 +144,9 @@ const handler = async (event) => {
     console.log('Error : ' + error);
     return {
       statusCode: 500,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+      },
       body: JSON.stringify({
         message: error.message
       })

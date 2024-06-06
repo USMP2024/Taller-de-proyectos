@@ -65,6 +65,9 @@ export const handler = async (event) => {
     // Construir y retornar la respuesta exitosa con los datos de todos los eventos del mes
     const response = {
       statusCode: 200,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: expedientesMap,
     };
     return response;
@@ -72,9 +75,12 @@ export const handler = async (event) => {
     // Manejo de errores
     const response = {
       statusCode: 500,
-      body: "Error interno del servidor",
-      error: "ERROR : " + error,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
+      body: `Error interno del servidor ${error}`,
+
     };
     return response;
   }
-
+}

@@ -24,12 +24,18 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ resultadoBusqueda })
         };
     } catch (error) {
         console.error(error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ error: 'Error al buscar preguntas frecuentes' })
         };
     }
