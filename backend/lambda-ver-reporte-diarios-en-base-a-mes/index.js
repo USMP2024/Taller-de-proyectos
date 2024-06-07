@@ -17,6 +17,9 @@ exports.handler = async (event, context) => {
     if (!mes || !año) {
         return {
             statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Faltan campos obligatorios en la solicitud.' })
         };
     }
@@ -56,12 +59,18 @@ exports.handler = async (event, context) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ ventasPorDía: rows })
         };
     } catch (dbError) {
         console.error('Error en la consulta a la base de datos:', dbError);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Error en la consulta a la base de datos.' })
         };
     }

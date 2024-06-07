@@ -13,6 +13,9 @@ const handler = async (event) => {
     if (!userName || !lastnames || !email || !password) {
         return {
             statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Faltan campos obligatorios en la solicitud.' })
         };
     }
@@ -29,6 +32,9 @@ const handler = async (event) => {
     if (legalNameArray.length < 3) {
         return {
             statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "No se introdujo el nombre completo (nombre, apellido paterno, apellido materno) o las separaciones necesarias, (ej. Alberto Castillo Mendoza)" })
         };
     }
@@ -36,6 +42,9 @@ const handler = async (event) => {
     if (!validatePassword(password)) {
         return {
             statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "La contraseña debe tener por lo menos 8 caracteres, contener al menos un carácter especial y una letra minúscula." })
         };
     }
@@ -43,6 +52,9 @@ const handler = async (event) => {
     if (!validateEmail(email)) {
         return {
             statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "Correo electrónico no válido." })
         };
     }
@@ -54,6 +66,9 @@ const handler = async (event) => {
         if (rows.length > 0) {
             return {
                 statusCode: 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({ message: `El con nombre legal ${legalName} ya se encuentra registrado` })
             };
         }
@@ -61,6 +76,9 @@ const handler = async (event) => {
     } catch (error) {
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: `ERROR BUSCAR USUARIO: ${error}` })
         };
     }
@@ -72,6 +90,9 @@ const handler = async (event) => {
         if (rows.length > 0) {
             return {
                 statusCode: 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({ message: "El usuario ya se encuentra registrado" })
             };
         }
@@ -79,6 +100,9 @@ const handler = async (event) => {
     } catch (error) {
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: `ERROR BUSCAR USUARIO: ${error}` })
         };
     }
@@ -98,6 +122,9 @@ const handler = async (event) => {
     } catch (error) {
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: `ERROR INSERT: ${error}` })
         };
     }
@@ -138,12 +165,18 @@ const handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "Usuario registrado exitosamente", usuarioId, rolValue })
         };
 
     } catch (error) {
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: `ERROR: ${error}` })
         };
     }

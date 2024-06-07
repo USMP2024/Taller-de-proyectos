@@ -33,6 +33,9 @@ exports.handler = async (event) => {
             console.error(`Error querying for category ${category}:`, error);
             return {
                 statusCode: 500,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({ error: `Error querying for category ${category}` })
             };
         }
@@ -40,6 +43,9 @@ exports.handler = async (event) => {
 
     return {
         statusCode: 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify(results)
     };
 };

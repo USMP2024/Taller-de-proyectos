@@ -12,6 +12,9 @@ exports.handler = async (event, context) => {
         if (!reportData || typeof reportData !== 'object') {
             return {
                 statusCode: 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: 'Los datos del reporte deben ser un objeto JSON.'
             };
         }
@@ -47,12 +50,18 @@ exports.handler = async (event, context) => {
         
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: `Archivo Excel generado y guardado en el Access Point ${accessPointArn}.`
         };
     } catch (err) {
         console.error('Error al generar el archivo Excel:', err);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: 'Error al generar el archivo Excel. Por favor, intenta de nuevo más tarde.'
         };
     }

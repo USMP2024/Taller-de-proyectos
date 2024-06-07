@@ -16,6 +16,9 @@ import AWS from "aws-sdk";
   if (!event.month) {
     const response = {
       statusCode: 404,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: "month is required",
     };
     return response;
@@ -44,6 +47,9 @@ import AWS from "aws-sdk";
     if (eventos.length === 0) {
       const response = {
         statusCode: 404,
+        'headers': {
+          'Access-Control-Allow-Origin': '*'
+      },
         body: `No hay eventos en el mes de ${event.month}`,
       };
       return response;
@@ -71,6 +77,9 @@ import AWS from "aws-sdk";
     // Construir y retornar la respuesta exitosa con los datos de todos los eventos del mes
     const response = {
       statusCode: 200,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: expedientesMap,
     };
     return response;
@@ -78,8 +87,10 @@ import AWS from "aws-sdk";
     // Manejo de errores
     const response = {
       statusCode: 500,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+      },
       body: "Error interno del servidor",
-      error: "ERROR : " + error,
     };
     return response;
   }

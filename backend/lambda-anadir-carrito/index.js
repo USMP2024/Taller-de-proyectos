@@ -44,12 +44,18 @@ exports.handler = async (event, context) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Productos añadidos al carrito exitosamente.' })
         };
     } catch (error) {
         console.error('Error:', error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Error al procesar la solicitud.' })
         };
     } finally {

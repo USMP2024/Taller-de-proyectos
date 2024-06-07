@@ -4,12 +4,6 @@ const AWS = require('aws-sdk');
 const handler = async (event) => {
     const { idPregunta, tipoCalificacion } = event.body;
     
-    AWS.config.update({
-        region: "us-east-1",
-        accessKeyId: "AKIAZQ3DU6LHBA6HOP5I",
-        secretAccessKey: "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"
-    });
-    
     const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     // Verificar que tipoCalificacion sea válido
@@ -41,15 +35,22 @@ const handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({
                 msj: 'Se registró su calificación',
                 tipoCalificacion: tipoCalificacion
             })
+            
         };
     } catch (error) {
         console.error(error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ error: 'Error al registrar la calificación' })
         };
     }

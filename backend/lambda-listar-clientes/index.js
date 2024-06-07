@@ -47,6 +47,9 @@ const handler = async (event) =>  {
         // Crear el objeto de respuesta
         const response = {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(listaUsuarios) // Devolver la lista de usuarios directamente
         };
         return response;
@@ -55,6 +58,9 @@ const handler = async (event) =>  {
         console.error("Error:", error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "Internal Server Error" })
         };
     }

@@ -64,12 +64,18 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ mensaje: 'Información del usuario encontrada', infoUsuario })
         };
     } catch (error) {
         console.error('Error al consultar información del usuario:', error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ mensaje: error.message })
         };
     } finally {

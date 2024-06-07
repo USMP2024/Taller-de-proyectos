@@ -79,6 +79,9 @@ exports.handler = async (event, context) => {
     // Devolvemos la respuesta con los productos en formato JSON.
     return {
       statusCode: 200,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: JSON.stringify(productos)
     };
   } catch (error) {
@@ -86,6 +89,9 @@ exports.handler = async (event, context) => {
     console.error('Error al ejecutar la consulta:', error);
     return {
       statusCode: 500,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: JSON.stringify({ error: 'Error interno del servidor' })
     };
   } finally {
