@@ -11,7 +11,7 @@ const User = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get("http://localhost:8000/api/getall");
+            const response = await axios.get("https://b8tz3ijhgg.execute-api.us-east-1.amazonaws.com/Prod/Usuarios/Compradores");
             setUsers(response.data);
             setFilteredUsers(response.data); // Inicialmente mostramos todos los usuarios
         }
