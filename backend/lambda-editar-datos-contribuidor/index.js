@@ -1,7 +1,7 @@
-const mysql = require('mysql'); // Importa el módulo mysql para interactuar con una base de datos MySQL.
-const util = require('util'); // Importa el módulo util para usar promisify y convertir funciones callback-based a promises.
+const mysql = require('mysql');
+const util = require('util');
 
-// Crea un pool de conexiones a la base de datos con las credenciales y parámetros especificados.
+// Configuración del pool de conexiones a la base de datos
 const pool = mysql.createPool({
     host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
     user: 'admindev',
@@ -9,81 +9,142 @@ const pool = mysql.createPool({
     database: 'db_cloud'
 });
 
-// Convierte pool.query a una función basada en promesas para usar async/await.
+// Convertir las consultas del pool a promesas
 const query = util.promisify(pool.query).bind(pool);
 
-// Función handler principal que se ejecuta cuando se invoca la función Lambda.
+// Función Lambda
 exports.handler = async (event) => {
-  console.log('Received event:', JSON.stringify(event, null, 2)); // Loguea el evento recibido para depuración.
-
-  // Obtiene y convierte los parámetros de la solicitud.
-  const idUsuario = parseInt(event.queryStringParameters.idUsuario); // Obtiene el idUsuario de los parámetros de la consulta y lo convierte a entero.
-  const rolUsuario = event.queryStringParameters.rolUsuario; // Obtiene el rolUsuario de los parámetros de la consulta.
-
-  // Verifica si los parámetros son válidos. Si no, retorna un error 400.
-  if (!idUsuario || rolUsuario !== 'Contribuidor') {
+  // Obtener el idUsuario del evento y convertirlo a entero
+  const idUsuario = parseInt(event.queryStringParameters.idUsuario);
+  const updates = event.queryStringParameters;
+  
+  // Campos permitidos para actualización
+  const allowedFields = [
+    'email', 'nombreUsuario', 'direccionPostal', 'lineaDireccion', 'ciudad',
+    'codigoPostal', 'país', 'provincial', 'contrasena', 'nombreUsuarioAPagar',
+    'correoPago', 'pagoMinimo', 'fotoPerfil', 'sitioWeb', 'fraseCierre',
+    'tipoColaborador', 'estilos', 'temas', 'equipo', 'bibliografia', 
+    'redFacebook', 'redInstagram', 'redLinkedin', 'redTwitter'
+  ];
+  
+  // Validar que idUsuario esté presente
+  if (!idUsuario) {
     return {
-      statusCode: 400, // Retorna un código de estado 400 indicando que los parámetros son inválidos.
-      body: JSON.stringify({ message: 'Invalid parameters' }) // Retorna un mensaje de error en formato JSON.
+      statusCode: 400,
+      body: JSON.stringify({ message: 'idUsuario is required' })
     };
   }
+
+  // Crear un objeto con los campos a actualizar
+  const fieldsToUpdate = {};
+  allowedFields.forEach(field => {
+    if (updates[field] !== undefined) {
+      fieldsToUpdate[field] = updates[field];
+    }
+  });
+
+  // Validar que haya campos válidos para actualizar
+  if (Object.keys(fieldsToUpdate).length === 0) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'No valid fields to update' })
+    };
+  }
+
+  const updatePromises = [];
 
   try {
-    // Consulta SQL para obtener los detalles del usuario y sus relaciones con otras tablas.
-    const userQuery = `
-      SELECT usr.usr_txt_correo_electronico as email, 
-             usr.usr_int_id_usuario as idUsuario, 
-             usr.usr_txt_nickname as nombreUsuario, 
-             usr.usr_txt_contrasena as contrasena, 
-             usr.usr_txt_nombre_legal as nombreUsuarioAPagar, 
-             dtl.txt_direccion_postal as direccionPostal, 
-             dtl.txt_direccion_complementaria as lineaDireccion, 
-             dtl.txt_ciudad as ciudad, 
-             dtl.int_codigo_postal as codigoPostal, 
-             dtl.txt_pais as país, 
-             dtl.txt_provincia as provincial, 
-             dtl.txt_correo_pago as correoPago, 
-             dtl.txt_pago_minimo as pagoMinimo, 
-             dtl.txt_url_sitio_web as sitioWeb, 
-             dtl.txt_frase_cierre as fraseCierre, 
-             adm.ora_profesion as tipoColaborador, 
-             adm.ora_estilos as estilos, 
-             adm.ora_temas as temas, 
-             adm.ora_equipo as equipo, 
-             red.txt_facebook as redFacebook, 
-             red.txt_instagram as redInstagram, 
-             red.txt_linkedin as redLinkedin, 
-             red.txt_twitter as redTwitter
-      FROM ora_usuarios usr
-      LEFT JOIN ora_detalle_usuario dtl ON usr.usr_int_id_usuario = dtl.usr_int_id_usuario
-      LEFT JOIN ora_detalle_red red ON usr.usr_int_id_usuario = red.id_usuario
-      LEFT JOIN ora_acerca_de_mi adm ON usr.usr_int_id_usuario = adm.ora_int_id_usuario
-      WHERE usr.usr_int_id_usuario = ? AND usr.usr_int_id_rol = 'Contribuidor';
-    `;
+    // Construir y agregar las promesas de las consultas de actualización
+    for (const [field, value] of Object.entries(fieldsToUpdate)) {
+      let updateQuery;
+      let queryParams = [value, idUsuario];
 
-    // Ejecuta la consulta con el idUsuario proporcionado.
-    const results = await query(userQuery, [idUsuario]);
-    console.log('Query results:', results); // Loguea los resultados de la consulta para depuración.
+      // Construir la consulta basada en el campo
+      switch (field) {
+        case 'email':
+        case 'nombreUsuario':
+        case 'contrasena':
+        case 'nombreUsuarioAPagar':
+          updateQuery = `UPDATE ora_usuarios SET ${fieldMap[field]} = ? WHERE usr_int_id_usuario = ?`;
+          break;
+        case 'direccionPostal':
+        case 'lineaDireccion':
+        case 'ciudad':
+        case 'codigoPostal':
+        case 'país':
+        case 'provincial':
+        case 'correoPago':
+        case 'pagoMinimo':
+        case 'fotoPerfil':
+        case 'sitioWeb':
+        case 'fraseCierre':
+          updateQuery = `UPDATE ora_detalle_usuario SET ${fieldMap[field]} = ? WHERE usr_int_id_usuario = ?`;
+          break;
+        case 'tipoColaborador':
+        case 'estilos':
+        case 'temas':
+        case 'equipo':
+        case 'bibliografia':
+          updateQuery = `UPDATE ora_acerca_de_mi SET ${fieldMap[field]} = ? WHERE ora_int_id_usuario = ?`;
+          break;
+        case 'redFacebook':
+        case 'redInstagram':
+        case 'redLinkedin':
+        case 'redTwitter':
+          updateQuery = `UPDATE ora_detalle_red SET ${fieldMap[field]} = ? WHERE id_usuario = ?`;
+          break;
+      }
 
-    // Si no se encuentra ningún resultado, retorna un error 404.
-    if (results.length === 0) {
-      return {
-        statusCode: 404, // Retorna un código de estado 404 indicando que no se encontró el contribuidor.
-        body: JSON.stringify({ message: 'Contributor not found' }) // Retorna un mensaje indicando que no se encontró el contribuidor.
-      };
+      // Agregar la promesa de la consulta a la lista
+      if (updateQuery) {
+        updatePromises.push(query(updateQuery, queryParams));
+      }
     }
 
-    // Si se encuentra el usuario, retorna los detalles del mismo.
+    // Ejecutar todas las promesas en paralelo
+    await Promise.all(updatePromises);
+
+    // Respuesta de éxito
     return {
-      statusCode: 200, // Retorna un código de estado 200 indicando éxito.
-      body: JSON.stringify(results[0]) // Retorna los detalles del usuario en formato JSON.
+      statusCode: 200,
+      body: JSON.stringify({ 
+        message: `Se edito el perfil contribuidor, los campos que se editaron fueron: ${Object.keys(fieldsToUpdate).join(', ')}` 
+      })
     };
   } catch (error) {
-    // Si ocurre un error durante la consulta, loguea el error y retorna un error 500.
-    console.error('Database query error', error); // Loguea el error ocurrido.
+    // Manejo de errores
+    console.error('Database query error', error);
     return {
-      statusCode: 500, // Retorna un código de estado 500 indicando un error interno del servidor.
-      body: JSON.stringify({ message: 'Internal server error', error: error.message }) // Retorna un mensaje de error en formato JSON.
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Internal server error' })
     };
   }
+};
+
+// Mapeo de los campos permitidos a sus nombres en la base de datos
+const fieldMap = {
+  email: 'usr_txt_correo_electronico',
+  nombreUsuario: 'usr_txt_nickname',
+  direccionPostal: 'txt_direccion_postal',
+  lineaDireccion: 'txt_direccion_complementaria',
+  ciudad: 'txt_ciudad',
+  codigoPostal: 'int_codigo_postal',
+  país: 'txt_pais',
+  provincial: 'txt_provincia',
+  contrasena: 'usr_txt_contrasena',
+  nombreUsuarioAPagar: 'usr_txt_nombre_legal',
+  correoPago: 'txt_correo_pago',
+  pagoMinimo: 'txt_pago_minimo',
+  fotoPerfil: 'dtl_txt_url_foto_perfil',
+  sitioWeb: 'txt_url_sitio_web',
+  fraseCierre: 'txt_frase_cierre',
+  tipoColaborador: 'ora_profesion',
+  estilos: 'ora_estilos',
+  temas: 'ora_temas',
+  equipo: 'ora_equipo',
+  bibliografia: 'ora_bibliografia',
+  redFacebook: 'txt_facebook',
+  redInstagram: 'txt_instagram',
+  redLinkedin: 'txt_linkedin',
+  redTwitter: 'txt_twitter'
 };
