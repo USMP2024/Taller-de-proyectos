@@ -506,6 +506,51 @@ Resources:
             Path: /Usuarios/ObtenerProductosArtista
             Method: get
 
+  LambdaEditarDatosComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-datos-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEditarDatosComprador:
+          Type: Api
+          Properties:
+            Path: /Comprador/EditarDatos
+            Method: put
+
+  LambdaObtenerDatosComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-datos-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerDatosComprador:
+          Type: Api
+          Properties:
+            Path: /Comprador/ObtenerDatos
+            Method: get  
+
+  LambdaObtenerHistorialComprasPrevias:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-historial-compras-previas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerHistorialComprasPrevias:
+          Type: Api
+          Properties:
+            Path: /Comprador/HistorialCompras
+            Method: get       
+
   LambdaObtenerDescargasUsuario:
     Type: AWS::Serverless::Function
     Properties:
