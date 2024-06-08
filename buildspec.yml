@@ -32,6 +32,7 @@ phases:
 
       - aws s3 sync ./frontend/mfe-prueba/dist s3://s3-mf-prueba --delete
       - aws s3 sync ./frontend/mfe-registro-logueo-comprador/dist s3://s3-mf-registro-logueo-comprador --delete
+      - aws s3 sync ./frontend/mfe-administrador-gestion/dist s3://s3-mf-administrador-gestion --delete
 
 artifacts:
   files:
