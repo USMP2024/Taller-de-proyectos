@@ -671,6 +671,21 @@ Resources:
             Path: /Usuarios/ObtenerPrimerosPanelesInformativos
             Method: get
 
+  LambdaObtenerPanelInformativo:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-panel-informativo/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerPanelInformativo:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerPanelInformativo
+            Method: get
+
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
