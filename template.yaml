@@ -732,7 +732,7 @@ Resources:
   #           Resource: arn:aws:s3:::s3-mf-registro-logueo-comprador/*
   #           Principal: "*"
 
-S3MFAdministradorGestion:
+  S3MFAdministradorGestion:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: s3-mf-administrador-gestion
