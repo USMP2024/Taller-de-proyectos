@@ -655,7 +655,34 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
             Method: get
-
+  LambdaObtenerDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-datos-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstadoPortafolioContribuidor:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDatosContribuidor
+            Method: get
+  LambdaEditarDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-datos-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstadoPortafolioContribuidor:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EditarDatosContribuidor
+            Method: put
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
