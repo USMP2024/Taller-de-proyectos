@@ -656,6 +656,21 @@ Resources:
             Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
             Method: get
 
+  LambdaObtenerPrimerosPanelesInformativos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-primeros-paneles-informativos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerPrimerosPanelesInformativos:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerPrimerosPanelesInformativos
+            Method: get
+
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
