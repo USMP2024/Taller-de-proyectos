@@ -842,7 +842,7 @@ Resources:
         IgnorePublicAcls: false
         RestrictPublicBuckets: false
   
-  S3MFRegistrarContribuidor:
+  S3MFRegistrarContribuidorBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
       Bucket: !Ref S3MFRegistrarContribuidor
