@@ -815,43 +815,43 @@ Resources:
   #           Resource: arn:aws:s3:::s3-mf-administrador-gestion/*
   #           Principal: "*"
 
-  S3MFRegistrarContribuidor:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: s3-mf-registrar-contribuidor
-      OwnershipControls:
-        Rules:
-          - ObjectOwnership: BucketOwnerPreferred
-      CorsConfiguration: 
-        CorsRules:
-          - AllowedOrigins:
-              - "*"
-            AllowedMethods:
-              - GET
-              - PUT
-              - POST
-              - DELETE
-              - HEAD
-            AllowedHeaders:
-              - "*"
-            Id: S3MFRegistrarContribuidorCORS
-            MaxAge: 3000
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        BlockPublicPolicy: false
-        IgnorePublicAcls: false
-        RestrictPublicBuckets: false
+  # S3MFRegistrarContribuidor:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-registrar-contribuidor
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFRegistrarContribuidorCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
   
-  S3MFRegistrarContribuidorBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref S3MFRegistrarContribuidor
-      PolicyDocument:
-        Statement:
-          - Action: s3:GetObject
-            Effect: Allow
-            Resource: arn:aws:s3:::s3-mf-registrar-contribuidor/*
-            Principal: "*"
+  # S3MFRegistrarContribuidorBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFRegistrarContribuidor
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-registrar-contribuidor/*
+  #           Principal: "*"
 
 Outputs:
   ApiGatewayUrl:
