@@ -696,7 +696,7 @@ Resources:
         LambdaObtenerTemas:
           Type: Api
           Properties:
-            Path: /Usuarios/ObtenerTemas
+            Path: /Temas/ObtenerTemas
             Method: get
   LambdaObtenerTiposColaborador:
     Type: AWS::Serverless::Function
@@ -710,7 +710,7 @@ Resources:
         LambdaObtenerTiposColaborador:
           Type: Api
           Properties:
-            Path: /Usuarios/ObtenerTiposColaborador
+            Path: /Temas/ObtenerTiposColaborador
             Method: get
   LambdaObtenerEstilos:
     Type: AWS::Serverless::Function
@@ -724,7 +724,7 @@ Resources:
         LambdaObtenerEstilos:
           Type: Api
           Properties:
-            Path: /Usuarios/ObtenerEstilos
+            Path: /Temas/ObtenerEstilos
             Method: get
   
   # S3MFPrueba:
