@@ -1,0 +1,27 @@
+.cabecera-contenedor {
+    background-image: url('./fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .cabecera-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+  }
+  
+  .cabecera-boton {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-left: -2.5rem;
+  }
