@@ -713,7 +713,7 @@ Resources:
         LambdaBuscarSoluciones:
           Type: Api
           Properties:
-            Path: Ayuda/Buscar
+            Path: /Ayuda/Buscar
             Method: post
             
   LambdaObtenerTemas:
@@ -728,7 +728,7 @@ Resources:
         LambdaObtenerTemas:
           Type: Api
           Properties:
-            Path: Ayuda/ObtenerTemas
+            Path: /Ayuda/ObtenerTemas
             Method: get
             
   LambdaObtenerSolucion:
@@ -743,7 +743,7 @@ Resources:
         LambdaObtenerSolucion:
           Type: Api
           Properties:
-            Path: Ayuda/ObtenerSolucion
+            Path: /Ayuda/ObtenerSolucion
             Method: post
             
   LambdaCalificarSolucion:
@@ -758,7 +758,7 @@ Resources:
         LambdaCalificarSolucion:
           Type: Api
           Properties:
-            Path: Ayuda/CalificarSolucion
+            Path: /Ayuda/CalificarSolucion
             Method: post
             
   LambdaEnviarCorreo:
@@ -773,7 +773,7 @@ Resources:
         LambdaEnviarCorreo:
           Type: Api
           Properties:
-            Path: Ayuda/CalificarSolucion
+            Path: /Ayuda/EnviarCorreo
             Method: post
             
   # S3MFPrueba:
