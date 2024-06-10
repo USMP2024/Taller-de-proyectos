@@ -32,6 +32,9 @@ const handler = async (event) =>  {
             // Si no hay resultados, devolver un mensaje indicando que no hay clientes en la base de datos
             return {
                 statusCode: 204,
+                'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
                 body: JSON.stringify({ message: "No hay clientes en la base de datos" })
             };
         }
