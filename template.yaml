@@ -700,6 +700,7 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
             Method: get
+            
   LambdaBuscarSoluciones:
     Type: AWS::Serverless::Function
     Properties:
@@ -714,6 +715,7 @@ Resources:
           Properties:
             Path: Ayuda/Buscar
             Method: post
+            
   LambdaObtenerTemas:
     Type: AWS::Serverless::Function
     Properties:
@@ -728,6 +730,7 @@ Resources:
           Properties:
             Path: Ayuda/ObtenerTemas
             Method: get
+            
   LambdaObtenerSolucion:
     Type: AWS::Serverless::Function
     Properties:
@@ -741,7 +744,8 @@ Resources:
           Type: Api
           Properties:
             Path: Ayuda/ObtenerSolucion
-            Method: post               
+            Method: post
+            
   LambdaCalificarSolucion:
     Type: AWS::Serverless::Function
     Properties:
@@ -755,21 +759,23 @@ Resources:
           Type: Api
           Properties:
             Path: Ayuda/CalificarSolucion
-            Method: post    
+            Method: post
+            
   LambdaEnviarCorreo:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-enviar-correo/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
-            - x86_64
-        Events:
-          LambdaEnviarCorreo:
-            Type: Api
-            Properties:
-              Path: Ayuda/CalificarSolucion
-              Method: post                               
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-enviar-correo/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaEnviarCorreo:
+          Type: Api
+          Properties:
+            Path: Ayuda/CalificarSolucion
+            Method: post
+            
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
