@@ -683,6 +683,50 @@ Resources:
           Properties:
             Path: /Usuarios/EditarDatosContribuidor
             Method: put
+
+  LambdaObtenerTemas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-temas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTemas:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerTemas
+            Method: get
+  LambdaObtenerTiposColaborador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipos-colaborador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTiposColaborador:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerTiposColaborador
+            Method: get
+  LambdaObtenerEstilos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-estilos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstilos:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerEstilos
+            Method: get
+  
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
