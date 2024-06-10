@@ -853,10 +853,48 @@ Resources:
   #           Resource: arn:aws:s3:::s3-mf-registrar-contribuidor/*
   #           Principal: "*"
 
-  S3MFVerificarEstadoDeSubidaDeArte:
+  # S3MFVerificarEstadoDeSubidaDeArte:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-verificar-estado-de-subida-de-arte
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFVerificarEstadoDeSubidaDeArteCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFVerificarEstadoDeSubidaDeArteBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFVerificarEstadoDeSubidaDeArte
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-verificar-estado-de-subida-de-arte/*
+  #           Principal: "*"
+
+  S3MFExplorarBlog:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: s3-mf-verificar-estado-de-subida-de-arte
+      BucketName: s3-mf-explorar-blog
       OwnershipControls:
         Rules:
           - ObjectOwnership: BucketOwnerPreferred
@@ -872,7 +910,7 @@ Resources:
               - HEAD
             AllowedHeaders:
               - "*"
-            Id: S3MFVerificarEstadoDeSubidaDeArteCORS
+            Id: S3MFExplorarBlogCORS
             MaxAge: 3000
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
@@ -880,16 +918,16 @@ Resources:
         IgnorePublicAcls: false
         RestrictPublicBuckets: false
   
-  S3MFVerificarEstadoDeSubidaDeArteBucketPolicy:
+  S3MFExplorarBlogBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref S3MFVerificarEstadoDeSubidaDeArte
+      Bucket: !Ref S3MFExplorarBlog
       PolicyDocument:
         Statement:
           - Action: s3:GetObject
             Effect: Allow
-            Resource: arn:aws:s3:::s3-mf-verificar-estado-de-subida-de-arte/*
-            Principal: "*"
+            Resource: arn:aws:s3:::s3-mf-explorar-blog/*
+            Principal: "*" 
 
 Outputs:
   ApiGatewayUrl:

@@ -35,6 +35,7 @@ phases:
       - aws s3 sync ./frontend/mfe-administrador-gestion/dist s3://s3-mf-administrador-gestion --delete
       - aws s3 sync ./frontend/mfe-registrar-contribuidor/dist s3://s3-mf-registrar-contribuidor --delete
       - aws s3 sync ./frontend/mfe-hu2-003-verificar-estado-de-subida-del-arte/dist s3://s3-mf-verificar-estado-de-subida-de-arte --delete
+      - aws s3 sync ./frontend/mfe-explorar-blog/dist s3://s3-mf-explorar-blog --delete
 
 artifacts:
   files:
