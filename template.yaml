@@ -966,43 +966,43 @@ Resources:
   #           Resource: arn:aws:s3:::s3-mf-verificar-estado-de-subida-de-arte/*
   #           Principal: "*"
 
-  S3MFExplorarBlog:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: s3-mf-explorar-blog
-      OwnershipControls:
-        Rules:
-          - ObjectOwnership: BucketOwnerPreferred
-      CorsConfiguration: 
-        CorsRules:
-          - AllowedOrigins:
-              - "*"
-            AllowedMethods:
-              - GET
-              - PUT
-              - POST
-              - DELETE
-              - HEAD
-            AllowedHeaders:
-              - "*"
-            Id: S3MFExplorarBlogCORS
-            MaxAge: 3000
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        BlockPublicPolicy: false
-        IgnorePublicAcls: false
-        RestrictPublicBuckets: false
+  # S3MFExplorarBlog:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-explorar-blog
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFExplorarBlogCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
   
-  S3MFExplorarBlogBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref S3MFExplorarBlog
-      PolicyDocument:
-        Statement:
-          - Action: s3:GetObject
-            Effect: Allow
-            Resource: arn:aws:s3:::s3-mf-explorar-blog/*
-            Principal: "*" 
+  # S3MFExplorarBlogBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFExplorarBlog
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-explorar-blog/*
+  #           Principal: "*" 
 
 Outputs:
   ApiGatewayUrl:

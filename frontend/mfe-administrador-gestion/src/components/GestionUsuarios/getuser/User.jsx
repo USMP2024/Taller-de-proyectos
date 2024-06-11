@@ -12,6 +12,7 @@ const User = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("https://b8tz3ijhgg.execute-api.us-east-1.amazonaws.com/Prod/Usuarios/Compradores");
+            console.log(response.data);
             setUsers(response.data);
             setFilteredUsers(response.data); // Inicialmente mostramos todos los usuarios
         }
@@ -68,15 +69,15 @@ const User = () => {
                     {
                         filteredUsers.map((user, index) => {
                             return (
-                                <tr key={user._id}>
+                                <tr key={user.idUsuario}>
                                     <td>{index + 1}</td>
-                                    <td>{user._id}</td>
-                                    <td>{user.fname} {user.lname}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.rol}</td>
+                                    <td>{user.idUsuario}</td>
+                                    <td>{user.nombreUsuario}</td>
+                                    <td>{user.correoUsuario}</td>
+                                    <td>{user.rolUsuario}</td>
                                     <td className='actionButtons'>
-                                        <button onClick={() => deleteUser(user._id)}>x</button>
-                                        <Link to={`/edit/${user._id}`}>Editar</Link>
+                                        <button onClick={() => deleteUser(user.idUsuario)}>x</button>
+                                        <a to={`/edit/${user.idUsuario}`}>Editar</a>
                                     </td>
                                 </tr>
                             )
