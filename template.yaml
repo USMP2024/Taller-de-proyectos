@@ -775,7 +775,34 @@ Resources:
           Properties:
             Path: /Ayuda/EnviarCorreo
             Method: post
-            
+  LambdaObtenerProductosmasVendidos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda_obtener_productos_mas_vendidos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerProductosmasVendidos:
+          Type: Api
+          Properties:
+            Path: /backend/lambda_obtener_productos_mas_vendidos
+            Method: get
+  LambdaObtenerBlogsColaborador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda_obtener_blogs_colaborador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerBlogsColaborador:
+          Type: Api
+          Properties:
+            Path: /backend/lambda_obtener_blogs_colaborador
+            Method: get
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
