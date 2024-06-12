@@ -48,17 +48,17 @@ async function consultarArchivosPorProducto(connection, idProducto) {
 
 // Función principal de Lambda
 exports.handler = async (event) => {
-    console.log('Event:', JSON.stringify(event)); // Log del evento para inspección
+    console.log('Event:', event.queryStringParameters); // Log del evento para inspección
     let connection;
 
-    if (!event.idProducto) {
+    if (!event.queryStringParameters.idProducto) {
         return {
             statusCode: 400,
             body: JSON.stringify({ mensaje: 'El ID del producto es requerido' })
         };
     }
 
-    const idProducto = event.idProducto;
+    const idProducto = event.queryStringParameters.idProducto;
 
     try {
         // Conectar a la base de datos
@@ -92,3 +92,4 @@ exports.handler = async (event) => {
         }
     }
 };
+
