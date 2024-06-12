@@ -29,9 +29,9 @@ const User = () => {
     }, [filterRole, users]);
 
     const deleteUser = async (userId) => {
-        await axios.delete(`http://localhost:8000/api/delete/${userId}`)
+        await axios.delete(`https://b8tz3ijhgg.execute-api.us-east-1.amazonaws.com/Prod/Usuarios/EliminarUsuario?${userId}`)
             .then((response) => {
-                setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+                setUsers((prevUsers) => prevUsers.filter((user) => user.idUsuaruio !== userId));
                 toast.success("Usuario Eliminado", { position: 'top-right' });
             })
             .catch((error) => {
