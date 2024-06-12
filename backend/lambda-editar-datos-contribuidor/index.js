@@ -16,7 +16,7 @@ const query = util.promisify(pool.query).bind(pool);
 exports.handler = async (event) => {
   // Obtener el idUsuario del evento y convertirlo a entero
   const idUsuario = parseInt(event.queryStringParameters.idUsuario);
-  const updates = event.queryStringParameters;
+  const updates = JSON.parse(event.body);
   
   // Campos permitidos para actualización
   const allowedFields = [
@@ -91,7 +91,7 @@ exports.handler = async (event) => {
         case 'redInstagram':
         case 'redLinkedin':
         case 'redTwitter':
-          updateQuery = `UPDATE ora_detalle_red SET ${fieldMap[field]} = ? WHERE id_usuario = ?`;
+          updateQuery = `UPDATE ora_detalle_red_usuario SET ${fieldMap[field]} = ? WHERE id_usuario = ?`;
           break;
       }
 
@@ -108,7 +108,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        message: `Se edito el perfil contribuidor, los campos que se editaron fueron: ${Object.keys(fieldsToUpdate).join(', ')}` 
+        message: `Se editó el perfil contribuidor, los campos que se editaron fueron: ${Object.keys(fieldsToUpdate).join(', ')}` 
       })
     };
   } catch (error) {
@@ -125,19 +125,19 @@ exports.handler = async (event) => {
 const fieldMap = {
   email: 'usr_txt_correo_electronico',
   nombreUsuario: 'usr_txt_nickname',
-  direccionPostal: 'txt_direccion_postal',
-  lineaDireccion: 'txt_direccion_complementaria',
-  ciudad: 'txt_ciudad',
-  codigoPostal: 'int_codigo_postal',
-  país: 'txt_pais',
-  provincial: 'txt_provincia',
+  direccionPostal: 'dtl_txt_direccion_postal',
+  lineaDireccion: 'dtl_txt_direccion_complementaria',
+  ciudad: 'dtl_txt_ciudad',
+  codigoPostal: 'dtl_int_codigo_postal',
+  país: 'dtl_txt_pais',
+  provincial: 'dtl_txt_provincia',
   contrasena: 'usr_txt_contrasena',
   nombreUsuarioAPagar: 'usr_txt_nombre_legal',
-  correoPago: 'txt_correo_pago',
-  pagoMinimo: 'txt_pago_minimo',
+  correoPago: 'dtl_txt_correo_pago',
+  pagoMinimo: 'dtl_dec_pago_minimo',
   fotoPerfil: 'dtl_txt_url_foto_perfil',
-  sitioWeb: 'txt_url_sitio_web',
-  fraseCierre: 'txt_frase_cierre',
+  sitioWeb: 'dtl_url_sitio_web',
+  fraseCierre: 'dtl_frase_cierre',
   tipoColaborador: 'ora_profesion',
   estilos: 'ora_estilos',
   temas: 'ora_temas',
@@ -148,3 +148,4 @@ const fieldMap = {
   redLinkedin: 'txt_linkedin',
   redTwitter: 'txt_twitter'
 };
+
