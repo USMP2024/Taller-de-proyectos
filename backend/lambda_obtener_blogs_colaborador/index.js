@@ -1,12 +1,4 @@
-import AWS from "aws-sdk";
 const AWS = require('aws-sdk');
-
-// Configuración explícita de las credenciales (No recomendado para producción)
-//const dynamoDB = new AWS.DynamoDB.DocumentClient({
- //   accessKeyId: "",
-  //  secretAccessKey: "",
-  //  region: "us-east-1"
-//});
 
 // Handler de la función Lambda
 exports.handler = async (event) => {

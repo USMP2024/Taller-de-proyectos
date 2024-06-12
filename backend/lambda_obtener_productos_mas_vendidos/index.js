@@ -2,7 +2,7 @@ const mysql = require('mysql2/promise');
 
 exports.handler = async (event) => {
     // Parsear el JSON del evento para obtener el idContribuidor
-    const { idContribuidor } = JSON.parse(event.body);
+    const idContribuidor = event.queryStringParameters.idContribuidor;
 
     // Verificar si el idContribuidor está presente en el cuerpo del evento
     if (!idContribuidor) {
