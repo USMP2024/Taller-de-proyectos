@@ -626,7 +626,6 @@ Resources:
             Path: /Usuarios/CalificarArticuloFrecuentes
             Method: post
 
-
   LambdaObtenerDetallesUsuario:
     Type: AWS::Serverless::Function
     Properties:
@@ -686,6 +685,7 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerDetalleCarrito
             Method: get
+            
   LambdaObtenerEstadoPortafolioContribuidor:
     Type: AWS::Serverless::Function
     Properties:
@@ -700,7 +700,7 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
             Method: get
-            
+         
   LambdaBuscarSoluciones:
     Type: AWS::Serverless::Function
     Properties:
@@ -715,7 +715,52 @@ Resources:
           Properties:
             Path: /Ayuda/Buscar
             Method: post
+
+  LambdaObtenerDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-datos-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerDatosContribuidor:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerDatosContribuidor
+            Method: get
             
+  LambdaEditarDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-datos-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaEditarDatosContribuidor:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EditarDatosContribuidor
+            Method: put
+
+  LambdaObtenerTemasAyuda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-temas-ayuda/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTemasAyuda:
+          Type: Api
+          Properties:
+            Path: /Ayuda/ObtenerTemas
+            Method: get
+
   LambdaObtenerTemas:
     Type: AWS::Serverless::Function
     Properties:
@@ -728,7 +773,7 @@ Resources:
         LambdaObtenerTemas:
           Type: Api
           Properties:
-            Path: /Ayuda/ObtenerTemas
+            Path: /Contribuidor/ObtenerTemas
             Method: get
             
   LambdaObtenerSolucion:
@@ -745,7 +790,7 @@ Resources:
           Properties:
             Path: /Ayuda/ObtenerSolucion
             Method: post
-            
+                      
   LambdaCalificarSolucion:
     Type: AWS::Serverless::Function
     Properties:
@@ -760,7 +805,22 @@ Resources:
           Properties:
             Path: /Ayuda/CalificarSolucion
             Method: post
-            
+
+  LambdaObtenerTiposColaborador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipos-colaborador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTiposColaborador:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerTiposColaborador
+            Method: get
+
   LambdaEnviarCorreo:
     Type: AWS::Serverless::Function
     Properties:
@@ -791,6 +851,22 @@ Resources:
             Path: /Contribuidor/ObtenerImagenPrueba
             Method: post
             
+
+    LambdaObtenerEstilos:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-obtener-solucion/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+            - x86_64
+        Events:
+          LambdaObtenerEstilos:
+            Type: Api
+            Properties:
+              Path: /Contribuidor/ObtenerEstilos
+              Method: get
+
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
