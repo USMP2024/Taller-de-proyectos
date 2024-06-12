@@ -851,21 +851,20 @@ Resources:
             Path: /Contribuidor/ObtenerImagenPrueba
             Method: post
             
-
-    LambdaObtenerEstilos:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-obtener-estilos/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
-            - x86_64
-        Events:
-          LambdaObtenerEstilos:
-            Type: Api
-            Properties:
-              Path: /Contribuidor/ObtenerEstilos
-              Method: get
+  LambdaObtenerEstilos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-estilos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstilos:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerEstilos
+            Method: get
 
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
