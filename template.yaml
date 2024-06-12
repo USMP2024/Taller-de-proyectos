@@ -836,6 +836,22 @@ Resources:
             Path: /Ayuda/EnviarCorreo
             Method: post
 
+  LambdaObtenerImagenPrueba:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-imagen-prueba/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerImagenPrueba:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerImagenPrueba
+            Method: post
+            
+
     LambdaObtenerEstilos:
       Type: AWS::Serverless::Function
       Properties:
