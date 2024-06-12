@@ -2,7 +2,7 @@ const mysql = require('mysql2/promise');
 
 exports.handler = async (event) => {
     // Configuración de la conexión a la base de datos
-    const connection = await mysql.createConnection({
+    const configuration = await mysql.createConnection({
         host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
         user: 'admindev',
         password: 'passworddev',
@@ -11,7 +11,7 @@ exports.handler = async (event) => {
 
     try {
         // Establecer conexión con la base de datos
-        connection = await mysql.createConnection(connection);
+        connection = await mysql.createConnection(configuration);
 
         // Consulta SQL con JOIN para obtener los estilos y sus tipos
         const [rows] = await connection.execute(`
