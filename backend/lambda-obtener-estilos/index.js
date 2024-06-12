@@ -1,4 +1,4 @@
-const mysql = require('mysql/promise');
+const mysql = require('mysql2/promise');
 
 exports.handler = async (event) => {
     // Configuración de la conexión a la base de datos

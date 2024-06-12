@@ -78,7 +78,7 @@ exports.handler = async (event) => {
         case 'fotoPerfil':
         case 'sitioWeb':
         case 'fraseCierre':
-          updateQuery = `UPDATE ora_detalle_usuario SET ${fieldMap[field]} = ? WHERE usr_int_id_usuario = ?`;
+          updateQuery = `UPDATE ora_detalle_usuario SET ${fieldMap[field]} = ? WHERE dtl_int_id_usuario = ?`;
           break;
         case 'tipoColaborador':
         case 'estilos':
@@ -91,7 +91,7 @@ exports.handler = async (event) => {
         case 'redInstagram':
         case 'redLinkedin':
         case 'redTwitter':
-          updateQuery = `UPDATE ora_detalle_red_usuario SET ${fieldMap[field]} = ? WHERE id_usuario = ?`;
+          updateQuery = `UPDATE ora_detalle_red_usuario SET ${fieldMap[field]} = ? WHERE dtlR_id_usuario = ?`;
           break;
       }
 
