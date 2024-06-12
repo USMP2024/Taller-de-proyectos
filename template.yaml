@@ -716,16 +716,16 @@ Resources:
             Path: /Ayuda/Buscar
             Method: post
 
- LambdaObtenerDatosContribuidor:
+  LambdaObtenerDatosContribuidor:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-obtener-datos-contribuidor
+      CodeUri: backend/lambda-obtener-datos-contribuidor/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
           - x86_64
       Events:
-        LambdaObtenerEstadoPortafolioContribuidor:
+        LambdaObtenerDatosContribuidor:
           Type: Api
           Properties:
             Path: /Contribuidor/ObtenerDatosContribuidor
@@ -740,13 +740,13 @@ Resources:
       Architectures:
           - x86_64
       Events:
-        LambdaObtenerEstadoPortafolioContribuidor:
+        LambdaEditarDatosContribuidor:
           Type: Api
           Properties:
             Path: /Usuarios/EditarDatosContribuidor
             Method: put
 
-  LambdaObtenerTemas:
+  LambdaObtenerTemasAyuda:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: backend/lambda-obtener-temas-ayuda/
@@ -755,7 +755,7 @@ Resources:
       Architectures:
           - x86_64
       Events:
-        LambdaObtenerTemas:
+        LambdaObtenerTemasAyuda:
           Type: Api
           Properties:
             Path: /Ayuda/ObtenerTemas
