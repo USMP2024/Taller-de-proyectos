@@ -855,7 +855,7 @@ Resources:
     LambdaObtenerEstilos:
       Type: AWS::Serverless::Function
       Properties:
-        CodeUri: backend/lambda-obtener-solucion/
+        CodeUri: backend/lambda-obtener-estilos/
         Handler: index.handler
         Runtime: nodejs20.x
         Architectures:
