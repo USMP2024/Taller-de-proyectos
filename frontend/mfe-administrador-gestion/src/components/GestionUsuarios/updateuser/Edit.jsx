@@ -25,7 +25,7 @@ const Edit = () =>{
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/getone/${id}`)
+        axios.get(`https://b8tz3ijhgg.execute-api.us-east-1.amazonaws.com/Prod/Usuarios/EditarUsuarios${id}`)
         .then((response)=>{
             setUser(response.data)
         })
