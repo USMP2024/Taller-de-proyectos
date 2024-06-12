@@ -56,7 +56,7 @@ exports.handler = async (event) => {
              red.txt_twitter as redTwitter
       FROM ora_usuarios usr
       LEFT JOIN ora_detalle_usuario dtl ON usr.usr_int_id_usuario = dtl.usr_int_id_usuario
-      LEFT JOIN ora_detalle_red red ON usr.usr_int_id_usuario = red.id_usuario
+      LEFT JOIN ora_detalle_red_usuario red ON usr.usr_int_id_usuario = red.id_usuario
       LEFT JOIN ora_acerca_de_mi adm ON usr.usr_int_id_usuario = adm.ora_int_id_usuario
       WHERE usr.usr_int_id_usuario = ? AND usr.usr_int_id_rol = 'Contribuidor';
     `;
