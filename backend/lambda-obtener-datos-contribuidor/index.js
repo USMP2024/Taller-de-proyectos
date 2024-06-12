@@ -20,7 +20,7 @@ exports.handler = async (event) => {
   const idUsuario = parseInt(event.queryStringParameters.idUsuario);
   const rolUsuario = event.queryStringParameters.rolUsuario;
 
-  // Verifica si los parámetros son válidos. Si no, retorna un error 400.
+  // Verifica si los parámetros son válidos. Si no, retorna un error 400..
   if (!idUsuario || rolUsuario !== 'Contribuidor') {
     return {
       statusCode: 400,
