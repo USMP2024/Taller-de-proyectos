@@ -18,10 +18,10 @@ exports.handler = async (event) => {
 
   // Obtiene y convierte los parámetros de la solicitud.
   const idUsuario = parseInt(event.queryStringParameters.idUsuario);
-  const rolUsuario = event.queryStringParameters.rolUsuario;
+  //const rolUsuario = event.queryStringParameters.rolUsuario;
 
   // Verifica si los parámetros son válidos. Si no, retorna un error 400..
-  if (!idUsuario || rolUsuario !== 'Contribuidor') {
+  if (!idUsuario) {
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Invalid parameters' })
@@ -58,7 +58,7 @@ exports.handler = async (event) => {
       LEFT JOIN ora_detalle_usuario dtl ON usr.usr_int_id_usuario = dtl.dtl_int_id_usuario
       LEFT JOIN ora_detalle_red_usuario red ON usr.usr_int_id_usuario = red.dtlR_id_usuario
       LEFT JOIN ora_acerca_de_mi adm ON usr.usr_int_id_usuario = adm.ora_int_id_usuario
-      WHERE usr.usr_int_id_usuario = 218 AND usr.usr_txt_tipo_usuario = 'Contribuidor';
+      WHERE usr.usr_int_id_usuario = ? AND usr.usr_txt_tipo_usuario = 'Contribuidor';
     `;
 
     // Ejecuta la consulta con el idUsuario proporcionado.
