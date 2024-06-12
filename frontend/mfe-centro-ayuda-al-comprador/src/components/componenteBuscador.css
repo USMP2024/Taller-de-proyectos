@@ -1,0 +1,14 @@
+.componente-buscador input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .componente-buscador input:focus {
+    outline: none;
+    border-color: #82c34a;
+    box-shadow: 0 0 5px rgba(130, 195, 74, 0.3);
+  }

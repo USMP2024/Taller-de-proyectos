@@ -11,7 +11,8 @@ function App() {
       {/* <Header/> */}
       {/* <User/>
       <Outlet /> */}
-      <AppRouter/>
+      {/* <AppRouter/> */}
+      <User></User>
     </div>
   );
 }

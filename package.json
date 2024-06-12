@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "aws-sdk": "^2.1594.0",
+    "fuse.js": "^7.0.0",
     "mercadopago": "^1.5.16",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "resend": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",

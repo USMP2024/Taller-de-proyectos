@@ -626,7 +626,6 @@ Resources:
             Path: /Usuarios/CalificarArticuloFrecuentes
             Method: post
 
-
   LambdaObtenerDetallesUsuario:
     Type: AWS::Serverless::Function
     Properties:
@@ -686,6 +685,7 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerDetalleCarrito
             Method: get
+            
   LambdaObtenerEstadoPortafolioContribuidor:
     Type: AWS::Serverless::Function
     Properties:
@@ -700,10 +700,26 @@ Resources:
           Properties:
             Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
             Method: get
-  LambdaObtenerDatosContribuidor:
+         
+  LambdaBuscarSoluciones:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-obtener-datos-contribuidor/
+      CodeUri: backend/lambda-buscar-soluciones/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaBuscarSoluciones:
+          Type: Api
+          Properties:
+            Path: /Ayuda/Buscar
+            Method: post
+
+ LambdaObtenerDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-datos-contribuidor
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
@@ -712,8 +728,9 @@ Resources:
         LambdaObtenerEstadoPortafolioContribuidor:
           Type: Api
           Properties:
-            Path: /Usuarios/ObtenerDatosContribuidor
+            Path: /Contribuidor/ObtenerDatosContribuidor
             Method: get
+            
   LambdaEditarDatosContribuidor:
     Type: AWS::Serverless::Function
     Properties:
@@ -732,6 +749,21 @@ Resources:
   LambdaObtenerTemas:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: backend/lambda-obtener-temas-ayuda/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTemas:
+          Type: Api
+          Properties:
+            Path: /Ayuda/ObtenerTemas
+            Method: get
+
+  LambdaObtenerTemas:
+    Type: AWS::Serverless::Function
+    Properties:
       CodeUri: backend/lambda-obtener-temas/
       Handler: index.handler
       Runtime: nodejs20.x
@@ -741,8 +773,39 @@ Resources:
         LambdaObtenerTemas:
           Type: Api
           Properties:
-            Path: /Temas/ObtenerTemas
+            Path: /Contribuidor/ObtenerTemas
             Method: get
+            
+  LambdaObtenerSolucion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-solucion/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerSolucion:
+          Type: Api
+          Properties:
+            Path: /Ayuda/ObtenerSolucion
+            Method: post
+                      
+  LambdaCalificarSolucion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-calificar-solucion/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaCalificarSolucion:
+          Type: Api
+          Properties:
+            Path: /Ayuda/CalificarSolucion
+            Method: post
+
   LambdaObtenerTiposColaborador:
     Type: AWS::Serverless::Function
     Properties:
@@ -755,23 +818,39 @@ Resources:
         LambdaObtenerTiposColaborador:
           Type: Api
           Properties:
-            Path: /Temas/ObtenerTiposColaborador
+            Path: /Contribuidor/ObtenerTiposColaborador
             Method: get
-  LambdaObtenerEstilos:
+
+  LambdaEnviarCorreo:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-obtener-estilos/
+      CodeUri: backend/lambda-enviar-correo/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
           - x86_64
       Events:
-        LambdaObtenerEstilos:
+        LambdaEnviarCorreo:
           Type: Api
           Properties:
-            Path: /Temas/ObtenerEstilos
-            Method: get
-  
+            Path: /Ayuda/EnviarCorreo
+            Method: post
+
+    LambdaObtenerEstilos:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/lambda-obtener-solucion/
+        Handler: index.handler
+        Runtime: nodejs20.x
+        Architectures:
+            - x86_64
+        Events:
+          LambdaObtenerEstilos:
+            Type: Api
+            Properties:
+              Path: /Contribuidor/ObtenerEstilos
+              Method: get
+
   # S3MFPrueba:
   #   Type: AWS::S3::Bucket
   #   Properties:
@@ -923,6 +1002,82 @@ Resources:
   #           Effect: Allow
   #           Resource: arn:aws:s3:::s3-mf-registrar-contribuidor/*
   #           Principal: "*"
+
+  # S3MFVerificarEstadoDeSubidaDeArte:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-verificar-estado-de-subida-de-arte
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFVerificarEstadoDeSubidaDeArteCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFVerificarEstadoDeSubidaDeArteBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFVerificarEstadoDeSubidaDeArte
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-verificar-estado-de-subida-de-arte/*
+  #           Principal: "*"
+
+  # S3MFExplorarBlog:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-explorar-blog
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFExplorarBlogCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFExplorarBlogBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFExplorarBlog
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-explorar-blog/*
+  #           Principal: "*" 
 
 Outputs:
   ApiGatewayUrl:
