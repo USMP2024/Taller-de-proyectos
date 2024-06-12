@@ -31,34 +31,34 @@ exports.handler = async (event) => {
   try {
     // Consulta SQL para obtener los detalles del usuario y sus relaciones con otras tablas.
     const userQuery = `
-      SELECT usr.usr_txt_correo_electronico as email, 
+       SELECT usr.usr_txt_correo_electronico as email, 
              usr.usr_int_id_usuario as idUsuario, 
              usr.usr_txt_nickname as nombreUsuario, 
              usr.usr_txt_contrasena as contrasena, 
              usr.usr_txt_nombre_legal as nombreUsuarioAPagar, 
              dtl.dtl_txt_direccion_postal as direccionPostal, 
-             dtl.dtl_txt_direccion_complementaria as lineaDireccion, 
+             dtl.txt_direccion_complementaria as lineaDireccion, 
              dtl.dtl_txt_ciudad as ciudad, 
              dtl.dtl_int_codigo_postal as codigoPostal, 
              dtl.dtl_txt_pais as país, 
-             dtl.dtl_txt_provincia as provincial, 
+             dtl.dtl_provincia as provincial, 
              dtl.dtl_txt_correo_pago as correoPago, 
-             dtl.dtl_txt_pago_minimo as pagoMinimo, 
-             dtl.dtl_txt_url_sitio_web as sitioWeb, 
-             dtl.dtl_txt_frase_cierre as fraseCierre, 
+             dtl.dtl_dec_pago_minimo as pagoMinimo, 
+             dtl.dtl_url_sitio_web as sitioWeb, 
+             dtl.dtl_frase_cierre as fraseCierre, 
              adm.ora_profesion as tipoColaborador, 
              adm.ora_estilos as estilos, 
              adm.ora_temas as temas, 
              adm.ora_equipo as equipo, 
-             red.txt_facebook as redFacebook, 
-             red.txt_instagram as redInstagram, 
-             red.txt_linkedin as redLinkedin, 
-             red.txt_twitter as redTwitter
+             red.dtlR_txt_facebook as redFacebook, 
+             red.dtlR_txt_instagram as redInstagram, 
+             red.dtlR_txt_linkedin as redLinkedin, 
+             red.dtl_txt_twitter as redTwitter
       FROM ora_usuarios usr
-      LEFT JOIN ora_detalle_usuario dtl ON usr.usr_int_id_usuario = dtl.usr_int_id_usuario
-      LEFT JOIN ora_detalle_red_usuario red ON usr.usr_int_id_usuario = red.id_usuario
+      LEFT JOIN ora_detalle_usuario dtl ON usr.usr_int_id_usuario = dtl.dtl_int_id_usuario
+      LEFT JOIN ora_detalle_red_usuario red ON usr.usr_int_id_usuario = red.dtlR_id_usuario
       LEFT JOIN ora_acerca_de_mi adm ON usr.usr_int_id_usuario = adm.ora_int_id_usuario
-      WHERE usr.usr_int_id_usuario = ? AND usr.usr_int_id_rol = 'Contribuidor';
+      WHERE usr.usr_int_id_usuario = 218 AND usr.usr_txt_tipo_usuario = 'Contribuidor';
     `;
 
     // Ejecuta la consulta con el idUsuario proporcionado.
