@@ -719,7 +719,7 @@ Resources:
   LambdaObtenerTemas:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: backend/lambda-obtener-temas/
+      CodeUri: backend/lambda-obtener-temas-ayuda/
       Handler: index.handler
       Runtime: nodejs20.x
       Architectures:
