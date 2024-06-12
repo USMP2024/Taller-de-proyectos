@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const util = require('util');
 
 // Configuración del pool de conexiones a la base de datos
