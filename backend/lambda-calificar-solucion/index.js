@@ -32,7 +32,7 @@ exports.handler = async (event) => {
 
         // Incrementar el contador correspondiente según el tipo de calificación
         const updateParams = {
-            TableName: 'dynamo_soluciones',
+            TableName: 'dynamo_soluciones_tb',
             Key: {
                 idSolucion: { N: idSolucion.toString() },
                 solucion: { S: solucion }

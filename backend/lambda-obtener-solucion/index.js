@@ -22,7 +22,7 @@ exports.handler = async (event) => {
 
         // Parámetros para la consulta
         const params = {
-            TableName: 'dynamo_soluciones',
+            TableName: 'dynamo_soluciones_tb',
             Key: {
                 idSolucion: { N: idSolucion.toString() }, // Convertir a cadena para DynamoDB
                 solucion: { S: solucion } // Clave de ordenación
