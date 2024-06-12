@@ -2,16 +2,18 @@ const mysql = require('mysql2/promise');
 
 exports.handler = async (event) => {
     // Configuración de la conexión a la base de datos
-    const configuration = await mysql.createConnection({
+    const connectionConfig = {
         host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
         user: 'admindev',
         password: 'passworddev',
         database: 'db_cloud'
-    });
+    };
+
+    let connection;
 
     try {
         // Establecer conexión con la base de datos
-        connection = await mysql.createConnection(configuration);
+        connection = await mysql.createConnection(connectionConfig);
 
         // Consulta SQL con JOIN para obtener los estilos y sus tipos
         const [rows] = await connection.execute(`
@@ -39,9 +41,6 @@ exports.handler = async (event) => {
             response[tipoEstilo].push(nombreEstilo);
         });
 
-        // Cerrar la conexión
-        await connection.end();
-
         return {
             statusCode: 200,
             body: JSON.stringify(response)
@@ -52,5 +51,9 @@ exports.handler = async (event) => {
             statusCode: 500,
             body: JSON.stringify({ message: 'Error al obtener datos' })
         };
+    } finally {
+        if (connection) {
+            await connection.end();
+        }
     }
 };
