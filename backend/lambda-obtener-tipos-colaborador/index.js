@@ -23,11 +23,11 @@ function conectarBaseDeDatos() {
     });
 }
 
-// Función para obtener los temas de la base de datos
-function obtenerTemas(connection) {
+// Función para obtener los datos de la tabla ora_tipos_profesion
+function obtenerTiposProfesion(connection) {
     return new Promise((resolve, reject) => {
-        // Consulta SQL para obtener todos los temas
-        const sql = `SELECT * FROM ora_temas`;
+        // Consulta SQL para seleccionar todos los registros de la tabla ora_tipos_profesion
+        const sql = 'SELECT * FROM ora_tipos_profesion';
 
         // Ejecutar la consulta SQL
         connection.query(sql, (err, results) => {
@@ -47,15 +47,15 @@ exports.handler = async (event) => {
         // Conectar a la base de datos
         connection = await conectarBaseDeDatos();
 
-        // Obtener los temas de la base de datos
-        const temas = await obtenerTemas(connection);
+        // Obtener los tipos de profesión
+        const resultados = await obtenerTiposProfesion(connection);
 
         return {
             statusCode: 200,
-            body: JSON.stringify(temas)
+            body: JSON.stringify({ datos: resultados })
         };
     } catch (error) {
-        console.error('Error al obtener temas:', error);
+        console.error('Error al obtener tipos de profesión:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ mensaje: error.message })
@@ -67,3 +67,4 @@ exports.handler = async (event) => {
         }
     }
 };
+//hola

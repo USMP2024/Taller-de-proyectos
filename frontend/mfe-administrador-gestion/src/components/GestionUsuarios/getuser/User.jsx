@@ -29,9 +29,9 @@ const User = () => {
     }, [filterRole, users]);
 
     const deleteUser = async (userId) => {
-        await axios.delete(`http://localhost:8000/api/delete/${userId}`)
+        await axios.delete(`https://b8tz3ijhgg.execute-api.us-east-1.amazonaws.com/Prod/Usuarios/EliminarUsuario?${userId}`)
             .then((response) => {
-                setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+                setUsers((prevUsers) => prevUsers.filter((user) => user.idUsuaruio !== userId));
                 toast.success("Usuario Eliminado", { position: 'top-right' });
             })
             .catch((error) => {
@@ -46,9 +46,9 @@ const User = () => {
             </div>
             <br />
             <div className='btns'>
-                <button className='Comprador' onClick={() => setFilterRole('comprador')}>Comprador</button>
+                <button className='Cliente' onClick={() => setFilterRole('Cliente')}>Cliente</button>
                 {"   -   "}
-                <button className='Contribuidor' onClick={() => setFilterRole('contribuidor')}>Contribuidor</button>
+                <button className='Contribuidor' onClick={() => setFilterRole('Contribuidor')}>Contribuidor</button>
                 {"   -   "}
                 <button className='Todos' onClick={() => setFilterRole('')}>Todos</button>
             </div>
