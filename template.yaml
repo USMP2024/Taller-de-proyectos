@@ -895,6 +895,37 @@ Resources:
           Properties:
             Path: /Contribuidor/ObtenerEstilos
             Method: get
+  
+  LambdaVerReporteMensualesEnBaseAAño:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-en-base-a-ano-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaVerReporteMensualesEnBaseAAno:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/VerReportesMensuales
+            Method: post
+
+
+  LambdaVerReporteDariosEnBaseAMes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-diarios-en-base-mes-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaVerReporteDariosEnBaseAMes:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/VerReportesDiarios 
+            Method: post
 
 
   # S3MFPrueba:
