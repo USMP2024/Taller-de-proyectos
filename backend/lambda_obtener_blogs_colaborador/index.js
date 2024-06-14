@@ -7,6 +7,8 @@ exports.handler = async (event) => {
         TableName: 'dynamo_blog_colaborador'
     };
 
+    const dynamoDB = new AWS.DynamoDB();
+    
     try {
         // Escanea la tabla para obtener todos los items
         const data = await dynamoDB.scan(params).promise();
