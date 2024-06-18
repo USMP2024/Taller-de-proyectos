@@ -281,6 +281,36 @@ Resources:
             Path: /Autenticacion/LoginComprador
             Method: post 
 
+  LambdaEvaluarImagenes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-evaluar-imagenes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEvaluarImagenes:
+          Type: Api
+          Properties:
+            Path: /Juez/EvaluarImagenes
+            Method: put   
+
+  LambdaListarImagenesValidar:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-listar-imagenes-validar/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaListarImagenesValidar:
+          Type: Api
+          Properties:
+            Path: /Juez/ObtenerImagenesValidar
+            Method: get
+
   LambdaVerReporteMensualesEnBaseAAno:
     Type: AWS::Serverless::Function
     Properties:
@@ -320,41 +350,795 @@ Resources:
       Architectures:
         - x86_64
       Events:
-       LambdaDetalleProducto:
+        LambdaDetalleProducto:
           Type: Api
           Properties:
             Path: /Productos/DetalleProducto
             Method: get
 
   LambdaRankingArtistas:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-ranking-artistas/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
-          - x86_64
-        Events:
-           LambdaRankingArtistas:
-            Type: Api
-            Properties:
-              Path: /Finanzas/ObtenerRankingArtistas
-              Method: get
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ranking-artistas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaRankingArtistas:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerRankingArtistas
+            Method: get
 
   LambdaObtenerCarritosAbandonados:
-      Type: AWS::Serverless::Function
-      Properties:
-        CodeUri: backend/lambda-obtener-carritos-abandonados/
-        Handler: index.handler
-        Runtime: nodejs20.x
-        Architectures:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-carritos-abandonados/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerCarritosAbandonados:
+          Type: Api
+          Properties:
+            Path: /Finanzas/ObtenerCarritosAbandonados
+            Method: get
+
+  LambdaGenerarExcel:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-excel/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaGenerarExcel:
+          Type: Api
+          Properties:
+            Path: /Finanzas/GenerarReporteExcel
+            Method: post
+
+  LambdaIniciarCheckout:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-generar-orden-pago/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaIniciarCheckout:
+          Type: Api
+          Properties:
+            Path: /Pago/IniciarCheckout
+            Method: post
+   
+  LambdaMostrarTendenciasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-tendencias-general/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarTendenciasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/TendenciasGeneral
+            Method: get
+    
+  LambdaMostrarBlogTutoriales:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-blog-tutoriales/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarBlogTutoriales:
+          Type: Api
+          Properties:
+            Path: /Productos/ObtenerBlogsTutoriales
+            Method: get
+    
+  LambdaMostrarCategoriasGeneral:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-categorias-general/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarCategoriasGeneral:
+          Type: Api
+          Properties:
+            Path: /Productos/CategoriasGeneral
+            Method: get
+
+  LambdaObtenerFestividadesporMes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-festividades-por-mes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerFestividadesporMes:
+          Type: Api
+          Properties:
+            Path: /Festividades
+            Method: get
+              
+  LambdaObtenerColeccionesArtista:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-colecciones-artista/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerColeccionesArtista:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerColecciones
+            Method: get
+
+  LambdaObtenerProductosArtista:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-productos-artista/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductosArtista:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerProductosArtista
+            Method: get
+
+  LambdaEditarDatosComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-datos-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaEditarDatosComprador:
+          Type: Api
+          Properties:
+            Path: /Comprador/EditarDatos
+            Method: put
+
+  LambdaObtenerDatosComprador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-datos-comprador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerDatosComprador:
+          Type: Api
+          Properties:
+            Path: /Comprador/ObtenerDatos
+            Method: get  
+
+  LambdaObtenerHistorialComprasPrevias:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-historial-compras-previas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerHistorialComprasPrevias:
+          Type: Api
+          Properties:
+            Path: /Comprador/HistorialCompras
+            Method: get       
+
+  LambdaObtenerDescargasUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-descargas-usuario/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerDescargasUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDescargasUsuario
+            Method: get
+
+  LambdaBuscarPreguntasFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-buscar-preguntas-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaBuscarPreguntasFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/BuscarPreguntasFrecuentes
+            Method: post
+
+  LambdaObtenerPreguntasFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-preguntas-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerPreguntasFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerPreguntasFrecuentes
+            Method: get
+
+  LambdaMostrarArticuloFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-mostrar-articulo-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaMostrarArticuloFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/MostrarArticuloFrecuentes
+            Method: get
+
+  LambdaCalificarArticuloFrecuentes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-calificar-articulo-frecuentes/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaCalificarArticuloFrecuentes:
+          Type: Api
+          Properties:
+            Path: /Usuarios/CalificarArticuloFrecuentes
+            Method: post
+
+  LambdaObtenerDetallesUsuario:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-detalles-usuario/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerDetallesUsuario:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDetallesUsuario
+            Method: get
+
+  LambdaAnadirCarrito:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-anadir-carrito/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaAnadirCarrito:
+          Type: Api
+          Properties:
+            Path: /Usuarios/AnadirCarrito
+            Method: post
+
+  LambdaObtenerProductoRecomendado:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-producto-recomendado/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        LambdaObtenerProductoRecomendado:
+          Type: Api
+          Properties:
+            Path: /Productos/ProductoRecomendado
+            Method: get
+    
+  LambdaObtenerDetalleCarrito:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-detalle-carrito/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
           - x86_64
-        Events:
-           LambdaObtenerCarritosAbandonados:
-            Type: Api
-            Properties:
-              Path: /Finanzas/ObtenerCarritosAbandonados
-              Method: get
+      Events:
+        LambdaObtenerDetalleCarrito:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerDetalleCarrito
+            Method: get
+            
+  LambdaObtenerEstadoPortafolioContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-estado-portafolio-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstadoPortafolioContribuidor:
+          Type: Api
+          Properties:
+            Path: /Usuarios/ObtenerEstadoPortafolioContribuidor
+            Method: get
+         
+  LambdaBuscarSoluciones:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-buscar-soluciones/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaBuscarSoluciones:
+          Type: Api
+          Properties:
+            Path: /Ayuda/Buscar
+            Method: post
+
+  LambdaObtenerDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-datos-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerDatosContribuidor:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerDatosContribuidor
+            Method: get
+            
+  LambdaEditarDatosContribuidor:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-editar-datos-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaEditarDatosContribuidor:
+          Type: Api
+          Properties:
+            Path: /Usuarios/EditarDatosContribuidor
+            Method: put
+
+  LambdaObtenerTemasAyuda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-temas-ayuda/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTemasAyuda:
+          Type: Api
+          Properties:
+            Path: /Ayuda/ObtenerTemas
+            Method: get
+
+  LambdaObtenerTemas:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-temas/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTemas:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerTemas
+            Method: get
+            
+  LambdaObtenerSolucion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-solucion/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerSolucion:
+          Type: Api
+          Properties:
+            Path: /Ayuda/ObtenerSolucion
+            Method: post
+                      
+  LambdaCalificarSolucion:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-calificar-solucion/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaCalificarSolucion:
+          Type: Api
+          Properties:
+            Path: /Ayuda/CalificarSolucion
+            Method: post
+
+  LambdaObtenerTiposColaborador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-tipos-colaborador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerTiposColaborador:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerTiposColaborador
+            Method: get
+
+  LambdaEnviarCorreo:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-enviar-correo/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaEnviarCorreo:
+          Type: Api
+          Properties:
+            Path: /Ayuda/EnviarCorreo
+            Method: post
+
+  LambdaObtenerImagenPrueba:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-imagen-prueba/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerImagenPrueba:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerImagenPrueba
+            Method: post
+            
+  LambdaObtenerProductosmasVendidos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda_obtener_productos_mas_vendidos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerProductosmasVendidos:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerProductosmasVendidos
+            Method: get
+            
+  LambdaObtenerBlogsColaborador:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda_obtener_blogs_colaborador/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerBlogsColaborador:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerBlogsColaborador
+            Method: get
+
+  LambdaObtenerEstilos:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-obtener-estilos/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaObtenerEstilos:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/ObtenerEstilos
+            Method: get
+  
+  LambdaVerReporteDariosEnBaseAMes:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/lambda-ver-reporte-diarios-en-base-mes-contribuidor/
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Architectures:
+          - x86_64
+      Events:
+        LambdaVerReporteDariosEnBaseAMes:
+          Type: Api
+          Properties:
+            Path: /Contribuidor/VerReportesDiarios 
+            Method: post
+
+
+  # S3MFPrueba:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-prueba
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFPruebaCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFPruebaBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFPrueba
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-prueba/*
+  #           Principal: "*"
+  
+  # S3MFRegistroLogueoComprador:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-registro-logueo-comprador
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFRegistroLogueoCompradorCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFRegistroLogueoCompradorBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFRegistroLogueoComprador
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-registro-logueo-comprador/*
+  #           Principal: "*"
+
+  # S3MFAdministradorGestion:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-administrador-gestion
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFAdministradorGestionCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFAdministradorGestionBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFAdministradorGestion
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-administrador-gestion/*
+  #           Principal: "*"
+
+  # S3MFRegistrarContribuidor:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-registrar-contribuidor
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFRegistrarContribuidorCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFRegistrarContribuidorBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFRegistrarContribuidor
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-registrar-contribuidor/*
+  #           Principal: "*"
+
+  # S3MFVerificarEstadoDeSubidaDeArte:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-verificar-estado-de-subida-de-arte
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFVerificarEstadoDeSubidaDeArteCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFVerificarEstadoDeSubidaDeArteBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFVerificarEstadoDeSubidaDeArte
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-verificar-estado-de-subida-de-arte/*
+  #           Principal: "*"
+
+  # S3MFExplorarBlog:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: s3-mf-explorar-blog
+  #     OwnershipControls:
+  #       Rules:
+  #         - ObjectOwnership: BucketOwnerPreferred
+  #     CorsConfiguration: 
+  #       CorsRules:
+  #         - AllowedOrigins:
+  #             - "*"
+  #           AllowedMethods:
+  #             - GET
+  #             - PUT
+  #             - POST
+  #             - DELETE
+  #             - HEAD
+  #           AllowedHeaders:
+  #             - "*"
+  #           Id: S3MFExplorarBlogCORS
+  #           MaxAge: 3000
+  #     PublicAccessBlockConfiguration:
+  #       BlockPublicAcls: false
+  #       BlockPublicPolicy: false
+  #       IgnorePublicAcls: false
+  #       RestrictPublicBuckets: false
+  
+  # S3MFExplorarBlogBucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties:
+  #     Bucket: !Ref S3MFExplorarBlog
+  #     PolicyDocument:
+  #       Statement:
+  #         - Action: s3:GetObject
+  #           Effect: Allow
+  #           Resource: arn:aws:s3:::s3-mf-explorar-blog/*
+  #           Principal: "*" 
 
 Outputs:
   ApiGatewayUrl:

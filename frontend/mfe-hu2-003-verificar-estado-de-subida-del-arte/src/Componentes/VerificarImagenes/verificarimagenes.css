@@ -1,0 +1,60 @@
+body {
+    background-color: #F3FBFC;
+}
+
+.contenido .h1 h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #162841;
+    align-items: center;
+}
+
+/* Estilos de los botones */
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Imagenes {
+    border: none;
+    background: #146b80;
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilo para el botón seleccionado */
+.selected {
+    background: #162841;
+}
+
+/* Estilo para la tabla */
+.estadoTable table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+.estadoTable table thead th {
+    background-color: #286C81;
+    color: white;
+    padding: 10px;
+}
+
+.estadoTable table tbody td {
+    padding: 10px;
+    text-align: center;
+}
+
+.estadoTable {
+    width: 60%;
+    background-color: white;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    border-radius: 5px;
+    margin: 40px auto;
+    padding: 40px;
+}

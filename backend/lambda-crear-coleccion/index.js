@@ -60,7 +60,8 @@ exports.handler = async (event) => {
     let connection;
     try {
         // Asegurarse de que el cuerpo del evento es un objeto JSON
-        const body = event.body; 
+        const body = JSON.parse(event.body);
+        console.log(body);
         const { idUsuario, nombreColeccion } = body;
 
         // Conectar a la base de datos
@@ -77,12 +78,18 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ mensaje: 'Colección insertada correctamente', insertedId: result.insertId })
         };
     } catch (error) {
         console.error('Error al insertar colección:', error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ mensaje: error.message })
         };
     } finally {

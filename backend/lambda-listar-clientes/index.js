@@ -11,7 +11,7 @@ const handler = async (event) =>  {
         });
 
         // Consulta SQL para seleccionar usuarios con el tipo 'Cliente'
-        const consulta = "SELECT usr_int_id_usuario AS idUsuario, usr_txt_nombre_usuario AS nombreUsuario, usr_txt_correo_electronico AS correoUsuario, usr_txt_tipo_usuario AS rolUsuario FROM ora_usuarios WHERE usr_txt_tipo_usuario = 'Cliente'";
+        const consulta = "SELECT usr_int_id_usuario AS idUsuario, usr_txt_nombre_usuario AS nombreUsuario, usr_txt_correo_electronico AS correoUsuario, usr_txt_tipo_usuario AS rolUsuario FROM ora_usuarios WHERE usr_txt_tipo_usuario = 'Contribuidor' OR usr_txt_tipo_usuario = 'Cliente'";
 
         // Ejecutar la consulta SQL
         const resultados = await new Promise((resolve, reject) => {
@@ -32,6 +32,9 @@ const handler = async (event) =>  {
             // Si no hay resultados, devolver un mensaje indicando que no hay clientes en la base de datos
             return {
                 statusCode: 204,
+                'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
                 body: JSON.stringify({ message: "No hay clientes en la base de datos" })
             };
         }
@@ -47,7 +50,10 @@ const handler = async (event) =>  {
         // Crear el objeto de respuesta
         const response = {
             statusCode: 200,
-            listaUsuarios: listaUsuarios // Devolver la lista de usuarios directamente
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(listaUsuarios) // Devolver la lista de usuarios directamente
         };
         return response;
     } catch (error) {
@@ -55,6 +61,9 @@ const handler = async (event) =>  {
         console.error("Error:", error);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: "Internal Server Error" })
         };
     }

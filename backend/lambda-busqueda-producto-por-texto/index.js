@@ -1,8 +1,8 @@
 const mysql = require('mysql2/promise');
 
 const handler = async (event) => {
-  const cadenaBusqueda = event.cadenaBusqueda || '';
-  const pagina = event.pagina || 0;
+  const cadenaBusqueda = event.queryStringParameters.cadenaBusqueda || '';
+  const pagina = event.queryStringParameters.pagina || 0;
   const resultadosPorPagina = 80;
   const inicio = (pagina - 1) * resultadosPorPagina;
 
@@ -52,7 +52,8 @@ const handler = async (event) => {
       statusCode: 500,
       body: JSON.stringify({ mensaje: "Error interno del servidor: " + error }),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     };
   }

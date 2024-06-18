@@ -1,0 +1,138 @@
+/* PreguntasFrecuentes.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Sección de búsqueda */
+.seccion-busqueda {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  background: rgb(247, 80, 255);
+  background: linear-gradient(90deg, rgba(247, 80, 255, 1) 35%, rgba(29, 216, 254, 1) 100%);
+  padding: 40px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.titulo-busqueda {
+  font-size: 2.5rem; /* Tamaño de fuente grande */
+  font-weight: bold; /* Negrita */
+  text-align: center; /* Alineado al centro */
+  margin-bottom: 10px; /* Espacio entre el título y la barra de búsqueda */
+}
+
+
+
+.barra-busqueda {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.icono-camara {
+  width: 130px;
+  height: 130px;
+  margin-right: 20px;
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.barra-busqueda input {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  padding: 5px 5px 5px 70px;
+  font-size: 18px;
+}
+
+.barra-busqueda button {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Artículos populares */
+.articulos-populares {
+  margin-bottom: 40px;
+}
+
+.articulos-populares h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.columna {
+  text-align: center;
+}
+
+.columna img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Artículos presentados */
+.articulos-presentados {
+  margin-bottom: 40px;
+}
+
+.articulos-presentados h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alineado a la derecha */
+}
+
+.enlaces {
+  flex: 1;
+}
+
+.ilustracion img {
+  max-width: 70%;
+  height: auto;
+  margin-left: 150px; /* Margen a la izquierda para mover la imagen a la derecha */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .columnas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contenido {
+    flex-direction: column;
+  }
+
+  .ilustracion {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .columnas {
+    grid-template-columns: 1fr;
+  }
+}

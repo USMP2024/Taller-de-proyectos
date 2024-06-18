@@ -18,6 +18,9 @@ const handler = async (event) => {
   if (!event.queryStringParameters.start_date) {
     const response = {
       statusCode: 404,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: "start_date is required.....",
     };
     return response;
@@ -31,6 +34,9 @@ const handler = async (event) => {
   } catch {
     const response = {
       statusCode: 404,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: "start_date is invalid",
     };
     return response;
@@ -42,6 +48,9 @@ const handler = async (event) => {
   } catch {
     const response = {
       statusCode: 404,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
       body: "start_date is invalid",
     };
     return response;
@@ -101,6 +110,9 @@ const handler = async (event) => {
     if(noticias.length > 0){
       const response = {
         statusCode: 200,
+        'headers': {
+          'Access-Control-Allow-Origin': '*'
+      },
         body: JSON.stringify(noticias),
       };
 
@@ -109,6 +121,9 @@ const handler = async (event) => {
     }else{
       const response = {
         statusCode: 404,
+        'headers': {
+          'Access-Control-Allow-Origin': '*'
+      },
         body: "Not Found : No se encontraron noticias",
       }
 
@@ -117,10 +132,13 @@ const handler = async (event) => {
 
   } catch (error) {
     //Manejo de errores internos del servidor
+    console.log("ERROR " + error)
     const response = {
       statusCode: 500,
-      body: "Error interno del servidor",
-      error: "ERROR : " + error,
+      'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
+      body: "Error interno del servidor"
     };
     return response;
   }

@@ -1,0 +1,98 @@
+
+/* Estilos Header login - registro */
+.active {
+    background-color: #1D4ED8;
+}
+
+.nav-reg-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1D1E1D;
+    position: sticky;
+    width: 100%;
+}
+
+.nav-reg-login .title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFF;
+}
+
+.nav-reg-login ul{
+    display: flex;
+}
+
+.nav-reg-login ul.open {
+    display: flex;
+}
+
+.nav-reg-login ul li {
+    list-style: none;
+}
+
+.nav-reg-login ul li a{
+    display: block;
+    text-decoration: none;
+    color: #FFF;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.nav-reg-login ul li a:not(.active):hover {
+    background-color: #363736;
+}
+
+.active {
+    background-color: #454645;
+}
+
+
+.nav-reg-login .menu {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+.nav-reg-login .menu span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 0.2rem;
+}
+
+/* Estilos Responsive Header login - registro */
+@media (max-width: 480px) {
+    .nav-reg-login .menu {
+        display: flex;
+    }
+
+    .nav-reg-login {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .nav-reg-login-reg-login ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    .nav-reg-login ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-reg-login ul li a {
+        margin: 0.2rem 0.5rem;
+    }
+}   

@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     if (!año) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ message: 'Falta el campo obligatorio "año" en la solicitud.' })
+            body: JSON.stringify({ message: 'Falta el campo obligatorio "año" en la solicitud..' })
         };
     }
 
@@ -54,12 +54,18 @@ exports.handler = async (event, context) => {
 
         return {
             statusCode: 200,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ ventasPorMes: rows })
         };
     } catch (dbError) {
         console.error('Error en la consulta a la base de datos:', dbError);
         return {
             statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Error en la consulta a la base de datos.' })
         };
     }
