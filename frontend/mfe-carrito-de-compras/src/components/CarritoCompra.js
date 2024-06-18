@@ -32,7 +32,7 @@ const CarritoCompra = () => {
       <div className="carrito-compra">
         <div className="carrito-compra-header">
           <img src="https://via.placeholder.com/30" alt="Imagen de perfil" />
-          <span>Hola, Luis Navarro Carpio</span>
+          <span>Hola, Luis Navarro</span>
         </div>
         {carrito.map(item => (
           <div className="carrito-compra-item" key={item.idProducto}>
