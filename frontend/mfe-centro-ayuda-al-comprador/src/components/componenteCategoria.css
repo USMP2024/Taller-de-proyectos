@@ -1,0 +1,41 @@
+.icono-contenido {
+    display: inline-block;
+    width: 50px; 
+    height: 50px; 
+    line-height: 50px; 
+    vertical-align: middle;
+  }
+  
+  .icono-facturacion {
+    max-width: 80%;
+    max-height: 80%;
+    vertical-align: middle;
+  }
+
+  .componente-categoria {
+    width: 80%;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .componente-categoria h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+  } 
+  
+.contenedor-categorias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+.componente-categoria {
+    width: 45%;
+    max-width: 600px;
+    margin: 1rem;
+  }

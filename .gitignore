@@ -35,7 +35,7 @@
 **/.lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-**/build/Release
+#**/build/Release
 
 # Dependency directories
 **/node_modules/
@@ -87,15 +87,15 @@
 **/out
 
 # Nuxt.js build / generate output
-**/.nuxt
-**/dist
+#**/.nuxt
+#**/dist
 
 # Gatsby files
 **/.cache/
 # public
 
 # vuepress build output
-**/.vuepress/dist
+#**/.vuepress/dist
 
 # vuepress v2.x temp and cache directory
 **/.temp

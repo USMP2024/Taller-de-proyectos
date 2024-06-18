@@ -1,0 +1,86 @@
+.registro-page {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registro-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+}
+
+.registro-container h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.registro-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registro-container input {
+  padding: 10px;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.nombre-artista-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.nombre-artista-container small {
+  color: #666;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+.terminos-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.terminos-label {
+  margin-left: 10px;
+  color: #333;
+}
+
+.terminos-label span {
+  color: #d32f2f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ingresar-button {
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.registro-container p {
+  color: #333;
+}
+
+.registro-container p a {
+  color: #d32f2f;
+  text-decoration: none;
+}

@@ -6,7 +6,7 @@ export const Header = () => {
     const[menuOpen, setMenuOpen] = useState(false)
     return (
     //Encabezado Inicio Sesión - Registrarse
-    <nav>
+    <nav className='nav-reg-login'>
         <Link to="/" className='title'>Inti Pacha Artes</Link>
 
         <div className='menu' onClick={() =>{
@@ -18,9 +18,7 @@ export const Header = () => {
         </div>
         
         <ul className={menuOpen? "open" : ""}>
-        <li>
-                <NavLink to="/index">Inicio</NavLink>
-            </li>
+
             <li>
                 <NavLink to="/login">Iniciar Sesión</NavLink>
             </li>

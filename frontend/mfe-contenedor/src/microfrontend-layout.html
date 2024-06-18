@@ -1,11 +1,14 @@
 <single-spa-router>
   <div class="contenedor" style="display: flex; flex-direction: column; height: 100vh;">
+    <route path="header">
+      <application name="@usmp/mf-header"></application>
+    </route>
+    <route path="prueba">
+      <application name="@usmp/mfe-prueba"></application>
+    </route>
+    <route path="administrador-gestion">
+      <application name="@usmp/mfe-administrador-gestion"></application>
+    </route>
 
-      <div class="header" style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
-        <application name="@usmp/mfe-header"></application>
-      </div>
-      <div class="footer" style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
-        <application name="@usmp/mfe-prueba"></application>
-      </div>
   </div>
 </single-spa-router>

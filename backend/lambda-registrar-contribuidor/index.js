@@ -1,71 +1,162 @@
 const AWS = require('aws-sdk');
-const crypto = require('crypto');
 const mysql = require('mysql2/promise');
+const crypto = require('crypto');
 
-exports.handler = async (event, context) => {
-    // Verificar si el cuerpo de la solicitud está presente y es un JSON válido
-    if (!event.body) {
+const handler = async (event) => {
+    const { legalName, username, password, email } = JSON.parse(event.body);
+    console.log(event.body);
+    console.log(event.body.legalName);
+    console.log(username);
+    console.log(password);
+    console.log(email);
+    
+    if (!legalName || !username || !email || !password) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ message: 'Cuerpo de solicitud no válido.' })
-        };
-    }
-
-    let { nombre, apellido, correo, contrasena } = JSON.parse(event.body);
-
-    // Validar campos requeridos
-    if (!nombre || !apellido || !correo || !contrasena) {
-        return {
-            statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Faltan campos obligatorios en la solicitud.' })
         };
     }
 
-    const nombreCompleto = `${nombre} ${apellido}`;
+    const connection = await mysql.createConnection({
+        host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
+        user: 'admindev',
+        password: 'passworddev',
+        database: 'db_cloud'
+    });
 
-    // Configuración de Cognito
+    const legalNameArray = legalName.split(' ');
+    const [name, firstLastName, secondLastName] = legalNameArray;
+    const lastName = `${firstLastName} ${secondLastName}`
+    if (legalNameArray.length < 3) {
+        return {
+            statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: "No se introdujo el nombre completo (nombre, apellido paterno, apellido materno) o las separaciones necesarias, (ej. Alberto Castillo Mendoza)" })
+        };
+    }
 
-const cognito = new AWS.CognitoIdentityServiceProvider();
-const userPoolId = 'us-east-1_K0WcEp2e0';
-const groupName = 'cognito-intipachaartes-contribuidor';
-const clientId = '5r7lhelfg091fpj2q5at7vcfse';
-const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
+    if (!validatePassword(password)) {
+        return {
+            statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: "La contraseña debe tener por lo menos 8 caracteres, contener al menos un carácter especial y una letra minúscula." })
+        };
+    }
 
-    // Calcula el hash secreto
-    const message = correo + clientId;
+    if (!validateEmail(email)) {
+        return {
+            statusCode: 400,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: "Correo electrónico no válido." })
+        };
+    }
+
+    try {
+        const query = `SELECT * FROM ora_usuarios WHERE usr_txt_nombre_legal = ?`;
+        const [rows] = await connection.execute(query, [legalName]);
+
+        if (rows.length > 0) {
+            return {
+                statusCode: 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify({ message: `El con nombre legal ${legalName} ya se encuentra registrado` })
+            };
+        }
+
+    } catch (error) {
+        return {
+            statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: `ERROR BUSCAR USUARIO: ${error}` })
+        };
+    }
+
+    try {
+        const query = `SELECT * FROM ora_usuarios WHERE usr_txt_correo_electronico = ?`;
+        const [rows] = await connection.execute(query, [email]);
+
+        if (rows.length > 0) {
+            return {
+                statusCode: 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify({ message: "El usuario ya se encuentra registrado" })
+            };
+        }
+
+    } catch (error) {
+        return {
+            statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: `ERROR BUSCAR USUARIO: ${error}` })
+        };
+    }
+
+    let usuarioId;
+    try {
+        const query = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_apellido_usuario,usr_txt_nombre_legal,usr_txt_correo_electronico, usr_txt_contrasena,usr_val_fecha_registro, usr_txt_tipo_usuario,usr_txt_nickname) VALUES (?,?,?,?,?,?,?,?)`
+        const rolValue = 'Contribuidor';
+        const currentDate = new Date();
+
+        const [result] = await connection.execute(query, [name, lastName, legalName, email, password, currentDate, rolValue,username]);
+
+        console.log(result)
+        usuarioId = result.insertId;
+        console.log(usuarioId + " " + typeof(usuarioId))
+
+    } catch (error) {
+        return {
+            statusCode: 500,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: `ERROR INSERT: ${error}` })
+        };
+    }
+
+    const cognito = new AWS.CognitoIdentityServiceProvider();
+    const userPoolId = 'us-east-1_MCOvPBJxj';
+    const groupName = 'Contribuidores';
+    const clientId = '3qeneeb39gfcaq8ci2jvhq1koj';
+    const clientSecret = '101tvrap5lq33oca6lfmvjkmitqhpkk6bjp7arm7bpjq211kuo1g';
+
+    const message = email + clientId;
     const hmac = crypto.createHmac('sha256', clientSecret);
     hmac.update(message);
     const secretHash = hmac.digest('base64');
 
-    // Configuración de conexión a MySQL utilizando async/await
+    const rolValue = 'Contribuidor';
     try {
-        
-        const connection = await mysql.createConnection({
-            host: 'rds-development-db.chu4imeus62g.us-east-1.rds.amazonaws.com',
-            user: 'admindev',
-            password: 'passworddev',
-            database: 'db_cloud'
-        });
-
-        // Registro de usuario en Cognito
         const signUpParams = {
             ClientId: clientId,
-            Username: correo,
-            Password: contrasena,
+            Username: email,
+            Password: password,
             SecretHash: secretHash,
             UserAttributes: [
-                { Name: 'email', Value: correo }
+                { Name: 'email', Value: email },
+                { Name: 'custom:idUsuario', Value: usuarioId.toString()},
+                { Name: 'custom:rolUsuario', Value: rolValue }
             ]
         };
         const signUpResponse = await cognito.signUp(signUpParams).promise();
         const userSub = signUpResponse.UserSub;
 
-        // Guardar datos en MySQL
-        const insertQuery = `INSERT INTO ora_usuarios (usr_txt_nombre_usuario, usr_txt_correo_electronico, usr_txt_contrasena, usr_txt_tipo_usuario) VALUES (?, ?, ?, ?)`;
-        const rolValue = 'Cliente'; // Valor ENUM válido
-        await connection.execute(insertQuery, [nombreCompleto, correo, contrasena, rolValue]);
-
-        // Añadir usuario al grupo en Cognito
         const addUserToGroupParams = {
             UserPoolId: userPoolId,
             Username: userSub,
@@ -73,18 +164,33 @@ const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
         };
         await cognito.adminAddUserToGroup(addUserToGroupParams).promise();
 
-        // Cerrar conexión a MySQL
-        await connection.end();
-
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Usuario registrado y añadido al grupo exitosamente.' })
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: "Usuario registrado exitosamente", usuarioId, rolValue })
         };
+
     } catch (error) {
-        console.error('Error:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Usuario registrado' })
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ message: `ERROR: ${error}` })
         };
     }
 };
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function validatePassword(password) {
+    const re = /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    return re.test(password);
+}
+
+exports.handler = handler;

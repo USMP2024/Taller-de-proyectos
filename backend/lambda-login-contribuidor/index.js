@@ -6,8 +6,8 @@ exports.handler = async (event) => {
     const { username, password } = JSON.parse(event.body);
 
     // Configuración de Cognito
-    const clientId = '5r7lhelfg091fpj2q5at7vcfse';
-    const clientSecret = 'roourbo0q06kotm7pn6p56lhods2metfviahn760r5ojgbicdes';
+    const clientId = '3qeneeb39gfcaq8ci2jvhq1koj';
+    const clientSecret = '101tvrap5lq33oca6lfmvjkmitqhpkk6bjp7arm7bpjq211kuo1g';
 
     // Calcula el hash secreto
     const message = username + clientId;
@@ -31,13 +31,19 @@ exports.handler = async (event) => {
         // Si el inicio de sesión es exitoso, devolver el token de acceso
         return {
             statusCode: 200,
-            body: JSON.stringify({ accessToken: data.AuthenticationResult.AccessToken })
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ accessToken: data.AuthenticationResult.AccessToken,idToken: data.AuthenticationResult.IdToken })
         };
     } catch (error) {
         // Manejar errores de inicio de sesión
         console.log("Error al iniciar sesión:", error);
         return {
             statusCode: 401,
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ message: 'Credenciales inválidas' })
         };
     }

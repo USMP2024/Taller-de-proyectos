@@ -4,7 +4,7 @@
     background-color: #1D4ED8;
 }
 
-nav {
+.nav-reg-login {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +13,7 @@ nav {
     width: 100%;
 }
 
-nav .title {
+.nav-reg-login .title {
     font-size: 1.5rem;
     margin: 1rem;
     font-weight: bold;
@@ -21,19 +21,19 @@ nav .title {
     color: #FFF;
 }
 
-nav ul{
+.nav-reg-login ul{
     display: flex;
 }
 
-nav ul.open {
+.nav-reg-login ul.open {
     display: flex;
 }
 
-nav ul li {
+.nav-reg-login ul li {
     list-style: none;
 }
 
-nav ul li a{
+.nav-reg-login ul li a{
     display: block;
     text-decoration: none;
     color: #FFF;
@@ -42,7 +42,7 @@ nav ul li a{
     border-radius: 0.5rem;
 }
 
-nav ul li a:not(.active):hover {
+.nav-reg-login ul li a:not(.active):hover {
     background-color: #363736;
 }
 
@@ -51,7 +51,7 @@ nav ul li a:not(.active):hover {
 }
 
 
-nav .menu {
+.nav-reg-login .menu {
     display: none;
     position: absolute;
     top: 0.75rem;
@@ -62,7 +62,7 @@ nav .menu {
     height: 2rem;
 }
 
-nav .menu span {
+.nav-reg-login .menu span {
     height: 0.4rem;
     width: 100%;
     background-color: #FFF;
@@ -71,28 +71,28 @@ nav .menu span {
 
 /* Estilos Responsive Header login - registro */
 @media (max-width: 480px) {
-    nav .menu {
+    .nav-reg-login .menu {
         display: flex;
     }
 
-    nav {
+    .nav-reg-login {
         flex-direction: column;
         align-items: start;
     }
 
-    nav ul {
+    .nav-reg-login-reg-login ul {
         display: none;
         flex-direction: column;
         width: 100%;
         margin-bottom: 0.25rem;
     }
 
-    nav ul li {
+    .nav-reg-login ul li {
         width: 100%;
         text-align: center;
     }
 
-    nav ul li a {
+    .nav-reg-login ul li a {
         margin: 0.2rem 0.5rem;
     }
 }   

@@ -1,0 +1,11 @@
+.search-bar-container {
+  width: 900px; /* Cambiar el ancho de la barra de búsqueda */
+  height: 20%; /* Cambiar la altura de la barra de búsqueda */
+}
+
+.search-input {
+  width: 100%; /* Ajustar el ancho del input al 100% del contenedor */
+  height: 100%; /* Ajustar la altura del input al 100% del contenedor */
+  padding: 5px; /* Añadir relleno para mejorar el aspecto */
+  
+}

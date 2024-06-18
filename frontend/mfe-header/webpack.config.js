@@ -10,6 +10,20 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
+    resolve: {
+      fallback: {
+        "fs": false,
+        "tls": false,
+        "net": false,
+        "path": false,
+        "zlib": false,
+        "http": false,
+        "https": false,
+        "stream": false,
+        "crypto": false,
+        "async_hooks": false,
+        "crypto-browserify": require.resolve('crypto-browserify'), //if you want to use this module also don't forget npm i crypto-browserify
+      }
+    },
   });
-};
+}
