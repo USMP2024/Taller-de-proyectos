@@ -32,7 +32,7 @@ const ComponenteNoEncuentra = () => {
       <h2>¿No encuentra lo que busca?</h2>
       <div className={`opcion-contacto ${opcionSeleccionada === 'chat' ? 'opcion-contacto-seleccionado' : ''}`}>
         <div className="mensaje-opcion">
-          <p>Chatee con nosotros</p>
+          <p>Converse con nosotros</p>
           <span className="mensaje-difuminado">Estado: Disponible</span>
         </div>
         <ComponenteBoton
