@@ -35,7 +35,7 @@ const RevisionMercadoPago = () => {
         <button onClick={handleModificar}>Modificar</button>
       </div>
       <div className="revision-mercado-pago-detalle">
-        <h3>Detalle de tu compra</h3>
+        <h3>Detalle de tu compra:</h3>
         <p>1085503217</p>
         <p>$ 50</p>
       </div>
