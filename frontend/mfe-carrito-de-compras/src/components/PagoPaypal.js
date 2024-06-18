@@ -37,7 +37,7 @@ const PagoPaypal = () => {
 
       {/* Información de envío */}
       <div className="envio">
-        <h3>Enviar a Luis Navarro Carpio</h3>
+        <h3>Enviar a Luis Ernesto Navarro Carpio</h3>
         <p>Calle Los Sauces 783, LIMA, 15036, LIMA</p>
       </div>
 
