@@ -22,7 +22,7 @@ const User = () => {
 
     useEffect(() => {
         if (filterRole) {
-            setFilteredUsers(users.filter(user => user.rol === filterRole));
+            setFilteredUsers(users.filter(user => user.rolUsuario === filterRole));
         } else {
             setFilteredUsers(users);
         }
@@ -31,7 +31,7 @@ const User = () => {
     const deleteUser = async (userId) => {
         await axios.delete(`https://b8tz3ijhgg.execute-api.us-east-1.amazonaws.com/Prod/Usuarios/EliminarUsuario?${userId}`)
             .then((response) => {
-                setUsers((prevUsers) => prevUsers.filter((user) => user.idUsuaruio !== userId));
+                setUsers((prevUsers) => prevUsers.filter((user) => user.idUsuario !== userId));
                 toast.success("Usuario Eliminado", { position: 'top-right' });
             })
             .catch((error) => {
