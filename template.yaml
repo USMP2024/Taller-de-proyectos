@@ -1140,6 +1140,44 @@ Resources:
   #           Resource: arn:aws:s3:::s3-mf-explorar-blog/*
   #           Principal: "*" 
 
+  S3MFAdministradorGestionDevoluciones:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: s3-mf-administrador-gestion-devoluciones
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred
+      CorsConfiguration: 
+        CorsRules:
+          - AllowedOrigins:
+              - "*"
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            AllowedHeaders:
+              - "*"
+            Id: S3MFAdministradorGestionDevolucionesCORS
+            MaxAge: 3000
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+  
+  S3MFAdministradorGestionBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3MFAdministradorGestionDevoluciones
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Resource: arn:aws:s3:::s3-mf-administrador-gestion-devoluciones/*
+            Principal: "*" 
+
 Outputs:
   ApiGatewayUrl:
     Description: "API Gateway endpoint URL for Prod stage"
