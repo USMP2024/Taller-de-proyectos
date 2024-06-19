@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "concurrently npm:build:*",
+    "build:webpack": "webpack --mode=production",
     "start": "webpack serve --config webpack.config.js"
   },
   "author": "",
@@ -24,6 +26,7 @@
     "@babel/preset-react": "^7.22.3",
     "babel-loader": "^9.1.3",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^8.2.2",
     "css-loader": "^6.11.0",
     "html-webpack-plugin": "^5.5.1",
     "http-proxy-middleware": "^3.0.0",

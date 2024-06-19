@@ -39,6 +39,7 @@ phases:
       - aws s3 sync ./frontend/mfe-explorar-blog/dist s3://s3-mf-explorar-blog --delete
       - aws s3 sync ./frontend/mfe-administrador-gestion-devoluciones/dist s3://s3-mf-administrador-gestion-devoluciones --delete
       - aws s3 sync ./frontend/mfe-administrador-gestion-solicutudes/dist s3://s3-mf-administrador-gestion-solicutudes --delete
+      - aws s3 sync ./frontend/mfe-finanzas-contribuidor/dist s3://s3-mf-finanzas-contribuidor --delete
 
 artifacts:
   files:
